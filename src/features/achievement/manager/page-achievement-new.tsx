@@ -3,6 +3,7 @@ import { ORPCError } from '@orpc/client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCanGoBack, useRouter } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { orpc } from '@/lib/orpc/client';
@@ -26,6 +27,7 @@ export const PageAchievementNew = () => {
   const router = useRouter();
   const canGoBack = useCanGoBack();
   const queryClient = useQueryClient();
+  const { t } = useTranslation(['achievement']);
   const form = useForm({
     resolver: zodResolver(zFormFieldsAchievement()),
     values: {
@@ -54,10 +56,10 @@ export const PageAchievementNew = () => {
       },
       onError: (error) => {
         if (error instanceof ORPCError && error.code === 'CONFLICT') {
-          toast.error('An achievement with this name already exists.');
+          toast.error(t('achievement:manager.new.conflict'));
           return;
         }
-        toast.error('Unable to create achievement');
+        toast.error(t('achievement:manager.new.createError'));
       },
     })
   );
@@ -81,11 +83,13 @@ export const PageAchievementNew = () => {
                 className="min-w-20"
                 loading={achievementCreate.isPending}
               >
-                Create
+                {t('achievement:manager.new.createButton.label')}
               </Button>
             }
           >
-            <PageLayoutTopBarTitle>New achievement</PageLayoutTopBarTitle>
+            <PageLayoutTopBarTitle>
+              {t('achievement:manager.new.title')}
+            </PageLayoutTopBarTitle>
           </PageLayoutTopBar>
           <PageLayoutContent>
             <div className="flex flex-col gap-4 xs:flex-row">

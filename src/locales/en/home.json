@@ -1,0 +1,11 @@
+{
+  "welcome": {
+    "title": "Welcome to the Achievement App!",
+    "description": "Unlock achievements by completing activities and reaching milestones across the app. Each achievement is worth a certain number of points. The more achievements you complete, the more points you earn! Discover hidden challenges, track your progress, and compete to reach the top.",
+    "cta": "Complete achievements to earn points and showcase your accomplishments!"
+  },
+  "rank": {
+    "title": "Your position",
+    "summary": "{{completedCount}} completed • {{totalPoints}} pts"
+  }
+}

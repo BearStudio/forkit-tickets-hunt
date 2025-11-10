@@ -1,0 +1,11 @@
+{
+  "welcome": {
+    "title": "Bienvenue sur l'application des succès !",
+    "description": "Débloquez des succès en accomplissant des activités et en atteignant des étapes clés dans l'application. Chaque succès vaut un certain nombre de points. Plus vous complétez de succès, plus vous gagnez de points ! Découvrez des défis cachés, suivez votre progression et rivalisez pour atteindre le sommet.",
+    "cta": "Complétez des succès pour gagner des points et mettre en valeur vos accomplissements !"
+  },
+  "rank": {
+    "title": "Votre position",
+    "summary": "{{completedCount}} terminés • {{totalPoints}} pts"
+  }
+}

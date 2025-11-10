@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { TrophyIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 
@@ -9,6 +10,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export const CurrentUserRank = () => {
   const query = useQuery(orpc.user.getCurrentUserRank.queryOptions());
+  const { t } = useTranslation(['home']);
 
   return (
     <Card>
@@ -21,14 +23,16 @@ export const CurrentUserRank = () => {
             <TrophyIcon className="size-5 text-muted-foreground" />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-medium">Your position</span>
+            <span className="text-sm font-medium">{t('home:rank.title')}</span>
             {query.status === 'pending' && (
               <Skeleton className="mt-1 h-4 w-24" />
             )}
             {query.status === 'success' && (
               <DataListText className="text-xs text-muted-foreground">
-                {query.data.completedCount} completed • {query.data.totalPoints}{' '}
-                pts
+                {t('home:rank.summary', {
+                  completedCount: query.data.completedCount,
+                  totalPoints: query.data.totalPoints,
+                })}
               </DataListText>
             )}
           </div>

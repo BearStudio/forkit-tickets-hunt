@@ -1,0 +1,11 @@
+{
+  "welcome": {
+    "title": "Karibu kwenye Programu ya Mafanikio!",
+    "description": "Fungua mafanikio kwa kukamilisha shughuli na kufikia malengo ndani ya programu. Kila mafanikio yana alama fulani. Unapokamilisha mafanikio zaidi, unapata alama zaidi! Gundua changamoto zilizofichwa, fuatilia maendeleo yako, na shiriki ili kufikia kilele.",
+    "cta": "Kamilisha mafanikio ili kupata alama na kuonyesha mafanikio yako!"
+  },
+  "rank": {
+    "title": "Nafasi yako",
+    "summary": "{{completedCount}} zimekamilika • {{totalPoints}} alama"
+  }
+}

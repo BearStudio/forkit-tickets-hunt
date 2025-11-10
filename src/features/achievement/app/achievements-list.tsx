@@ -1,6 +1,7 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { CheckIcon, TrophyIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 
@@ -16,6 +17,7 @@ import {
 } from '@/components/ui/datalist';
 
 export const AchievementsList = () => {
+  const { t } = useTranslation(['achievement']);
   const achievementsQuery = useInfiniteQuery(
     orpc.achievement.getAllWithCompletion.infiniteOptions({
       input: (cursor: string | undefined) => ({
@@ -42,7 +44,9 @@ export const AchievementsList = () => {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center justify-between">
-        <h2 className="text-base font-medium">Achievements</h2>
+        <h2 className="text-base font-medium">
+          {t('achievement:common.achievements')}
+        </h2>
       </div>
       <DataList>
         {ui
@@ -79,7 +83,9 @@ export const AchievementsList = () => {
                   </DataListCell>
                   <DataListCell>
                     <DataListText className="font-medium">
-                      {item.name}
+                      {item.isSecret && !item.completed
+                        ? t('achievement:common.secretName')
+                        : item.name}
                     </DataListText>
                     <DataListText className="text-xs text-muted-foreground">
                       {item.hint}
@@ -94,11 +100,11 @@ export const AchievementsList = () => {
                     {item.completed ? (
                       <div className="bg-green-600/10 text-green-700 dark:text-green-400 inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium">
                         <CheckIcon className="size-3" />
-                        Completed
+                        {t('achievement:common.completed')}
                       </div>
                     ) : (
                       <div className="bg-amber-600/10 text-amber-700 dark:text-amber-400 inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium">
-                        Not completed
+                        {t('achievement:common.notCompleted')}
                       </div>
                     )}
                   </DataListCell>
@@ -113,12 +119,15 @@ export const AchievementsList = () => {
                     onClick={() => achievementsQuery.fetchNextPage()}
                     loading={achievementsQuery.isFetchingNextPage}
                   >
-                    Load more
+                    {t('achievement:common.loadMore')}
                   </Button>
                 </DataListCell>
                 <DataListCell>
                   <DataListText className="text-xs text-muted-foreground">
-                    Showing {items.length} of {total}
+                    {t('achievement:common.showingOf', {
+                      count: items.length,
+                      total,
+                    })}
                   </DataListText>
                 </DataListCell>
               </DataListRow>

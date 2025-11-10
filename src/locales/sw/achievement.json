@@ -1,0 +1,53 @@
+{
+  "common": {
+    "achievements": "Mafanikio",
+    "name": { "label": "Jina" },
+    "hint": { "label": "Dokezo" },
+    "points": { "label": "Alama" },
+    "emoji": { "label": "Emoji" },
+    "imageUrl": { "label": "Picha" },
+    "secret": { "label": "Siri" },
+    "secretName": "Siri",
+    "yes": "Ndiyo",
+    "no": "Hapana",
+    "loadMore": "Pakia zaidi",
+    "showingOf": "Inaonyesha {{count}} kati ya {{total}}",
+    "searchResults": "Inaonyesha matokeo {{total}} kwa “{{searchTerm}}”",
+    "completed": "Imekamilika",
+    "notCompleted": "Haijakamilika"
+  },
+  "manager": {
+    "list": {
+      "title": "Mafanikio",
+      "new": { "label": "Fanikiwa jipya" }
+    },
+    "new": {
+      "title": "Fanikiwa jipya",
+      "createButton": { "label": "Unda" },
+      "conflict": "Fanikiwa lenye jina hili tayari lipo.",
+      "createError": "Imeshindikana kuunda fanikiwa"
+    },
+    "detail": {
+      "deleteConfirmTitle": "Futa \"{{name}}\"?",
+      "deleteConfirmDescription": "Kitendo hiki hakiwezi kubatilishwa.",
+      "deleteButton": { "label": "Futa" },
+      "editButton": { "label": "Hariri" },
+      "deleted": "Fanikiwa limefutwa",
+      "deleteError": "Imeshindwa kufuta fanikiwa"
+    },
+    "update": {
+      "title": "Hariri fanikiwa",
+      "updateButton": { "label": "Sasisha" },
+      "conflict": "Mgongano wakati wa kusasisha fanikiwa",
+      "updateError": "Imeshindikana kusasisha fanikiwa"
+    }
+  },
+  "app": {
+    "complete": {
+      "title": "Fanikiwa limekamilika",
+      "titleNotFound": "Fanikiwa halipatikani",
+      "alreadyCompleted": "Tayari limekamilika",
+      "completed": "Fanikiwa limekamilika!"
+    }
+  }
+}

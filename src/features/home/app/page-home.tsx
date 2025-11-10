@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Logo } from '@/components/brand/logo';
 
 import { AchievementsList } from '@/features/achievement/app/achievements-list';
@@ -9,6 +11,7 @@ import {
 } from '@/layout/app/page-layout';
 
 export const PageHome = () => {
+  const { t } = useTranslation(['home']);
   return (
     <PageLayout>
       <PageLayoutTopBar className="md:hidden">
@@ -18,18 +21,13 @@ export const PageHome = () => {
         <div className="flex flex-1 flex-col gap-4">
           <div className="mb-4 rounded-lg bg-muted p-4 text-center">
             <h2 className="mb-2 text-lg font-semibold">
-              Welcome to the Achievement App!
+              {t('home:welcome.title')}
             </h2>
             <p className="text-sm text-muted-foreground">
-              Unlock achievements by completing activities and reaching
-              milestones across the app. Each achievement is worth a certain
-              number of points. The more achievements you complete, the more
-              points you earn! Discover hidden challenges, track your progress,
-              and compete to reach the top.
+              {t('home:welcome.description')}
             </p>
             <div className="mt-3 text-sm font-medium text-primary">
-              Complete achievements to earn points and showcase your
-              accomplishments!
+              {t('home:welcome.cta')}
             </div>
           </div>
           <CurrentUserRank />

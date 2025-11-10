@@ -1,0 +1,53 @@
+{
+  "common": {
+    "achievements": "Succès",
+    "name": { "label": "Nom" },
+    "hint": { "label": "Indice" },
+    "points": { "label": "Points" },
+    "emoji": { "label": "Émoji" },
+    "imageUrl": { "label": "Image" },
+    "secret": { "label": "Secret" },
+    "secretName": "Secret",
+    "yes": "Oui",
+    "no": "Non",
+    "loadMore": "Charger plus",
+    "showingOf": "Affichage de {{count}} sur {{total}}",
+    "searchResults": "{{total}} résultats pour « {{searchTerm}} »",
+    "completed": "Terminé",
+    "notCompleted": "Non terminé"
+  },
+  "manager": {
+    "list": {
+      "title": "Succès",
+      "new": { "label": "Nouveau succès" }
+    },
+    "new": {
+      "title": "Nouveau succès",
+      "createButton": { "label": "Créer" },
+      "conflict": "Un succès avec ce nom existe déjà.",
+      "createError": "Impossible de créer le succès"
+    },
+    "detail": {
+      "deleteConfirmTitle": "Supprimer « {{name}} » ?",
+      "deleteConfirmDescription": "Cette action est irréversible.",
+      "deleteButton": { "label": "Supprimer" },
+      "editButton": { "label": "Modifier" },
+      "deleted": "Succès supprimé",
+      "deleteError": "Impossible de supprimer le succès"
+    },
+    "update": {
+      "title": "Modifier le succès",
+      "updateButton": { "label": "Mettre à jour" },
+      "conflict": "Conflit lors de la mise à jour du succès",
+      "updateError": "Impossible de mettre à jour le succès"
+    }
+  },
+  "app": {
+    "complete": {
+      "title": "Succès validé",
+      "titleNotFound": "Succès introuvable",
+      "alreadyCompleted": "Déjà validé",
+      "completed": "Succès validé !"
+    }
+  }
+}

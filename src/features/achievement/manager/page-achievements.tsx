@@ -2,6 +2,7 @@ import { getUiState } from '@bearstudio/ui-state';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link, useRouter } from '@tanstack/react-router';
 import { PlusIcon, TrophyIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 
@@ -32,6 +33,7 @@ export const PageAchievements = (props: {
   search: { searchTerm?: string };
 }) => {
   const router = useRouter();
+  const { t } = useTranslation(['achievement']);
 
   const searchInputProps = {
     value: props.search.searchTerm ?? '',
@@ -79,7 +81,7 @@ export const PageAchievements = (props: {
         actions={
           <ResponsiveIconButton
             asChild
-            label="New achievement"
+            label={t('achievement:manager.list.new.label')}
             variant="secondary"
             size="sm"
           >
@@ -89,7 +91,9 @@ export const PageAchievements = (props: {
           </ResponsiveIconButton>
         }
       >
-        <PageLayoutTopBarTitle>Achievements</PageLayoutTopBarTitle>
+        <PageLayoutTopBarTitle>
+          {t('achievement:manager.list.title')}
+        </PageLayoutTopBarTitle>
         <SearchButton
           {...searchInputProps}
           className="-mx-2 md:hidden"
@@ -125,7 +129,10 @@ export const PageAchievements = (props: {
                       });
                     }}
                   >
-                    Showing {total} results for “{searchTerm}”
+                    {t('achievement:common.searchResults', {
+                      total,
+                      searchTerm,
+                    })}
                   </DataListRowResults>
                 )}
                 {items.map((item) => (
@@ -165,7 +172,9 @@ export const PageAchievements = (props: {
                       </DataListText>
                     </DataListCell>
                     <DataListCell>
-                      {item.isSecret && <Badge>Secret</Badge>}
+                      {item.isSecret && (
+                        <Badge>{t('achievement:common.secret.label')}</Badge>
+                      )}
                     </DataListCell>
                     <DataListCell className="flex-none">
                       <DataListText className="text-xs text-muted-foreground">
@@ -183,12 +192,15 @@ export const PageAchievements = (props: {
                       onClick={() => achievementsQuery.fetchNextPage()}
                       loading={achievementsQuery.isFetchingNextPage}
                     >
-                      Load more
+                      {t('achievement:common.loadMore')}
                     </Button>
                   </DataListCell>
                   <DataListCell>
                     <DataListText className="text-xs text-muted-foreground">
-                      Showing {items.length} of {total}
+                      {t('achievement:common.showingOf', {
+                        count: items.length,
+                        total,
+                      })}
                     </DataListText>
                   </DataListCell>
                 </DataListRow>

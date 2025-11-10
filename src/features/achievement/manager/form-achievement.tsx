@@ -1,4 +1,5 @@
 import { useFormContext } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import {
   FormField,
@@ -10,11 +11,12 @@ import { FormFieldsAchievement } from '@/features/achievement/schema';
 
 export const FormAchievement = () => {
   const form = useFormContext<FormFieldsAchievement>();
+  const { t } = useTranslation(['achievement']);
 
   return (
     <div className="flex flex-col gap-4">
       <FormField>
-        <FormFieldLabel>Name</FormFieldLabel>
+        <FormFieldLabel>{t('achievement:common.name.label')}</FormFieldLabel>
         <FormFieldController
           type="text"
           control={form.control}
@@ -23,7 +25,7 @@ export const FormAchievement = () => {
         />
       </FormField>
       <FormField>
-        <FormFieldLabel>Secret</FormFieldLabel>
+        <FormFieldLabel>{t('achievement:common.secret.label')}</FormFieldLabel>
         <FormFieldController
           type="checkbox"
           control={form.control}
@@ -31,11 +33,11 @@ export const FormAchievement = () => {
         />
       </FormField>
       <FormField>
-        <FormFieldLabel>Hint</FormFieldLabel>
+        <FormFieldLabel>{t('achievement:common.hint.label')}</FormFieldLabel>
         <FormFieldController type="text" control={form.control} name="hint" />
       </FormField>
       <FormField>
-        <FormFieldLabel>Points</FormFieldLabel>
+        <FormFieldLabel>{t('achievement:common.points.label')}</FormFieldLabel>
         <FormFieldController
           type="number"
           control={form.control}
@@ -43,11 +45,13 @@ export const FormAchievement = () => {
         />
       </FormField>
       <FormField>
-        <FormFieldLabel>Emoji</FormFieldLabel>
+        <FormFieldLabel>{t('achievement:common.emoji.label')}</FormFieldLabel>
         <FormFieldController type="text" control={form.control} name="emoji" />
       </FormField>
       <FormField>
-        <FormFieldLabel>Image URL</FormFieldLabel>
+        <FormFieldLabel>
+          {t('achievement:common.imageUrl.label')}
+        </FormFieldLabel>
         <FormFieldController
           type="text"
           control={form.control}

@@ -3,6 +3,7 @@ import { ORPCError } from '@orpc/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useCanGoBack, useRouter } from '@tanstack/react-router';
 import { AlertCircleIcon, PencilLineIcon, Trash2Icon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { orpc } from '@/lib/orpc/client';
@@ -32,6 +33,7 @@ export const PageAchievement = (props: { params: { id: string } }) => {
   const achievementQuery = useQuery(
     orpc.achievement.getById.queryOptions({ input: { id: props.params.id } })
   );
+  const { t } = useTranslation(['achievement']);
 
   const ui = getUiState((set) => {
     if (achievementQuery.status === 'pending') return set('pending');
@@ -60,7 +62,7 @@ export const PageAchievement = (props: { params: { id: string } }) => {
         }),
       ]);
 
-      toast.success('Achievement deleted');
+      toast.success(t('achievement:manager.detail.deleted'));
 
       if (canGoBack) {
         router.history.back();
@@ -68,7 +70,7 @@ export const PageAchievement = (props: { params: { id: string } }) => {
         router.navigate({ to: '..', replace: true });
       }
     } catch {
-      toast.error('Unable to delete achievement');
+      toast.error(t('achievement:manager.detail.deleteError'));
     }
   };
 
@@ -87,12 +89,20 @@ export const PageAchievement = (props: { params: { id: string } }) => {
             >
               <ConfirmResponsiveDrawer
                 onConfirm={() => deleteAchievement()}
-                title={`Delete "${achievementQuery.data?.name ?? '--'}"?`}
-                description="This action cannot be undone."
-                confirmText="Delete"
+                title={t('achievement:manager.detail.deleteConfirmTitle', {
+                  name: achievementQuery.data?.name ?? '--',
+                })}
+                description={t(
+                  'achievement:manager.detail.deleteConfirmDescription'
+                )}
+                confirmText={t('achievement:manager.detail.deleteButton.label')}
                 confirmVariant="destructive"
               >
-                <ResponsiveIconButton variant="ghost" label="Delete" size="sm">
+                <ResponsiveIconButton
+                  variant="ghost"
+                  label={t('achievement:manager.detail.deleteButton.label')}
+                  size="sm"
+                >
                   <Trash2Icon />
                 </ResponsiveIconButton>
               </ConfirmResponsiveDrawer>
@@ -103,7 +113,7 @@ export const PageAchievement = (props: { params: { id: string } }) => {
                 params={{ id: props.params.id }}
               >
                 <PencilLineIcon />
-                Edit
+                {t('achievement:manager.detail.editButton.label')}
               </Link>
             </Button>
           </>
@@ -132,39 +142,41 @@ export const PageAchievement = (props: { params: { id: string } }) => {
                     <dl className="flex flex-col divide-y text-sm">
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
-                          Name
+                          {t('achievement:common.name.label')}
                         </dt>
                         <dd className="flex-1">{achievement.name}</dd>
                       </div>
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
-                          Hint
+                          {t('achievement:common.hint.label')}
                         </dt>
                         <dd className="flex-1">{achievement.hint}</dd>
                       </div>
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
-                          Points
+                          {t('achievement:common.points.label')}
                         </dt>
                         <dd className="flex-1">{achievement.points}</dd>
                       </div>
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
-                          Secret
+                          {t('achievement:common.secret.label')}
                         </dt>
                         <dd className="flex-1">
-                          {achievement.isSecret ? 'Yes' : 'No'}
+                          {achievement.isSecret
+                            ? t('achievement:common.yes')
+                            : t('achievement:common.no')}
                         </dd>
                       </div>
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
-                          Emoji
+                          {t('achievement:common.emoji.label')}
                         </dt>
                         <dd className="flex-1">{achievement.emoji}</dd>
                       </div>
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
-                          Image URL
+                          {t('achievement:common.imageUrl.label')}
                         </dt>
                         <dd className="flex-1">{achievement.imageUrl}</dd>
                       </div>

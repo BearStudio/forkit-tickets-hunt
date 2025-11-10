@@ -1,0 +1,53 @@
+{
+  "common": {
+    "achievements": "Achievements",
+    "name": { "label": "Name" },
+    "hint": { "label": "Hint" },
+    "points": { "label": "Points" },
+    "emoji": { "label": "Emoji" },
+    "imageUrl": { "label": "Image URL" },
+    "secret": { "label": "Secret" },
+    "secretName": "Secret",
+    "yes": "Yes",
+    "no": "No",
+    "loadMore": "Load more",
+    "showingOf": "Showing {{count}} of {{total}}",
+    "searchResults": "Showing {{total}} results for “{{searchTerm}}”",
+    "completed": "Completed",
+    "notCompleted": "Not completed"
+  },
+  "manager": {
+    "list": {
+      "title": "Achievements",
+      "new": { "label": "New achievement" }
+    },
+    "new": {
+      "title": "New achievement",
+      "createButton": { "label": "Create" },
+      "conflict": "An achievement with this name already exists.",
+      "createError": "Unable to create achievement"
+    },
+    "detail": {
+      "deleteConfirmTitle": "Delete \"{{name}}\"?",
+      "deleteConfirmDescription": "This action cannot be undone.",
+      "deleteButton": { "label": "Delete" },
+      "editButton": { "label": "Edit" },
+      "deleted": "Achievement deleted",
+      "deleteError": "Unable to delete achievement"
+    },
+    "update": {
+      "title": "Edit achievement",
+      "updateButton": { "label": "Update" },
+      "conflict": "Conflict updating achievement",
+      "updateError": "Unable to update achievement"
+    }
+  },
+  "app": {
+    "complete": {
+      "title": "Achievement completed",
+      "titleNotFound": "Achievement not found",
+      "alreadyCompleted": "Already completed",
+      "completed": "Achievement completed!"
+    }
+  }
+}

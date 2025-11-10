@@ -81,7 +81,7 @@ export const NavSidebar = (props: { children?: ReactNode }) => {
                       <SidebarMenuButton asChild isActive={isActive}>
                         <span>
                           <TrophyIcon />
-                          <span>Achievements</span>
+                          <span>{t('layout:nav.achievements')}</span>
                         </span>
                       </SidebarMenuButton>
                     )}

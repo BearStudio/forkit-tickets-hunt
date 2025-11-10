@@ -1,0 +1,53 @@
+{
+  "common": {
+    "achievements": "الإنجازات",
+    "name": { "label": "الاسم" },
+    "hint": { "label": "تلميح" },
+    "points": { "label": "النقاط" },
+    "emoji": { "label": "رمز تعبيري" },
+    "imageUrl": { "label": "صورة" },
+    "secret": { "label": "سري" },
+    "secretName": "سري",
+    "yes": "نعم",
+    "no": "لا",
+    "loadMore": "تحميل المزيد",
+    "showingOf": "عرض {{count}} من {{total}}",
+    "searchResults": "عرض {{total}} نتيجة لـ “{{searchTerm}}”",
+    "completed": "مكتمل",
+    "notCompleted": "غير مكتمل"
+  },
+  "manager": {
+    "list": {
+      "title": "الإنجازات",
+      "new": { "label": "إنجاز جديد" }
+    },
+    "new": {
+      "title": "إنجاز جديد",
+      "createButton": { "label": "إنشاء" },
+      "conflict": "يوجد إنجاز بهذا الاسم بالفعل.",
+      "createError": "تعذر إنشاء الإنجاز"
+    },
+    "detail": {
+      "deleteConfirmTitle": "حذف \"{{name}}\"؟",
+      "deleteConfirmDescription": "لا يمكن التراجع عن هذا الإجراء.",
+      "deleteButton": { "label": "حذف" },
+      "editButton": { "label": "تعديل" },
+      "deleted": "تم حذف الإنجاز",
+      "deleteError": "تعذر حذف الإنجاز"
+    },
+    "update": {
+      "title": "تعديل الإنجاز",
+      "updateButton": { "label": "تحديث" },
+      "conflict": "حدث تعارض أثناء تحديث الإنجاز",
+      "updateError": "تعذر تحديث الإنجاز"
+    }
+  },
+  "app": {
+    "complete": {
+      "title": "تم إكمال الإنجاز",
+      "titleNotFound": "الإنجاز غير موجود",
+      "alreadyCompleted": "مُكتمل بالفعل",
+      "completed": "تم إكمال الإنجاز!"
+    }
+  }
+}

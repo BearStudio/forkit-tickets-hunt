@@ -3,6 +3,7 @@ import { ORPCError } from '@orpc/client';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCanGoBack, useRouter } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { orpc } from '@/lib/orpc/client';
@@ -26,6 +27,7 @@ export const PageAchievementUpdate = (props: { params: { id: string } }) => {
   const router = useRouter();
   const canGoBack = useCanGoBack();
   const queryClient = useQueryClient();
+  const { t } = useTranslation(['achievement']);
   const achievementQuery = useQuery(
     orpc.achievement.getById.queryOptions({ input: { id: props.params.id } })
   );
@@ -57,10 +59,10 @@ export const PageAchievementUpdate = (props: { params: { id: string } }) => {
       },
       onError: (error) => {
         if (error instanceof ORPCError && error.code === 'CONFLICT') {
-          toast.error('Conflict updating achievement');
+          toast.error(t('achievement:manager.update.conflict'));
           return;
         }
-        toast.error('Unable to update achievement');
+        toast.error(t('achievement:manager.update.updateError'));
       },
     })
   );
@@ -84,11 +86,13 @@ export const PageAchievementUpdate = (props: { params: { id: string } }) => {
                 className="min-w-20"
                 loading={achievementUpdate.isPending}
               >
-                Update
+                {t('achievement:manager.update.updateButton.label')}
               </Button>
             }
           >
-            <PageLayoutTopBarTitle>Edit achievement</PageLayoutTopBarTitle>
+            <PageLayoutTopBarTitle>
+              {t('achievement:manager.update.title')}
+            </PageLayoutTopBarTitle>
           </PageLayoutTopBar>
           <PageLayoutContent>
             <div className="flex flex-col gap-4 xs:flex-row">
