@@ -62,9 +62,7 @@ export const AchievementsList = () => {
                   <DataListCell className="flex-none">
                     <div
                       aria-hidden
-                      className={`flex size-8 items-center justify-center rounded-md bg-muted ${
-                        item.isSecret && !item.completed ? 'blur-xs' : ''
-                      }`}
+                      className="flex size-8 items-center justify-center rounded-md bg-muted"
                     >
                       {item.imageUrl && (
                         <img
