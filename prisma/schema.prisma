@@ -90,6 +90,8 @@ model Verification {
 
 model Achievement {
   id          String   @id @default(cuid())
+  secretId    String   @unique @default(cuid()) 
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   name        String

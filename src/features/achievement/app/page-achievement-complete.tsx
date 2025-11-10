@@ -22,7 +22,7 @@ export const PageAchievementComplete = () => {
   const params = useParams({ from: '/app/achievements/$id/complete/' });
 
   const completeMutation = useMutation(
-    orpc.achievement.completeById.mutationOptions()
+    orpc.achievement.completeBySecretId.mutationOptions()
   );
 
   useEffect(() => {

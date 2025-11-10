@@ -197,7 +197,11 @@ export default {
         id: z.string(),
       })
     )
-    .output(zAchievement())
+    .output(
+      zAchievement().extend({
+        secretId: z.string(),
+      })
+    )
     .handler(async ({ context, input }) => {
       context.logger.info('Getting achievement');
       const achievement = await context.db.achievement.findUnique({
@@ -322,7 +326,7 @@ export default {
       }
     }),
 
-  completeById: protectedProcedure({
+  completeBySecretId: protectedProcedure({
     permission: { apps: ['app'] },
   })
     .route({
@@ -345,7 +349,7 @@ export default {
       context.logger.info('Complete achievement for current user');
 
       const achievement = await context.db.achievement.findUnique({
-        where: { id: input.id },
+        where: { secretId: input.id },
         include: {
           completedBy: {
             where: { id: context.user.id },
@@ -363,7 +367,7 @@ export default {
 
       if (!alreadyCompleted) {
         await context.db.achievement.update({
-          where: { id: input.id },
+          where: { secretId: input.id },
           data: {
             completedBy: {
               connect: { id: context.user.id },

@@ -178,7 +178,7 @@ export const PageAchievement = (props: { params: { id: string } }) => {
               >
                 <img
                   src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
-                    `${envClient.VITE_BASE_URL}/app/achievements/${achievement.id}/complete`
+                    `${envClient.VITE_BASE_URL}/app/achievements/${achievement.secretId}/complete`
                   )}`}
                   alt=""
                   className="h-40 w-40 rounded bg-white p-2"
