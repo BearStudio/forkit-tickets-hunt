@@ -34,6 +34,8 @@ model User {
   banExpires  DateTime?
   onboardedAt DateTime?
 
+  completedAchievements Achievement[] @relation("UserAchievements")
+
   @@unique([email])
   @@map("user")
 }
@@ -85,45 +87,18 @@ model Verification {
   @@map("verification")
 }
 
-model Book {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  author    String
-  genre     Genre?   @relation(fields: [genreId], references: [id])
-  genreId   String
-  publisher String?
 
-  @@unique([title, author])
-  @@map("book")
-}
+model Achievement {
+  id          String   @id @default(cuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  name        String
+  hint        String?
+  points      Int
+  isSecret    Boolean  @default(false)
+  emoji       String?
+  imageUrl    String?
+  completedBy User[]   @relation("UserAchievements")
 
-model Author {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String   @unique
-
-  @@map("author")
-}
-
-model Genre {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String   @unique
-  color     String
-  Book      Book[]
-
-  @@map("genre")
-}
-
-model Publisher {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String   @unique
-
-  @@map("publisher")
+  @@map("achievement")
 }

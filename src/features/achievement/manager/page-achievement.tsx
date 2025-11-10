@@ -3,7 +3,6 @@ import { ORPCError } from '@orpc/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useCanGoBack, useRouter } from '@tanstack/react-router';
 import { AlertCircleIcon, PencilLineIcon, Trash2Icon } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { orpc } from '@/lib/orpc/client';
@@ -17,8 +16,8 @@ import { ResponsiveIconButton } from '@/components/ui/responsive-icon-button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Spinner } from '@/components/ui/spinner';
 
+import { envClient } from '@/env/client';
 import { WithPermissions } from '@/features/auth/with-permission';
-import { BookCover } from '@/features/book/book-cover';
 import {
   PageLayout,
   PageLayoutContent,
@@ -26,52 +25,50 @@ import {
   PageLayoutTopBarTitle,
 } from '@/layout/manager/page-layout';
 
-export const PageBook = (props: { params: { id: string } }) => {
-  const { t } = useTranslation(['book']);
+export const PageAchievement = (props: { params: { id: string } }) => {
   const queryClient = useQueryClient();
   const router = useRouter();
   const canGoBack = useCanGoBack();
-  const bookQuery = useQuery(
-    orpc.book.getById.queryOptions({ input: { id: props.params.id } })
+  const achievementQuery = useQuery(
+    orpc.achievement.getById.queryOptions({ input: { id: props.params.id } })
   );
 
   const ui = getUiState((set) => {
-    if (bookQuery.status === 'pending') return set('pending');
+    if (achievementQuery.status === 'pending') return set('pending');
     if (
-      bookQuery.status === 'error' &&
-      bookQuery.error instanceof ORPCError &&
-      bookQuery.error.code === 'NOT_FOUND'
+      achievementQuery.status === 'error' &&
+      achievementQuery.error instanceof ORPCError &&
+      achievementQuery.error.code === 'NOT_FOUND'
     )
       return set('not-found');
-    if (bookQuery.status === 'error') return set('error');
-    return set('default', { book: bookQuery.data });
+    if (achievementQuery.status === 'error') return set('error');
+    return set('default', { achievement: achievementQuery.data });
   });
 
-  const deleteBook = async () => {
+  const deleteAchievement = async () => {
     try {
-      await orpc.book.deleteById.call({ id: props.params.id });
+      await orpc.achievement.deleteById.call({ id: props.params.id });
       await Promise.all([
-        // Invalidate books list
         queryClient.invalidateQueries({
-          queryKey: orpc.book.getAll.key(),
+          queryKey: orpc.achievement.getAll.key(),
           type: 'all',
         }),
-        // Remove user from cache
         queryClient.removeQueries({
-          queryKey: orpc.book.getById.key({ input: { id: props.params.id } }),
+          queryKey: orpc.achievement.getById.key({
+            input: { id: props.params.id },
+          }),
         }),
       ]);
 
-      toast.success(t('book:manager.detail.deleted'));
+      toast.success('Achievement deleted');
 
-      // Redirect
       if (canGoBack) {
         router.history.back();
       } else {
         router.navigate({ to: '..', replace: true });
       }
     } catch {
-      toast.error(t('book:manager.detail.deleteError'));
+      toast.error('Unable to delete achievement');
     }
   };
 
@@ -84,35 +81,29 @@ export const PageBook = (props: { params: { id: string } }) => {
             <WithPermissions
               permissions={[
                 {
-                  book: ['delete'],
+                  achievement: ['delete'],
                 },
               ]}
             >
               <ConfirmResponsiveDrawer
-                onConfirm={() => deleteBook()}
-                title={t('book:manager.detail.confirmDeleteTitle', {
-                  title: bookQuery.data?.title ?? '--',
-                })}
-                description={t('book:manager.detail.confirmDeleteDescription')}
-                confirmText={t('book:manager.detail.deleteButton.label')}
+                onConfirm={() => deleteAchievement()}
+                title={`Delete "${achievementQuery.data?.name ?? '--'}"?`}
+                description="This action cannot be undone."
+                confirmText="Delete"
                 confirmVariant="destructive"
               >
-                <ResponsiveIconButton
-                  variant="ghost"
-                  label={t('book:manager.detail.deleteButton.label')}
-                  size="sm"
-                >
+                <ResponsiveIconButton variant="ghost" label="Delete" size="sm">
                   <Trash2Icon />
                 </ResponsiveIconButton>
               </ConfirmResponsiveDrawer>
             </WithPermissions>
             <Button asChild size="sm" variant="secondary">
               <Link
-                to="/manager/books/$id/update"
+                to="/manager/achievements/$id/update"
                 params={{ id: props.params.id }}
               >
                 <PencilLineIcon />
-                {t('book:manager.detail.editButton.label')}
+                Edit
               </Link>
             </Button>
           </>
@@ -124,11 +115,7 @@ export const PageBook = (props: { params: { id: string } }) => {
             .match(['not-found', 'error'], () => (
               <AlertCircleIcon className="size-4 text-muted-foreground" />
             ))
-            .match('default', ({ book }) => (
-              <>
-                {book.title} - {book.author}
-              </>
-            ))
+            .match('default', ({ achievement }) => <>{achievement.name}</>)
             .exhaustive()}
         </PageLayoutTopBarTitle>
       </PageLayoutTopBar>
@@ -137,7 +124,7 @@ export const PageBook = (props: { params: { id: string } }) => {
           .match('pending', () => <Spinner full />)
           .match('not-found', () => <PageError error="404" />)
           .match('error', () => <PageError />)
-          .match('default', ({ book }) => (
+          .match('default', ({ achievement }) => (
             <div className="flex flex-col gap-4 xs:flex-row">
               <div className="flex-2">
                 <Card className="py-1">
@@ -145,27 +132,41 @@ export const PageBook = (props: { params: { id: string } }) => {
                     <dl className="flex flex-col divide-y text-sm">
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
-                          {t('book:common.title.label')}
+                          Name
                         </dt>
-                        <dd className="flex-1">{book.title}</dd>
+                        <dd className="flex-1">{achievement.name}</dd>
                       </div>
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
-                          {t('book:common.author.label')}
+                          Hint
                         </dt>
-                        <dd className="flex-1">{book.author}</dd>
+                        <dd className="flex-1">{achievement.hint}</dd>
                       </div>
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
-                          {t('book:common.genre.label')}
+                          Points
                         </dt>
-                        <dd className="flex-1">{book.genre?.name}</dd>
+                        <dd className="flex-1">{achievement.points}</dd>
                       </div>
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
-                          {t('book:common.publisher.label')}
+                          Secret
                         </dt>
-                        <dd className="flex-1">{book.publisher}</dd>
+                        <dd className="flex-1">
+                          {achievement.isSecret ? 'Yes' : 'No'}
+                        </dd>
+                      </div>
+                      <div className="flex gap-4 py-3">
+                        <dt className="w-24 flex-none font-medium text-muted-foreground">
+                          Emoji
+                        </dt>
+                        <dd className="flex-1">{achievement.emoji}</dd>
+                      </div>
+                      <div className="flex gap-4 py-3">
+                        <dt className="w-24 flex-none font-medium text-muted-foreground">
+                          Image URL
+                        </dt>
+                        <dd className="flex-1">{achievement.imageUrl}</dd>
                       </div>
                     </dl>
                   </CardContent>
@@ -173,9 +174,15 @@ export const PageBook = (props: { params: { id: string } }) => {
               </div>
               <div
                 aria-hidden
-                className="mx-auto w-full max-w-64 min-w-48 flex-1"
+                className="mx-auto flex w-full max-w-64 min-w-48 flex-1 items-center justify-center rounded-md bg-muted"
               >
-                <BookCover book={book} />
+                <img
+                  src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
+                    `${envClient.VITE_BASE_URL}/app/achievements/${achievement.id}/complete`
+                  )}`}
+                  alt=""
+                  className="h-40 w-40 rounded bg-white p-2"
+                />
               </div>
             </div>
           ))

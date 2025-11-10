@@ -10,6 +10,126 @@ import { protectedProcedure } from '@/server/orpc';
 const tags = ['users'];
 
 export default {
+  getLeaderboard: protectedProcedure({
+    permission: {
+      user: ['list'],
+    },
+  })
+    .route({
+      method: 'GET',
+      path: '/users/leaderboard',
+      tags,
+    })
+    .input(
+      z
+        .object({
+          limit: z.coerce.number().int().min(1).max(100).prefault(50),
+        })
+        .prefault({})
+    )
+    .output(
+      z.object({
+        items: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            image: z.string().nullish(),
+            totalPoints: z.number().int(),
+            completedCount: z.number().int(),
+          })
+        ),
+        total: z.number(),
+      })
+    )
+    .handler(async ({ context, input }) => {
+      context.logger.info('Getting leaderboard');
+      const users = await context.db.user.findMany({
+        select: {
+          id: true,
+          name: true,
+          image: true,
+          completedAchievements: {
+            select: { points: true },
+          },
+        },
+      });
+
+      const items = users
+        .map((u) => {
+          const totalPoints = u.completedAchievements.reduce(
+            (sum, a) => sum + (a.points ?? 0),
+            0
+          );
+          return {
+            id: u.id,
+            name: u.name,
+            image: u.image ?? null,
+            totalPoints,
+            completedCount: u.completedAchievements.length,
+          };
+        })
+        .sort((a, b) => b.totalPoints - a.totalPoints)
+        .slice(0, input.limit);
+
+      return {
+        items,
+        total: users.length,
+      };
+    }),
+
+  getCurrentUserRank: protectedProcedure({
+    permission: null,
+  })
+    .route({
+      method: 'GET',
+      path: '/users/me/leaderboard-rank',
+      tags,
+    })
+    .output(
+      z.object({
+        rank: z.number().int(),
+        totalUsers: z.number().int(),
+        totalPoints: z.number().int(),
+        completedCount: z.number().int(),
+      })
+    )
+    .handler(async ({ context }) => {
+      context.logger.info('Computing current user rank');
+      const users = await context.db.user.findMany({
+        select: {
+          id: true,
+          completedAchievements: {
+            select: { points: true },
+          },
+        },
+      });
+
+      const mapped = users
+        .map((u) => ({
+          id: u.id,
+          totalPoints: u.completedAchievements.reduce(
+            (sum, a) => sum + (a.points ?? 0),
+            0
+          ),
+          completedCount: u.completedAchievements.length,
+        }))
+        .sort((a, b) => b.totalPoints - a.totalPoints);
+
+      const index = mapped.findIndex((u) => u.id === context.user.id);
+      let totalPoints = 0;
+      let completedCount = 0;
+      if (index >= 0) {
+        totalPoints = mapped[index]!.totalPoints;
+        completedCount = mapped[index]!.completedCount;
+      }
+
+      return {
+        rank: index >= 0 ? index + 1 : mapped.length + 1,
+        totalUsers: users.length,
+        totalPoints,
+        completedCount,
+      };
+    }),
   getAll: protectedProcedure({
     permission: {
       user: ['list'],

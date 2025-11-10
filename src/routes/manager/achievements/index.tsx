@@ -2,9 +2,9 @@ import { createFileRoute, stripSearchParams } from '@tanstack/react-router';
 import { zodValidator } from '@tanstack/zod-adapter';
 import { z } from 'zod';
 
-import { PageBooks } from '@/features/book/manager/page-books';
+import { PageAchievements } from '@/features/achievement/manager/page-achievements';
 
-export const Route = createFileRoute('/manager/books/')({
+export const Route = createFileRoute('/manager/achievements/')({
   component: RouteComponent,
   validateSearch: zodValidator(
     z.object({
@@ -18,5 +18,5 @@ export const Route = createFileRoute('/manager/books/')({
 
 function RouteComponent() {
   const search = Route.useSearch();
-  return <PageBooks search={search} />;
+  return <PageAchievements search={search} />;
 }

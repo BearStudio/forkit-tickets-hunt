@@ -12,8 +12,7 @@ const statement = {
   ...defaultStatements,
   account: ['read', 'update'],
   apps: ['app', 'manager'],
-  book: ['read', 'create', 'update', 'delete'],
-  genre: ['read'],
+  achievement: ['read', 'create', 'update', 'delete'],
 } as const;
 
 const ac = createAccessControl(statement);
@@ -21,16 +20,14 @@ const ac = createAccessControl(statement);
 const user = ac.newRole({
   account: ['update'],
   apps: ['app'],
-  book: ['read'],
-  genre: ['read'],
+  achievement: ['read'],
 });
 
 const admin = ac.newRole({
   ...adminAc.statements,
   account: ['update'],
   apps: ['app', 'manager'],
-  book: ['read', 'create', 'update', 'delete'],
-  genre: ['read'],
+  achievement: ['read', 'create', 'update', 'delete'],
 });
 
 export const rolesNames = ['admin', 'user'] as const;

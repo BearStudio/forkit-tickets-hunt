@@ -1,9 +1,8 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ORPCError } from '@orpc/client';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCanGoBack, useRouter } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { orpc } from '@/lib/orpc/client';
@@ -14,9 +13,8 @@ import { PreventNavigation } from '@/components/prevent-navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 
-import { FormBook } from '@/features/book/manager/form-book';
-import { FormBookCover } from '@/features/book/manager/form-book-cover';
-import { zFormFieldsBook } from '@/features/book/schema';
+import { FormAchievement } from '@/features/achievement/manager/form-achievement';
+import { zFormFieldsAchievement } from '@/features/achievement/schema';
 import {
   PageLayout,
   PageLayoutContent,
@@ -24,34 +22,30 @@ import {
   PageLayoutTopBarTitle,
 } from '@/layout/manager/page-layout';
 
-export const PageBookUpdate = (props: { params: { id: string } }) => {
-  const { t } = useTranslation(['book']);
+export const PageAchievementNew = () => {
   const router = useRouter();
   const canGoBack = useCanGoBack();
   const queryClient = useQueryClient();
-  const bookQuery = useQuery(
-    orpc.book.getById.queryOptions({ input: { id: props.params.id } })
-  );
   const form = useForm({
-    resolver: zodResolver(zFormFieldsBook()),
+    resolver: zodResolver(zFormFieldsAchievement()),
     values: {
-      title: bookQuery.data?.title ?? '',
-      author: bookQuery.data?.author ?? '',
-      genreId: bookQuery.data?.genre?.id ?? null!,
-      publisher: bookQuery.data?.publisher ?? '',
+      name: '',
+      hint: '',
+      points: 100,
+      isSecret: false,
+      emoji: '',
+      imageUrl: '',
     },
   });
 
-  const bookUpdate = useMutation(
-    orpc.book.updateById.mutationOptions({
+  const achievementCreate = useMutation(
+    orpc.achievement.create.mutationOptions({
       onSuccess: async () => {
-        // Invalidate Users list
         await queryClient.invalidateQueries({
-          queryKey: orpc.book.getAll.key(),
+          queryKey: orpc.achievement.getAll.key(),
           type: 'all',
         });
 
-        // Redirect
         if (canGoBack) {
           router.history.back({ ignoreBlocker: true });
         } else {
@@ -59,18 +53,11 @@ export const PageBookUpdate = (props: { params: { id: string } }) => {
         }
       },
       onError: (error) => {
-        if (
-          error instanceof ORPCError &&
-          error.code === 'CONFLICT' &&
-          error.data?.target?.includes('title')
-        ) {
-          form.setError('title', {
-            message: t('book:manager.form.titleAlreadyExist'),
-          });
+        if (error instanceof ORPCError && error.code === 'CONFLICT') {
+          toast.error('An achievement with this name already exists.');
           return;
         }
-
-        toast.error(t('book:manager.update.updateError'));
+        toast.error('Unable to create achievement');
       },
     })
   );
@@ -81,7 +68,7 @@ export const PageBookUpdate = (props: { params: { id: string } }) => {
       <Form
         {...form}
         onSubmit={async (values) => {
-          bookUpdate.mutate({ id: props.params.id, ...values });
+          achievementCreate.mutate(values);
         }}
       >
         <PageLayout>
@@ -92,30 +79,22 @@ export const PageBookUpdate = (props: { params: { id: string } }) => {
                 size="sm"
                 type="submit"
                 className="min-w-20"
-                loading={bookUpdate.isPending}
+                loading={achievementCreate.isPending}
               >
-                {t('book:manager.update.updateButton.label')}
+                Create
               </Button>
             }
           >
-            <PageLayoutTopBarTitle>
-              {t('book:manager.update.title')}
-            </PageLayoutTopBarTitle>
+            <PageLayoutTopBarTitle>New achievement</PageLayoutTopBarTitle>
           </PageLayoutTopBar>
           <PageLayoutContent>
             <div className="flex flex-col gap-4 xs:flex-row">
               <div className="flex-2">
                 <Card>
                   <CardContent>
-                    <FormBook />
+                    <FormAchievement />
                   </CardContent>
                 </Card>
-              </div>
-              <div
-                aria-hidden
-                className="mx-auto w-full max-w-64 min-w-48 flex-1"
-              >
-                <FormBookCover />
               </div>
             </div>
           </PageLayoutContent>

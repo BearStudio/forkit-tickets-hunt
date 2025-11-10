@@ -18,11 +18,10 @@ import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as ManagerUsersIndexRouteImport } from './routes/manager/users/index'
 import { Route as ManagerDashboardIndexRouteImport } from './routes/manager/dashboard.index'
-import { Route as ManagerBooksIndexRouteImport } from './routes/manager/books/index'
+import { Route as ManagerAchievementsIndexRouteImport } from './routes/manager/achievements/index'
 import { Route as ManagerAccountIndexRouteImport } from './routes/manager/account.index'
 import { Route as LoginVerifyIndexRouteImport } from './routes/login/verify.index'
 import { Route as LoginErrorIndexRouteImport } from './routes/login/error.index'
-import { Route as AppBooksIndexRouteImport } from './routes/app/books/index'
 import { Route as AppAccountIndexRouteImport } from './routes/app/account.index'
 import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc.$'
 import { Route as ApiRestSplatRouteImport } from './routes/api/rest.$'
@@ -31,14 +30,14 @@ import { Route as ApiOpenapiAppRouteImport } from './routes/api/openapi/app'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth.$'
 import { Route as ManagerUsersNewIndexRouteImport } from './routes/manager/users/new.index'
 import { Route as ManagerUsersIdIndexRouteImport } from './routes/manager/users/$id.index'
-import { Route as ManagerBooksNewIndexRouteImport } from './routes/manager/books/new.index'
-import { Route as ManagerBooksIdIndexRouteImport } from './routes/manager/books/$id.index'
-import { Route as AppBooksIdIndexRouteImport } from './routes/app/books/$id.index'
+import { Route as ManagerAchievementsNewIndexRouteImport } from './routes/manager/achievements/new.index'
+import { Route as ManagerAchievementsIdIndexRouteImport } from './routes/manager/achievements/$id.index'
 import { Route as ApiOpenapiAuthSchemaRouteImport } from './routes/api/openapi/auth.schema'
 import { Route as ApiOpenapiAppSchemaRouteImport } from './routes/api/openapi/app.schema'
 import { Route as ApiDevEmailTemplateRouteImport } from './routes/api/dev.email.$template'
 import { Route as ManagerUsersIdUpdateIndexRouteImport } from './routes/manager/users/$id.update.index'
-import { Route as ManagerBooksIdUpdateIndexRouteImport } from './routes/manager/books/$id.update.index'
+import { Route as ManagerAchievementsIdUpdateIndexRouteImport } from './routes/manager/achievements/$id.update.index'
+import { Route as AppAchievementsIdCompleteIndexRouteImport } from './routes/app/achievements/$id.complete.index'
 
 const ManagerRouteRoute = ManagerRouteRouteImport.update({
   id: '/manager',
@@ -85,11 +84,12 @@ const ManagerDashboardIndexRoute = ManagerDashboardIndexRouteImport.update({
   path: '/dashboard/',
   getParentRoute: () => ManagerRouteRoute,
 } as any)
-const ManagerBooksIndexRoute = ManagerBooksIndexRouteImport.update({
-  id: '/books/',
-  path: '/books/',
-  getParentRoute: () => ManagerRouteRoute,
-} as any)
+const ManagerAchievementsIndexRoute =
+  ManagerAchievementsIndexRouteImport.update({
+    id: '/achievements/',
+    path: '/achievements/',
+    getParentRoute: () => ManagerRouteRoute,
+  } as any)
 const ManagerAccountIndexRoute = ManagerAccountIndexRouteImport.update({
   id: '/account/',
   path: '/account/',
@@ -104,11 +104,6 @@ const LoginErrorIndexRoute = LoginErrorIndexRouteImport.update({
   id: '/error/',
   path: '/error/',
   getParentRoute: () => LoginRouteRoute,
-} as any)
-const AppBooksIndexRoute = AppBooksIndexRouteImport.update({
-  id: '/books/',
-  path: '/books/',
-  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppAccountIndexRoute = AppAccountIndexRouteImport.update({
   id: '/account/',
@@ -150,21 +145,18 @@ const ManagerUsersIdIndexRoute = ManagerUsersIdIndexRouteImport.update({
   path: '/users/$id/',
   getParentRoute: () => ManagerRouteRoute,
 } as any)
-const ManagerBooksNewIndexRoute = ManagerBooksNewIndexRouteImport.update({
-  id: '/books/new/',
-  path: '/books/new/',
-  getParentRoute: () => ManagerRouteRoute,
-} as any)
-const ManagerBooksIdIndexRoute = ManagerBooksIdIndexRouteImport.update({
-  id: '/books/$id/',
-  path: '/books/$id/',
-  getParentRoute: () => ManagerRouteRoute,
-} as any)
-const AppBooksIdIndexRoute = AppBooksIdIndexRouteImport.update({
-  id: '/books/$id/',
-  path: '/books/$id/',
-  getParentRoute: () => AppRouteRoute,
-} as any)
+const ManagerAchievementsNewIndexRoute =
+  ManagerAchievementsNewIndexRouteImport.update({
+    id: '/achievements/new/',
+    path: '/achievements/new/',
+    getParentRoute: () => ManagerRouteRoute,
+  } as any)
+const ManagerAchievementsIdIndexRoute =
+  ManagerAchievementsIdIndexRouteImport.update({
+    id: '/achievements/$id/',
+    path: '/achievements/$id/',
+    getParentRoute: () => ManagerRouteRoute,
+  } as any)
 const ApiOpenapiAuthSchemaRoute = ApiOpenapiAuthSchemaRouteImport.update({
   id: '/schema',
   path: '/schema',
@@ -186,11 +178,17 @@ const ManagerUsersIdUpdateIndexRoute =
     path: '/users/$id/update/',
     getParentRoute: () => ManagerRouteRoute,
   } as any)
-const ManagerBooksIdUpdateIndexRoute =
-  ManagerBooksIdUpdateIndexRouteImport.update({
-    id: '/books/$id/update/',
-    path: '/books/$id/update/',
+const ManagerAchievementsIdUpdateIndexRoute =
+  ManagerAchievementsIdUpdateIndexRouteImport.update({
+    id: '/achievements/$id/update/',
+    path: '/achievements/$id/update/',
     getParentRoute: () => ManagerRouteRoute,
+  } as any)
+const AppAchievementsIdCompleteIndexRoute =
+  AppAchievementsIdCompleteIndexRouteImport.update({
+    id: '/achievements/$id/complete/',
+    path: '/achievements/$id/complete/',
+    getParentRoute: () => AppRouteRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -207,22 +205,21 @@ export interface FileRoutesByFullPath {
   '/api/rest/$': typeof ApiRestSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/app/account': typeof AppAccountIndexRoute
-  '/app/books': typeof AppBooksIndexRoute
   '/login/error': typeof LoginErrorIndexRoute
   '/login/verify': typeof LoginVerifyIndexRoute
   '/manager/account': typeof ManagerAccountIndexRoute
-  '/manager/books': typeof ManagerBooksIndexRoute
+  '/manager/achievements': typeof ManagerAchievementsIndexRoute
   '/manager/dashboard': typeof ManagerDashboardIndexRoute
   '/manager/users': typeof ManagerUsersIndexRoute
   '/api/dev/email/$template': typeof ApiDevEmailTemplateRoute
   '/api/openapi/app/schema': typeof ApiOpenapiAppSchemaRoute
   '/api/openapi/auth/schema': typeof ApiOpenapiAuthSchemaRoute
-  '/app/books/$id': typeof AppBooksIdIndexRoute
-  '/manager/books/$id': typeof ManagerBooksIdIndexRoute
-  '/manager/books/new': typeof ManagerBooksNewIndexRoute
+  '/manager/achievements/$id': typeof ManagerAchievementsIdIndexRoute
+  '/manager/achievements/new': typeof ManagerAchievementsNewIndexRoute
   '/manager/users/$id': typeof ManagerUsersIdIndexRoute
   '/manager/users/new': typeof ManagerUsersNewIndexRoute
-  '/manager/books/$id/update': typeof ManagerBooksIdUpdateIndexRoute
+  '/app/achievements/$id/complete': typeof AppAchievementsIdCompleteIndexRoute
+  '/manager/achievements/$id/update': typeof ManagerAchievementsIdUpdateIndexRoute
   '/manager/users/$id/update': typeof ManagerUsersIdUpdateIndexRoute
 }
 export interface FileRoutesByTo {
@@ -236,22 +233,21 @@ export interface FileRoutesByTo {
   '/api/rest/$': typeof ApiRestSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/app/account': typeof AppAccountIndexRoute
-  '/app/books': typeof AppBooksIndexRoute
   '/login/error': typeof LoginErrorIndexRoute
   '/login/verify': typeof LoginVerifyIndexRoute
   '/manager/account': typeof ManagerAccountIndexRoute
-  '/manager/books': typeof ManagerBooksIndexRoute
+  '/manager/achievements': typeof ManagerAchievementsIndexRoute
   '/manager/dashboard': typeof ManagerDashboardIndexRoute
   '/manager/users': typeof ManagerUsersIndexRoute
   '/api/dev/email/$template': typeof ApiDevEmailTemplateRoute
   '/api/openapi/app/schema': typeof ApiOpenapiAppSchemaRoute
   '/api/openapi/auth/schema': typeof ApiOpenapiAuthSchemaRoute
-  '/app/books/$id': typeof AppBooksIdIndexRoute
-  '/manager/books/$id': typeof ManagerBooksIdIndexRoute
-  '/manager/books/new': typeof ManagerBooksNewIndexRoute
+  '/manager/achievements/$id': typeof ManagerAchievementsIdIndexRoute
+  '/manager/achievements/new': typeof ManagerAchievementsNewIndexRoute
   '/manager/users/$id': typeof ManagerUsersIdIndexRoute
   '/manager/users/new': typeof ManagerUsersNewIndexRoute
-  '/manager/books/$id/update': typeof ManagerBooksIdUpdateIndexRoute
+  '/app/achievements/$id/complete': typeof AppAchievementsIdCompleteIndexRoute
+  '/manager/achievements/$id/update': typeof ManagerAchievementsIdUpdateIndexRoute
   '/manager/users/$id/update': typeof ManagerUsersIdUpdateIndexRoute
 }
 export interface FileRoutesById {
@@ -269,22 +265,21 @@ export interface FileRoutesById {
   '/api/rest/$': typeof ApiRestSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/app/account/': typeof AppAccountIndexRoute
-  '/app/books/': typeof AppBooksIndexRoute
   '/login/error/': typeof LoginErrorIndexRoute
   '/login/verify/': typeof LoginVerifyIndexRoute
   '/manager/account/': typeof ManagerAccountIndexRoute
-  '/manager/books/': typeof ManagerBooksIndexRoute
+  '/manager/achievements/': typeof ManagerAchievementsIndexRoute
   '/manager/dashboard/': typeof ManagerDashboardIndexRoute
   '/manager/users/': typeof ManagerUsersIndexRoute
   '/api/dev/email/$template': typeof ApiDevEmailTemplateRoute
   '/api/openapi/app/schema': typeof ApiOpenapiAppSchemaRoute
   '/api/openapi/auth/schema': typeof ApiOpenapiAuthSchemaRoute
-  '/app/books/$id/': typeof AppBooksIdIndexRoute
-  '/manager/books/$id/': typeof ManagerBooksIdIndexRoute
-  '/manager/books/new/': typeof ManagerBooksNewIndexRoute
+  '/manager/achievements/$id/': typeof ManagerAchievementsIdIndexRoute
+  '/manager/achievements/new/': typeof ManagerAchievementsNewIndexRoute
   '/manager/users/$id/': typeof ManagerUsersIdIndexRoute
   '/manager/users/new/': typeof ManagerUsersNewIndexRoute
-  '/manager/books/$id/update/': typeof ManagerBooksIdUpdateIndexRoute
+  '/app/achievements/$id/complete/': typeof AppAchievementsIdCompleteIndexRoute
+  '/manager/achievements/$id/update/': typeof ManagerAchievementsIdUpdateIndexRoute
   '/manager/users/$id/update/': typeof ManagerUsersIdUpdateIndexRoute
 }
 export interface FileRouteTypes {
@@ -303,22 +298,21 @@ export interface FileRouteTypes {
     | '/api/rest/$'
     | '/api/rpc/$'
     | '/app/account'
-    | '/app/books'
     | '/login/error'
     | '/login/verify'
     | '/manager/account'
-    | '/manager/books'
+    | '/manager/achievements'
     | '/manager/dashboard'
     | '/manager/users'
     | '/api/dev/email/$template'
     | '/api/openapi/app/schema'
     | '/api/openapi/auth/schema'
-    | '/app/books/$id'
-    | '/manager/books/$id'
-    | '/manager/books/new'
+    | '/manager/achievements/$id'
+    | '/manager/achievements/new'
     | '/manager/users/$id'
     | '/manager/users/new'
-    | '/manager/books/$id/update'
+    | '/app/achievements/$id/complete'
+    | '/manager/achievements/$id/update'
     | '/manager/users/$id/update'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -332,22 +326,21 @@ export interface FileRouteTypes {
     | '/api/rest/$'
     | '/api/rpc/$'
     | '/app/account'
-    | '/app/books'
     | '/login/error'
     | '/login/verify'
     | '/manager/account'
-    | '/manager/books'
+    | '/manager/achievements'
     | '/manager/dashboard'
     | '/manager/users'
     | '/api/dev/email/$template'
     | '/api/openapi/app/schema'
     | '/api/openapi/auth/schema'
-    | '/app/books/$id'
-    | '/manager/books/$id'
-    | '/manager/books/new'
+    | '/manager/achievements/$id'
+    | '/manager/achievements/new'
     | '/manager/users/$id'
     | '/manager/users/new'
-    | '/manager/books/$id/update'
+    | '/app/achievements/$id/complete'
+    | '/manager/achievements/$id/update'
     | '/manager/users/$id/update'
   id:
     | '__root__'
@@ -364,22 +357,21 @@ export interface FileRouteTypes {
     | '/api/rest/$'
     | '/api/rpc/$'
     | '/app/account/'
-    | '/app/books/'
     | '/login/error/'
     | '/login/verify/'
     | '/manager/account/'
-    | '/manager/books/'
+    | '/manager/achievements/'
     | '/manager/dashboard/'
     | '/manager/users/'
     | '/api/dev/email/$template'
     | '/api/openapi/app/schema'
     | '/api/openapi/auth/schema'
-    | '/app/books/$id/'
-    | '/manager/books/$id/'
-    | '/manager/books/new/'
+    | '/manager/achievements/$id/'
+    | '/manager/achievements/new/'
     | '/manager/users/$id/'
     | '/manager/users/new/'
-    | '/manager/books/$id/update/'
+    | '/app/achievements/$id/complete/'
+    | '/manager/achievements/$id/update/'
     | '/manager/users/$id/update/'
   fileRoutesById: FileRoutesById
 }
@@ -461,11 +453,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManagerDashboardIndexRouteImport
       parentRoute: typeof ManagerRouteRoute
     }
-    '/manager/books/': {
-      id: '/manager/books/'
-      path: '/books'
-      fullPath: '/manager/books'
-      preLoaderRoute: typeof ManagerBooksIndexRouteImport
+    '/manager/achievements/': {
+      id: '/manager/achievements/'
+      path: '/achievements'
+      fullPath: '/manager/achievements'
+      preLoaderRoute: typeof ManagerAchievementsIndexRouteImport
       parentRoute: typeof ManagerRouteRoute
     }
     '/manager/account/': {
@@ -488,13 +480,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/login/error'
       preLoaderRoute: typeof LoginErrorIndexRouteImport
       parentRoute: typeof LoginRouteRoute
-    }
-    '/app/books/': {
-      id: '/app/books/'
-      path: '/books'
-      fullPath: '/app/books'
-      preLoaderRoute: typeof AppBooksIndexRouteImport
-      parentRoute: typeof AppRouteRoute
     }
     '/app/account/': {
       id: '/app/account/'
@@ -552,26 +537,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManagerUsersIdIndexRouteImport
       parentRoute: typeof ManagerRouteRoute
     }
-    '/manager/books/new/': {
-      id: '/manager/books/new/'
-      path: '/books/new'
-      fullPath: '/manager/books/new'
-      preLoaderRoute: typeof ManagerBooksNewIndexRouteImport
+    '/manager/achievements/new/': {
+      id: '/manager/achievements/new/'
+      path: '/achievements/new'
+      fullPath: '/manager/achievements/new'
+      preLoaderRoute: typeof ManagerAchievementsNewIndexRouteImport
       parentRoute: typeof ManagerRouteRoute
     }
-    '/manager/books/$id/': {
-      id: '/manager/books/$id/'
-      path: '/books/$id'
-      fullPath: '/manager/books/$id'
-      preLoaderRoute: typeof ManagerBooksIdIndexRouteImport
+    '/manager/achievements/$id/': {
+      id: '/manager/achievements/$id/'
+      path: '/achievements/$id'
+      fullPath: '/manager/achievements/$id'
+      preLoaderRoute: typeof ManagerAchievementsIdIndexRouteImport
       parentRoute: typeof ManagerRouteRoute
-    }
-    '/app/books/$id/': {
-      id: '/app/books/$id/'
-      path: '/books/$id'
-      fullPath: '/app/books/$id'
-      preLoaderRoute: typeof AppBooksIdIndexRouteImport
-      parentRoute: typeof AppRouteRoute
     }
     '/api/openapi/auth/schema': {
       id: '/api/openapi/auth/schema'
@@ -601,12 +579,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManagerUsersIdUpdateIndexRouteImport
       parentRoute: typeof ManagerRouteRoute
     }
-    '/manager/books/$id/update/': {
-      id: '/manager/books/$id/update/'
-      path: '/books/$id/update'
-      fullPath: '/manager/books/$id/update'
-      preLoaderRoute: typeof ManagerBooksIdUpdateIndexRouteImport
+    '/manager/achievements/$id/update/': {
+      id: '/manager/achievements/$id/update/'
+      path: '/achievements/$id/update'
+      fullPath: '/manager/achievements/$id/update'
+      preLoaderRoute: typeof ManagerAchievementsIdUpdateIndexRouteImport
       parentRoute: typeof ManagerRouteRoute
+    }
+    '/app/achievements/$id/complete/': {
+      id: '/app/achievements/$id/complete/'
+      path: '/achievements/$id/complete'
+      fullPath: '/app/achievements/$id/complete'
+      preLoaderRoute: typeof AppAchievementsIdCompleteIndexRouteImport
+      parentRoute: typeof AppRouteRoute
     }
   }
 }
@@ -614,15 +599,13 @@ declare module '@tanstack/react-router' {
 interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
   AppAccountIndexRoute: typeof AppAccountIndexRoute
-  AppBooksIndexRoute: typeof AppBooksIndexRoute
-  AppBooksIdIndexRoute: typeof AppBooksIdIndexRoute
+  AppAchievementsIdCompleteIndexRoute: typeof AppAchievementsIdCompleteIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
   AppAccountIndexRoute: AppAccountIndexRoute,
-  AppBooksIndexRoute: AppBooksIndexRoute,
-  AppBooksIdIndexRoute: AppBooksIdIndexRoute,
+  AppAchievementsIdCompleteIndexRoute: AppAchievementsIdCompleteIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
@@ -648,28 +631,28 @@ const LoginRouteRouteWithChildren = LoginRouteRoute._addFileChildren(
 interface ManagerRouteRouteChildren {
   ManagerIndexRoute: typeof ManagerIndexRoute
   ManagerAccountIndexRoute: typeof ManagerAccountIndexRoute
-  ManagerBooksIndexRoute: typeof ManagerBooksIndexRoute
+  ManagerAchievementsIndexRoute: typeof ManagerAchievementsIndexRoute
   ManagerDashboardIndexRoute: typeof ManagerDashboardIndexRoute
   ManagerUsersIndexRoute: typeof ManagerUsersIndexRoute
-  ManagerBooksIdIndexRoute: typeof ManagerBooksIdIndexRoute
-  ManagerBooksNewIndexRoute: typeof ManagerBooksNewIndexRoute
+  ManagerAchievementsIdIndexRoute: typeof ManagerAchievementsIdIndexRoute
+  ManagerAchievementsNewIndexRoute: typeof ManagerAchievementsNewIndexRoute
   ManagerUsersIdIndexRoute: typeof ManagerUsersIdIndexRoute
   ManagerUsersNewIndexRoute: typeof ManagerUsersNewIndexRoute
-  ManagerBooksIdUpdateIndexRoute: typeof ManagerBooksIdUpdateIndexRoute
+  ManagerAchievementsIdUpdateIndexRoute: typeof ManagerAchievementsIdUpdateIndexRoute
   ManagerUsersIdUpdateIndexRoute: typeof ManagerUsersIdUpdateIndexRoute
 }
 
 const ManagerRouteRouteChildren: ManagerRouteRouteChildren = {
   ManagerIndexRoute: ManagerIndexRoute,
   ManagerAccountIndexRoute: ManagerAccountIndexRoute,
-  ManagerBooksIndexRoute: ManagerBooksIndexRoute,
+  ManagerAchievementsIndexRoute: ManagerAchievementsIndexRoute,
   ManagerDashboardIndexRoute: ManagerDashboardIndexRoute,
   ManagerUsersIndexRoute: ManagerUsersIndexRoute,
-  ManagerBooksIdIndexRoute: ManagerBooksIdIndexRoute,
-  ManagerBooksNewIndexRoute: ManagerBooksNewIndexRoute,
+  ManagerAchievementsIdIndexRoute: ManagerAchievementsIdIndexRoute,
+  ManagerAchievementsNewIndexRoute: ManagerAchievementsNewIndexRoute,
   ManagerUsersIdIndexRoute: ManagerUsersIdIndexRoute,
   ManagerUsersNewIndexRoute: ManagerUsersNewIndexRoute,
-  ManagerBooksIdUpdateIndexRoute: ManagerBooksIdUpdateIndexRoute,
+  ManagerAchievementsIdUpdateIndexRoute: ManagerAchievementsIdUpdateIndexRoute,
   ManagerUsersIdUpdateIndexRoute: ManagerUsersIdUpdateIndexRoute,
 }
 

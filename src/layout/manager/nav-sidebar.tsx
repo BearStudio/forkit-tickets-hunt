@@ -5,11 +5,11 @@ import {
   UsersIcon,
   XIcon,
 } from 'lucide-react';
+import { TrophyIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Logo } from '@/components/brand/logo';
-import { IconBookOpen } from '@/components/icons/generated';
 import {
   Sidebar,
   SidebarContent,
@@ -76,12 +76,12 @@ export const NavSidebar = (props: { children?: ReactNode }) => {
                   </Link>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <Link to="/manager/books">
+                  <Link to="/manager/achievements">
                     {({ isActive }) => (
                       <SidebarMenuButton asChild isActive={isActive}>
                         <span>
-                          <IconBookOpen />
-                          <span>{t('layout:nav.books')}</span>
+                          <TrophyIcon />
+                          <span>Achievements</span>
                         </span>
                       </SidebarMenuButton>
                     )}

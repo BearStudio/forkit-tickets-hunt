@@ -1,11 +1,11 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Link, useRouter } from '@tanstack/react-router';
-import { PlusIcon } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
+import { PlusIcon, TrophyIcon } from 'lucide-react';
 
 import { orpc } from '@/lib/orpc/client';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
   DataList,
@@ -21,7 +21,6 @@ import { ResponsiveIconButton } from '@/components/ui/responsive-icon-button';
 import { SearchButton } from '@/components/ui/search-button';
 import { SearchInput } from '@/components/ui/search-input';
 
-import { BookCover } from '@/features/book/book-cover';
 import {
   PageLayout,
   PageLayoutContent,
@@ -29,9 +28,10 @@ import {
   PageLayoutTopBarTitle,
 } from '@/layout/manager/page-layout';
 
-export const PageBooks = (props: { search: { searchTerm?: string } }) => {
+export const PageAchievements = (props: {
+  search: { searchTerm?: string };
+}) => {
   const router = useRouter();
-  const { t } = useTranslation(['book']);
 
   const searchInputProps = {
     value: props.search.searchTerm ?? '',
@@ -43,8 +43,8 @@ export const PageBooks = (props: { search: { searchTerm?: string } }) => {
       }),
   };
 
-  const booksQuery = useInfiniteQuery(
-    orpc.book.getAll.infiniteOptions({
+  const achievementsQuery = useInfiniteQuery(
+    orpc.achievement.getAll.infiniteOptions({
       input: (cursor: string | undefined) => ({
         searchTerm: props.search.searchTerm,
         cursor,
@@ -56,11 +56,11 @@ export const PageBooks = (props: { search: { searchTerm?: string } }) => {
   );
 
   const ui = getUiState((set) => {
-    if (booksQuery.status === 'pending') return set('pending');
-    if (booksQuery.status === 'error') return set('error');
+    if (achievementsQuery.status === 'pending') return set('pending');
+    if (achievementsQuery.status === 'error') return set('error');
 
     const searchTerm = props.search.searchTerm;
-    const items = booksQuery.data?.pages.flatMap((p) => p.items) ?? [];
+    const items = achievementsQuery.data?.pages.flatMap((p) => p.items) ?? [];
     if (!items.length && searchTerm) {
       return set('empty-search', { searchTerm });
     }
@@ -69,7 +69,7 @@ export const PageBooks = (props: { search: { searchTerm?: string } }) => {
     return set('default', {
       items,
       searchTerm,
-      total: booksQuery.data.pages[0]?.total ?? 0,
+      total: achievementsQuery.data.pages[0]?.total ?? 0,
     });
   });
 
@@ -79,19 +79,17 @@ export const PageBooks = (props: { search: { searchTerm?: string } }) => {
         actions={
           <ResponsiveIconButton
             asChild
-            label={t('book:manager.new.title')}
+            label="New achievement"
             variant="secondary"
             size="sm"
           >
-            <Link to="/manager/books/new">
+            <Link to="/manager/achievements/new">
               <PlusIcon />
             </Link>
           </ResponsiveIconButton>
         }
       >
-        <PageLayoutTopBarTitle>
-          {t('book:manager.list.title')}
-        </PageLayoutTopBarTitle>
+        <PageLayoutTopBarTitle>Achievements</PageLayoutTopBarTitle>
         <SearchButton
           {...searchInputProps}
           className="-mx-2 md:hidden"
@@ -108,7 +106,7 @@ export const PageBooks = (props: { search: { searchTerm?: string } }) => {
           {ui
             .match('pending', () => <DataListLoadingState />)
             .match('error', () => (
-              <DataListErrorState retry={() => booksQuery.refetch()} />
+              <DataListErrorState retry={() => achievementsQuery.refetch()} />
             ))
             .match('empty', () => <DataListEmptyState />)
             .match('empty-search', ({ searchTerm }) => (
@@ -127,43 +125,52 @@ export const PageBooks = (props: { search: { searchTerm?: string } }) => {
                       });
                     }}
                   >
-                    {t('book:manager.list.searchResults', {
-                      total,
-                      searchTerm,
-                    })}
+                    Showing {total} results for “{searchTerm}”
                   </DataListRowResults>
                 )}
                 {items.map((item) => (
                   <DataListRow key={item.id} withHover>
                     <DataListCell className="flex-none">
-                      <div aria-hidden>
-                        <BookCover book={item} variant="tiny" />
+                      <div
+                        aria-hidden
+                        className="flex size-8 items-center justify-center rounded-md bg-muted"
+                      >
+                        {item.imageUrl && (
+                          <img
+                            src={item.imageUrl}
+                            alt=""
+                            className="h-5 w-5 rounded object-cover"
+                          />
+                        )}
+                        {!item.imageUrl && item.emoji && (
+                          <span className="text-lg">{item.emoji}</span>
+                        )}
+                        {!item.imageUrl && !item.emoji && (
+                          <TrophyIcon className="size-4 text-muted-foreground" />
+                        )}
                       </div>
                     </DataListCell>
                     <DataListCell>
                       <DataListText className="font-medium">
-                        <Link to="/manager/books/$id" params={{ id: item.id }}>
-                          {item.title}
+                        <Link
+                          to="/manager/achievements/$id"
+                          params={{ id: item.id }}
+                        >
+                          {item.name}
                           <span className="absolute inset-0" />
                         </Link>
                       </DataListText>
                       <DataListText className="text-xs text-muted-foreground">
-                        {item.author}
+                        {item.hint}
                       </DataListText>
                     </DataListCell>
                     <DataListCell>
-                      {item.genre && (
-                        <DataListText className="text-xs text-muted-foreground">
-                          {item.genre.name}
-                        </DataListText>
-                      )}
+                      {item.isSecret && <Badge>Secret</Badge>}
                     </DataListCell>
-                    <DataListCell>
-                      {item.publisher && (
-                        <DataListText className="text-xs text-muted-foreground">
-                          {item.publisher}
-                        </DataListText>
-                      )}
+                    <DataListCell className="flex-none">
+                      <DataListText className="text-xs text-muted-foreground">
+                        {item.points} pts
+                      </DataListText>
                     </DataListCell>
                   </DataListRow>
                 ))}
@@ -172,19 +179,16 @@ export const PageBooks = (props: { search: { searchTerm?: string } }) => {
                     <Button
                       size="xs"
                       variant="secondary"
-                      disabled={!booksQuery.hasNextPage}
-                      onClick={() => booksQuery.fetchNextPage()}
-                      loading={booksQuery.isFetchingNextPage}
+                      disabled={!achievementsQuery.hasNextPage}
+                      onClick={() => achievementsQuery.fetchNextPage()}
+                      loading={achievementsQuery.isFetchingNextPage}
                     >
-                      {t('book:manager.list.loadMore')}
+                      Load more
                     </Button>
                   </DataListCell>
                   <DataListCell>
                     <DataListText className="text-xs text-muted-foreground">
-                      {t('book:manager.list.showing', {
-                        count: items.length,
-                        total,
-                      })}
+                      Showing {items.length} of {total}
                     </DataListText>
                   </DataListCell>
                 </DataListRow>
