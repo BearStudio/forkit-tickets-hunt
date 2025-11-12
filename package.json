@@ -39,7 +39,8 @@
     "db:init": "pnpm db:push && pnpm db:seed",
     "db:push": "prisma db push",
     "db:ui": "prisma studio",
-    "db:seed": "dotenv -- cross-env node ./run-jiti ./prisma/seed/index.ts"
+    "db:seed": "dotenv -- cross-env node ./run-jiti ./prisma/seed/index.ts",
+    "db:seed-production": "dotenv -- cross-env NODE_ENV=production node ./run-jiti ./prisma/seed/index.ts"
   },
   "dependencies": {
     "@base-ui-components/react": "1.0.0-beta.1",

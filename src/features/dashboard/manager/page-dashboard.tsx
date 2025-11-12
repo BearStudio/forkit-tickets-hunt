@@ -12,6 +12,7 @@ import {
   DataListRow,
   DataListText,
 } from '@/components/ui/datalist';
+import { TicketIcon } from '@/components/ui/ticket-icon';
 
 import {
   PageLayout,
@@ -19,7 +20,6 @@ import {
   PageLayoutTopBar,
   PageLayoutTopBarTitle,
 } from '@/layout/manager/page-layout';
-import { TicketIcon } from '@/components/ui/ticket-icon';
 
 export const PageDashboard = () => {
   const leaderboardQuery = useQuery(

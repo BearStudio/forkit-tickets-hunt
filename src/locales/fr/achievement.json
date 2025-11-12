@@ -51,5 +51,11 @@
       "alreadyCompleted": "Déjà validé",
       "completed": "Succès validé !"
     }
+  },
+  "inAppAchievements": {
+    "error": { "triggerButton": { "label": "Obtenir des points" } },
+    "onboarding_email": {
+      "triggerButton": { "label": "Je pense que vous devriez vérifier ce lien" }
+    }
   }
 }

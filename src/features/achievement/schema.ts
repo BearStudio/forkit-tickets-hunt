@@ -7,6 +7,7 @@ export type Achievement = z.infer<ReturnType<typeof zAchievement>>;
 export const zAchievement = () =>
   z.object({
     id: z.string(),
+    key: z.string(),
     name: zu.fieldText.required(),
     hint: zu.fieldText.nullish(),
     points: z.coerce.number().int(),

@@ -6,5 +6,11 @@
     "intro": "To verify you identity, enter the following code:",
     "validityTime": "This code will only be valid for the next {{expiration}} minutes.",
     "ignoreHelper": "If you didn't try to sign in, you can safely ignore this email."
+  },
+  "onboarded": {
+    "subject": "You're all set!",
+    "preview": "There is a surprise waiting for you",
+    "title": "Thanks for joining us {{name}}!",
+    "intro": "To thank you for joining us, we've prepared a little something for you:"
   }
 }

@@ -21,6 +21,7 @@ import {
 import { ResponsiveIconButton } from '@/components/ui/responsive-icon-button';
 import { SearchButton } from '@/components/ui/search-button';
 import { SearchInput } from '@/components/ui/search-input';
+import { TicketIcon } from '@/components/ui/ticket-icon';
 
 import {
   PageLayout,
@@ -28,7 +29,6 @@ import {
   PageLayoutTopBar,
   PageLayoutTopBarTitle,
 } from '@/layout/manager/page-layout';
-import { TicketIcon } from '@/components/ui/ticket-icon';
 
 export const PageAchievements = (props: {
   search: { searchTerm?: string };

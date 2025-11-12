@@ -1,10 +1,12 @@
-import { HomeIcon, Undo2Icon } from 'lucide-react';
+import { HomeIcon, TrophyIcon, Undo2Icon } from 'lucide-react';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+
+import { getAchievementLinkByKey } from '@/features/achievement/get-achievement-link';
 
 export const PageError = (props: {
   error?: '403' | '404' | '500' | 'custom';
@@ -92,7 +94,20 @@ const PageErrorContent = (props: {
           {props.children}
         </div>
       )}
+      <PageErrorButtonAchievement />
     </div>
+  );
+};
+
+const PageErrorButtonAchievement = () => {
+  const { t } = useTranslation(['achievement']);
+  return (
+    <Button asChild>
+      <a href={getAchievementLinkByKey('error')}>
+        <TrophyIcon />
+        {t('achievement:inAppAchievements.error.triggerButton.label')}
+      </a>
+    </Button>
   );
 };
 

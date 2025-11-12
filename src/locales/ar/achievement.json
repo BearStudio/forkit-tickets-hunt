@@ -51,5 +51,11 @@
       "alreadyCompleted": "مُكتمل بالفعل",
       "completed": "تم إكمال الإنجاز!"
     }
+  },
+  "inAppAchievements": {
+    "error": { "triggerButton": { "label": "احصل على بعض النقاط" } },
+    "onboarding_email": {
+      "triggerButton": { "label": "أعتقد أنك يجب أن تتحقق من هذا الرابط" }
+    }
   }
 }

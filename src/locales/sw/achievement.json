@@ -51,5 +51,11 @@
       "alreadyCompleted": "Tayari limekamilika",
       "completed": "Fanikiwa limekamilika!"
     }
+  },
+  "inAppAchievements": {
+    "error": { "triggerButton": { "label": "Kupata alama" } },
+    "onboarding_email": {
+      "triggerButton": { "label": "Nini unachojua kuangalia kiungo hili" }
+    }
   }
 }

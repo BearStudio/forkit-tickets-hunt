@@ -94,6 +94,8 @@ model Achievement {
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  key         String   @unique @default(cuid())
   name        String
   hint        String?
   points      Int
