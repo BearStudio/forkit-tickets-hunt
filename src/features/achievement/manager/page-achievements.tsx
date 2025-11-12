@@ -28,6 +28,7 @@ import {
   PageLayoutTopBar,
   PageLayoutTopBarTitle,
 } from '@/layout/manager/page-layout';
+import { TicketIcon } from '@/components/ui/ticket-icon';
 
 export const PageAchievements = (props: {
   search: { searchTerm?: string };
@@ -177,8 +178,8 @@ export const PageAchievements = (props: {
                       )}
                     </DataListCell>
                     <DataListCell className="flex-none">
-                      <DataListText className="text-xs text-muted-foreground">
-                        {item.points} pts
+                      <DataListText className="flex gap-1.5 text-xs text-muted-foreground">
+                        +{item.points} <TicketIcon />
                       </DataListText>
                     </DataListCell>
                   </DataListRow>

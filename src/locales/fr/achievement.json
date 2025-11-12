@@ -3,7 +3,7 @@
     "achievements": "Succès",
     "name": { "label": "Nom" },
     "hint": { "label": "Indice" },
-    "points": { "label": "Points" },
+    "points": { "label": "Tickets" },
     "emoji": { "label": "Émoji" },
     "imageUrl": { "label": "Image" },
     "secret": { "label": "Secret" },

@@ -4,6 +4,7 @@ import { CheckIcon, TrophyIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
+import { cn } from '@/lib/tailwind/utils';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -15,6 +16,7 @@ import {
   DataListRow,
   DataListText,
 } from '@/components/ui/datalist';
+import { TicketIcon } from '@/components/ui/ticket-icon';
 
 export const AchievementsList = () => {
   const { t } = useTranslation(['achievement']);
@@ -92,7 +94,19 @@ export const AchievementsList = () => {
                       {item.isSecret && !item.completed ? (
                         '???'
                       ) : (
-                        <>{item.points} pts</>
+                        <span
+                          className={cn(
+                            'flex items-center gap-1.5',
+                            !item.completed && 'opacity-60'
+                          )}
+                        >
+                          +{item.points}
+                          <TicketIcon
+                            className={cn(
+                              !item.completed && 'opacity-60 grayscale'
+                            )}
+                          />
+                        </span>
                       )}
                     </DataListText>
                   </DataListCell>

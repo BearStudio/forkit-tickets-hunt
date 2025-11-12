@@ -19,6 +19,7 @@ import {
   PageLayoutTopBar,
   PageLayoutTopBarTitle,
 } from '@/layout/manager/page-layout';
+import { TicketIcon } from '@/components/ui/ticket-icon';
 
 export const PageDashboard = () => {
   const leaderboardQuery = useQuery(
@@ -72,8 +73,8 @@ export const PageDashboard = () => {
                       </DataListText>
                     </DataListCell>
                     <DataListCell className="flex-none">
-                      <span className="rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
-                        {item.totalPoints} pts
+                      <span className="flex gap-1.5 rounded-md bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                        {item.totalPoints} <TicketIcon className="w-5" />
                       </span>
                     </DataListCell>
                   </DataListRow>

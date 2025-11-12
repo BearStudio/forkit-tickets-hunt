@@ -6,6 +6,6 @@
   },
   "rank": {
     "title": "Votre position",
-    "summary": "{{completedCount}} terminés • {{totalPoints}} pts"
+    "summary": "{{completedCount}} terminés • {{totalPoints}} tickets"
   }
 }
