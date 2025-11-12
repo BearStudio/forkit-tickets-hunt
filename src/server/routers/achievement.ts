@@ -147,11 +147,11 @@ export default {
         nextCursor = nextItem?.id;
       }
 
-      const mapped = items.reduce(
-        (acc, achievement) => {
+      const mapped = items
+        .map((achievement) => {
           const completed = achievement.completedBy.length > 0;
 
-          const mappedItem = {
+          return {
             id: achievement.id,
             name: achievement.isSecret && !completed ? '???' : achievement.name,
             hint: achievement.hint ?? null,
@@ -163,19 +163,16 @@ export default {
             completed,
             isSecret: achievement.isSecret,
           };
+        })
+        .sort((a, b) => {
+          if (a.completed && !b.completed) return 1;
+          if (!a.completed && b.completed) return -1;
 
-          const key = completed ? 'doneItems' : 'notDoneItems';
-
-          return {
-            ...acc,
-            [key]: [...acc[key], mappedItem],
-          };
-        },
-        { doneItems: [], notDoneItems: [] }
-      );
+          return b.points - a.points;
+        });
 
       return {
-        items: [...mapped.notDoneItems, ...mapped.doneItems],
+        items: mapped,
         nextCursor,
         total,
       };
