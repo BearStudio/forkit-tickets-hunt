@@ -34,7 +34,7 @@ model User {
   banExpires  DateTime?
   onboardedAt DateTime?
 
-  completedAchievements Achievement[] @relation("UserAchievements")
+  unlockedAchievements UnlockedAchievement[]
 
   @@unique([email])
   @@map("user")
@@ -90,7 +90,7 @@ model Verification {
 
 model Achievement {
   id          String   @id @default(cuid())
-  secretId    String   @unique @default(cuid()) 
+  secretId    String   @unique @default(cuid())
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -100,7 +100,21 @@ model Achievement {
   isSecret    Boolean  @default(false)
   emoji       String?
   imageUrl    String?
-  completedBy User[]   @relation("UserAchievements")
+
+  unlockedAchievements UnlockedAchievement[]
 
   @@map("achievement")
+}
+
+model UnlockedAchievement {
+  achievementId String
+  userId String
+  
+  unlockedAt DateTime @default(now())
+
+  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([achievementId, userId])
+  @@map("unlocked_achievement")
 }

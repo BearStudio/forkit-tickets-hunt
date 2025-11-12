@@ -1,9 +1,8 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { ORPCError } from '@orpc/client';
-import { useMutation } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useParams } from '@tanstack/react-router';
 import { TrophyIcon } from 'lucide-react';
-import { useEffect } from 'react';
 
 import { orpc } from '@/lib/orpc/client';
 
@@ -17,30 +16,27 @@ import { PageLayout, PageLayoutContent } from '@/layout/app/page-layout';
 export const PageAchievementComplete = () => {
   const params = useParams({ from: '/app/achievements/$id/complete/' });
 
-  const completeMutation = useMutation(
-    orpc.achievement.completeBySecretId.mutationOptions()
+  const completionQuery = useQuery(
+    orpc.achievement.completeBySecretId.queryOptions({
+      input: { id: params.id },
+    })
   );
 
-  useEffect(() => {
-    completeMutation.mutate({ id: params.id });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params.id]);
-
   const ui = getUiState((set) => {
-    if (completeMutation.status === 'pending') return set('pending');
+    if (completionQuery.status === 'pending') return set('pending');
 
     if (
-      completeMutation.status === 'error' &&
-      completeMutation.error instanceof ORPCError &&
-      completeMutation.error.code === 'NOT_FOUND'
+      completionQuery.status === 'error' &&
+      completionQuery.error instanceof ORPCError &&
+      completionQuery.error.code === 'NOT_FOUND'
     )
       return set('not-found');
 
-    if (completeMutation.status !== 'success') return set('error');
+    if (completionQuery.status !== 'success') return set('error');
 
-    if (completeMutation.data.alreadyCompleted)
-      return set('already-completed', { data: completeMutation.data });
-    return set('default', { data: completeMutation.data });
+    if (completionQuery.data.alreadyCompleted)
+      return set('already-completed', { data: completionQuery.data });
+    return set('default', { data: completionQuery.data });
   });
 
   return (

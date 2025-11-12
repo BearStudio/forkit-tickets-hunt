@@ -133,9 +133,9 @@ export default {
           cursor: input.cursor ? { id: input.cursor } : undefined,
           orderBy: { points: 'desc' },
           include: {
-            completedBy: {
-              where: { id: context.user.id },
-              select: { id: true },
+            unlockedAchievements: {
+              where: { userId: context.user.id },
+              select: { achievementId: true },
             },
           },
         }),
@@ -149,7 +149,7 @@ export default {
 
       const mapped = items
         .map((achievement) => {
-          const completed = achievement.completedBy.length > 0;
+          const completed = achievement.unlockedAchievements.length > 0;
 
           return {
             id: achievement.id,
@@ -347,9 +347,9 @@ export default {
       const achievement = await context.db.achievement.findUnique({
         where: { secretId: input.id },
         include: {
-          completedBy: {
-            where: { id: context.user.id },
-            select: { id: true },
+          unlockedAchievements: {
+            where: { userId: context.user.id },
+            select: { achievementId: true },
           },
         },
       });
@@ -359,15 +359,13 @@ export default {
         throw new ORPCError('NOT_FOUND');
       }
 
-      const alreadyCompleted = achievement.completedBy.length > 0;
+      const alreadyCompleted = achievement.unlockedAchievements.length > 0;
 
       if (!alreadyCompleted) {
-        await context.db.achievement.update({
-          where: { secretId: input.id },
+        await context.db.unlockedAchievement.create({
           data: {
-            completedBy: {
-              connect: { id: context.user.id },
-            },
+            achievementId: achievement.id,
+            userId: context.user.id,
           },
         });
       }

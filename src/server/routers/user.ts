@@ -48,24 +48,25 @@ export default {
           id: true,
           name: true,
           image: true,
-          completedAchievements: {
-            select: { points: true },
+          unlockedAchievements: {
+            select: { achievement: { select: { points: true } } },
           },
         },
       });
 
       const items = users
-        .map((u) => {
-          const totalPoints = u.completedAchievements.reduce(
-            (sum, a) => sum + (a.points ?? 0),
+        .map((user) => {
+          const totalPoints = user.unlockedAchievements.reduce(
+            (sum, unlockedAchievement) =>
+              sum + (unlockedAchievement.achievement.points ?? 0),
             0
           );
           return {
-            id: u.id,
-            name: u.name,
-            image: u.image ?? null,
+            id: user.id,
+            name: user.name,
+            image: user.image ?? null,
             totalPoints,
-            completedCount: u.completedAchievements.length,
+            completedCount: user.unlockedAchievements.length,
           };
         })
         .sort((a, b) => b.totalPoints - a.totalPoints)
@@ -98,24 +99,25 @@ export default {
       const users = await context.db.user.findMany({
         select: {
           id: true,
-          completedAchievements: {
-            select: { points: true },
+          unlockedAchievements: {
+            select: { achievement: { select: { points: true } } },
           },
         },
       });
 
       const mapped = users
-        .map((u) => ({
-          id: u.id,
-          totalPoints: u.completedAchievements.reduce(
-            (sum, a) => sum + (a.points ?? 0),
+        .map((user) => ({
+          id: user.id,
+          totalPoints: user.unlockedAchievements.reduce(
+            (sum, unlockedAchievement) =>
+              sum + (unlockedAchievement.achievement.points ?? 0),
             0
           ),
-          completedCount: u.completedAchievements.length,
+          completedCount: user.unlockedAchievements.length,
         }))
         .sort((a, b) => b.totalPoints - a.totalPoints);
 
-      const index = mapped.findIndex((u) => u.id === context.user.id);
+      const index = mapped.findIndex((user) => user.id === context.user.id);
       let totalPoints = 0;
       let completedCount = 0;
       if (index >= 0) {
