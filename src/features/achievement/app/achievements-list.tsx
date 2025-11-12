@@ -81,9 +81,7 @@ export const AchievementsList = () => {
                   </DataListCell>
                   <DataListCell>
                     <DataListText className="font-medium">
-                      {item.isSecret && !item.completed
-                        ? t('achievement:common.secretName')
-                        : item.name}
+                      {item.name}
                     </DataListText>
                     <DataListText className="text-xs text-muted-foreground">
                       {item.hint}
@@ -91,7 +89,11 @@ export const AchievementsList = () => {
                   </DataListCell>
                   <DataListCell>
                     <DataListText className="text-xs text-muted-foreground">
-                      {item.points} pts
+                      {item.isSecret && !item.completed ? (
+                        '???'
+                      ) : (
+                        <>{item.points} pts</>
+                      )}
                     </DataListText>
                   </DataListCell>
                   <DataListCell className="flex-none">

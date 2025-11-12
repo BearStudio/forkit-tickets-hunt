@@ -99,7 +99,7 @@ export default {
       z
         .object({
           cursor: z.string().optional(),
-          limit: z.coerce.number().int().min(1).max(100).prefault(20),
+          limit: z.coerce.number().int().min(1).max(100).prefault(100),
         })
         .prefault({})
     )
@@ -153,10 +153,9 @@ export default {
 
           const mappedItem = {
             id: achievement.id,
-            name:
-              achievement.isSecret && !completed ? 'Secret' : achievement.name,
+            name: achievement.isSecret && !completed ? '???' : achievement.name,
             hint: achievement.hint ?? null,
-            points: achievement.points,
+            points: achievement.isSecret && !completed ? 0 : achievement.points,
             emoji: achievement.emoji ?? null,
             imageUrl: achievement.imageUrl ?? null,
             createdAt: achievement.createdAt,

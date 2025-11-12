@@ -20,6 +20,8 @@ export const Providers = (props: { children: ReactNode }) => {
     <ThemeProvider
       attribute="class"
       storageKey="theme"
+      defaultTheme="dark"
+      forcedTheme="dark"
       disableTransitionOnChange
     >
       <QueryClientProvider>
