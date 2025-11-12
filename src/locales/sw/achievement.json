@@ -54,7 +54,7 @@
   },
   "inAppAchievements": {
     "error": { "triggerButton": { "label": "Kupata alama" } },
-    "onboarding_email": {
+    "onboarded": {
       "triggerButton": { "label": "Nini unachojua kuangalia kiungo hili" }
     }
   }

@@ -28,9 +28,9 @@ export const TemplateOnboarded = (props: { language: string; user: User }) => {
         <Section style={styles.section}>
           <Text style={styles.text}>{i18n.t('emails:onboarded.intro')}</Text>
           <Button>
-            <a href={getAchievementLinkByKey('onboarding_email')}>
+            <a href={getAchievementLinkByKey('onboarded')}>
               {i18n.t(
-                'achievement:inAppAchievements.onboarding_email.triggerButton.label'
+                'achievement:inAppAchievements.onboarded.triggerButton.label'
               )}
             </a>
           </Button>
