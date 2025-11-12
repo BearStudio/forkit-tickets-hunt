@@ -33,7 +33,9 @@
       "deleteButton": { "label": "Futa" },
       "editButton": { "label": "Hariri" },
       "deleted": "Fanikiwa limefutwa",
-      "deleteError": "Imeshindwa kufuta fanikiwa"
+      "deleteError": "Imeshindwa kufuta fanikiwa",
+      "copiedToClipboard": "Imenakiliwa kwenye ubao wa kunakili",
+      "copyToClipboard": "Nakili kiungo"
     },
     "update": {
       "title": "Hariri fanikiwa",

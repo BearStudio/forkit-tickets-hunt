@@ -2,7 +2,15 @@ import { getUiState } from '@bearstudio/ui-state';
 import { ORPCError } from '@orpc/client';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useCanGoBack, useRouter } from '@tanstack/react-router';
-import { AlertCircleIcon, PencilLineIcon, Trash2Icon } from 'lucide-react';
+import { useCopyToClipboard } from '@uidotdev/usehooks';
+import {
+  AlertCircleIcon,
+  CheckCircle2Icon,
+  CopyIcon,
+  PencilLineIcon,
+  Trash2Icon,
+} from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
@@ -34,6 +42,25 @@ export const PageAchievement = (props: { params: { id: string } }) => {
     orpc.achievement.getById.queryOptions({ input: { id: props.params.id } })
   );
   const { t } = useTranslation(['achievement']);
+
+  const achievementUrl = achievementQuery.data
+    ? `${envClient.VITE_BASE_URL}/app/achievements/${achievementQuery.data.secretId}/complete`
+    : '';
+
+  const [, copyToClipboard] = useCopyToClipboard();
+  const [showFeedback, setShowFeedback] = useState(false);
+
+  const copyAchievementUrl = () => {
+    setShowFeedback(true);
+    copyToClipboard(achievementUrl);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowFeedback(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [showFeedback]);
 
   const ui = getUiState((set) => {
     if (achievementQuery.status === 'pending') return set('pending');
@@ -186,15 +213,31 @@ export const PageAchievement = (props: { params: { id: string } }) => {
               </div>
               <div
                 aria-hidden
-                className="mx-auto flex w-full max-w-64 min-w-48 flex-1 items-center justify-center rounded-md bg-muted"
+                className="mx-auto flex w-full max-w-64 min-w-48 flex-1 flex-col items-center justify-center gap-4 rounded-md bg-muted"
               >
                 <img
                   src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
-                    `${envClient.VITE_BASE_URL}/app/achievements/${achievement.secretId}/complete`
+                    achievementUrl
                   )}`}
                   alt=""
                   className="h-40 w-40 rounded bg-white p-2"
                 />
+                {showFeedback ? (
+                  <span className="flex items-center gap-1 rounded-md bg-positive-100 px-1.5 py-1 text-xs font-medium text-positive-800 max-sm:mx-auto dark:bg-positive-600/30 dark:text-positive-100">
+                    <CheckCircle2Icon className="size-3" />{' '}
+                    {t('achievement:manager.detail.copiedToClipboard')}
+                  </span>
+                ) : (
+                  <Button
+                    size="xs"
+                    variant="secondary"
+                    className="max-sm:mx-auto"
+                    onClick={() => copyAchievementUrl()}
+                  >
+                    <CopyIcon />
+                    {t('achievement:manager.detail.copyToClipboard')}
+                  </Button>
+                )}
               </div>
             </div>
           ))

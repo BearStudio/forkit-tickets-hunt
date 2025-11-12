@@ -33,7 +33,9 @@
       "deleteButton": { "label": "حذف" },
       "editButton": { "label": "تعديل" },
       "deleted": "تم حذف الإنجاز",
-      "deleteError": "تعذر حذف الإنجاز"
+      "deleteError": "تعذر حذف الإنجاز",
+      "copiedToClipboard": "تم النسخ إلى الحافظة",
+      "copyToClipboard": "نسخ الرابط"
     },
     "update": {
       "title": "تعديل الإنجاز",

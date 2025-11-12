@@ -33,7 +33,9 @@
       "deleteButton": { "label": "Delete" },
       "editButton": { "label": "Edit" },
       "deleted": "Achievement deleted",
-      "deleteError": "Unable to delete achievement"
+      "deleteError": "Unable to delete achievement",
+      "copiedToClipboard": "Copied",
+      "copyToClipboard": "Copy link"
     },
     "update": {
       "title": "Edit achievement",

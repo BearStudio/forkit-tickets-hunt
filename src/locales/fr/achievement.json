@@ -33,7 +33,9 @@
       "deleteButton": { "label": "Supprimer" },
       "editButton": { "label": "Modifier" },
       "deleted": "Succès supprimé",
-      "deleteError": "Impossible de supprimer le succès"
+      "deleteError": "Impossible de supprimer le succès",
+      "copiedToClipboard": "Copié",
+      "copyToClipboard": "Copier le lien"
     },
     "update": {
       "title": "Modifier le succès",
