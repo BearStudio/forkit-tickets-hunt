@@ -1,53 +1,55 @@
 import { useQuery } from '@tanstack/react-query';
-import { TrophyIcon } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 
-import { Card, CardContent } from '@/components/ui/card';
-import { DataListText } from '@/components/ui/datalist';
+import { IconCrownSimpleDuotone } from '@/components/icons/generated';
+import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { TicketIcon } from '@/components/ui/ticket-icon';
 
 export const CurrentUserRank = () => {
   const query = useQuery(orpc.user.getCurrentUserRank.queryOptions());
   const { t } = useTranslation(['home']);
 
   return (
-    <Card>
-      <CardContent className="flex items-center justify-between gap-4 py-4">
-        <div className="flex items-center gap-3">
-          <div
-            aria-hidden
-            className="flex size-10 items-center justify-center rounded-full bg-muted"
-          >
-            <TrophyIcon className="size-5 text-muted-foreground" />
-          </div>
-          <div className="flex flex-col">
-            <span className="text-sm font-medium">{t('home:rank.title')}</span>
-            {query.status === 'pending' && (
-              <Skeleton className="mt-1 h-4 w-24" />
-            )}
-            {query.status === 'success' && (
-              <DataListText className="text-xs text-muted-foreground">
-                {t('home:rank.summary', {
-                  completedCount: query.data.completedCount,
-                  totalPoints: query.data.totalPoints,
-                })}
-              </DataListText>
-            )}
-          </div>
-        </div>
-        <div className="text-right">
+    <div className="flex flex-1 flex-col items-center justify-center gap-8 p-4">
+      <h2 className="text-xs font-medium tracking-wider text-muted-foreground uppercase">
+        {t('home:rank.title')}
+      </h2>
+      <div className="flex flex-col gap-3">
+        <div className="flex size-36 flex-col items-center justify-center rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10">
+          <IconCrownSimpleDuotone className="size-16" />
           {query.status === 'pending' && (
-            <Skeleton className="ml-auto h-6 w-10" />
+            <Skeleton className="mx-auto h-6 w-8" />
           )}
           {query.status === 'success' && (
-            <span className="rounded-md bg-primary/10 px-2 py-0.5 text-sm font-semibold text-primary">
-              #{query.data.rank}
-            </span>
+            <span className="text-xl font-bold">#{query.data.rank}</span>
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <div className="flex gap-2">
+          <div className="flex items-center gap-2 p-4">
+            <div className="text-4xl font-bold">
+              {query.data?.completedCount}
+            </div>
+            <div className="text-xs opacity-60">
+              Achievements
+              <br />
+              Completed
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-2 p-4 text-center">
+            <div className="text-4xl font-bold">{query.data?.totalPoints}</div>
+            <TicketIcon className="w-12" />
+          </div>
+        </div>
+        <Button variant="secondary" asChild>
+          <Link to="/app/achievements">View All Achievements</Link>
+        </Button>
+      </div>
+    </div>
   );
 };

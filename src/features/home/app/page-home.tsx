@@ -1,5 +1,3 @@
-import { useTranslation } from 'react-i18next';
-
 import { Logo } from '@/components/brand/logo';
 
 import { CurrentUserRank } from '@/features/user/app/current-user-rank';
@@ -10,25 +8,13 @@ import {
 } from '@/layout/app/page-layout';
 
 export const PageHome = () => {
-  const { t } = useTranslation(['home']);
   return (
     <PageLayout>
       <PageLayoutTopBar className="md:hidden">
-        <Logo className="mx-auto w-24" />
+        <Logo className="mx-auto w-28" />
       </PageLayoutTopBar>
       <PageLayoutContent>
         <div className="flex flex-1 flex-col gap-4">
-          <div className="mb-4 rounded-lg bg-muted p-4 text-center">
-            <h2 className="mb-2 text-lg font-semibold">
-              {t('home:welcome.title')}
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              {t('home:welcome.description')}
-            </p>
-            <div className="mt-3 text-sm font-medium text-primary">
-              {t('home:welcome.cta')}
-            </div>
-          </div>
           <CurrentUserRank />
         </div>
       </PageLayoutContent>

@@ -7,6 +7,7 @@ export const TicketIcon = (props: SVGProps<SVGSVGElement>) => {
     <svg
       viewBox="0 0 28 15"
       fill="none"
+      aria-label="ticket"
       {...props}
       className={cn('w-6 text-accent', props.className)}
     >

@@ -5,7 +5,7 @@
     "cta": "Complete achievements to earn points and showcase your accomplishments!"
   },
   "rank": {
-    "title": "Your position",
+    "title": "My position",
     "summary": "{{completedCount}} completed • {{totalPoints}} tickets"
   }
 }

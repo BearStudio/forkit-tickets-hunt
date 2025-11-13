@@ -5,7 +5,7 @@
     "cta": "Complétez des succès pour gagner des points et mettre en valeur vos accomplissements !"
   },
   "rank": {
-    "title": "Votre position",
+    "title": "Mon classement",
     "summary": "{{completedCount}} terminés • {{totalPoints}} tickets"
   }
 }
