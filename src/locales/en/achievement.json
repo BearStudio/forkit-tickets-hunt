@@ -7,7 +7,15 @@
     "emoji": { "label": "Emoji" },
     "imageUrl": { "label": "Image URL" },
     "secret": { "label": "Secret" },
-    "secretName": "Secret",
+    "type": {
+      "label": "Type",
+      "options": {
+        "GITHUB_STAR": "Github Star",
+        "IN_APP": "In App",
+        "CUSTOM": "Custom"
+      }
+    },
+    "key": { "label": "Key" },
     "yes": "Yes",
     "no": "No",
     "loadMore": "Load more",

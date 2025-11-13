@@ -25,6 +25,10 @@ export const FormAchievement = () => {
         />
       </FormField>
       <FormField>
+        <FormFieldLabel>{t('achievement:common.hint.label')}</FormFieldLabel>
+        <FormFieldController type="text" control={form.control} name="hint" />
+      </FormField>
+      <FormField>
         <FormFieldLabel>{t('achievement:common.secret.label')}</FormFieldLabel>
         <FormFieldController
           type="checkbox"
@@ -32,10 +36,40 @@ export const FormAchievement = () => {
           name="isSecret"
         />
       </FormField>
-      <FormField>
-        <FormFieldLabel>{t('achievement:common.hint.label')}</FormFieldLabel>
-        <FormFieldController type="text" control={form.control} name="hint" />
-      </FormField>
+      <div className="flex gap-2">
+        <FormField>
+          <FormFieldLabel>{t('achievement:common.type.label')}</FormFieldLabel>
+          <FormFieldController
+            type="select"
+            control={form.control}
+            name="type"
+            options={[
+              {
+                label: t('achievement:common.type.options.GITHUB_STAR'),
+                id: 'GITHUB_STAR',
+              },
+              {
+                label: t('achievement:common.type.options.IN_APP'),
+                id: 'IN_APP',
+              },
+              {
+                label: t('achievement:common.type.options.CUSTOM'),
+                id: 'CUSTOM',
+              },
+            ]}
+          />
+        </FormField>
+        {['GITHUB_STAR'].includes(form.watch('type')) && (
+          <FormField>
+            <FormFieldLabel>{t('achievement:common.key.label')}</FormFieldLabel>
+            <FormFieldController
+              type="text"
+              control={form.control}
+              name="key"
+            />
+          </FormField>
+        )}
+      </div>
       <FormField>
         <FormFieldLabel>{t('achievement:common.points.label')}</FormFieldLabel>
         <FormFieldController

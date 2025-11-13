@@ -14,6 +14,7 @@ export const zAchievement = () =>
     hint: zu.fieldText.nullish(),
     points: z.coerce.number().int(),
     isSecret: z.boolean().default(false),
+    type: zAchievementType().default('CUSTOM'),
     emoji: zu.fieldText.nullish(),
     imageUrl: zu.fieldText.nullish(),
     createdAt: z.date(),
@@ -25,14 +26,17 @@ export type FormFieldsAchievement = z.infer<
   ReturnType<typeof zFormFieldsAchievement>
 >;
 export const zFormFieldsAchievement = () =>
-  zAchievement().pick({
-    name: true,
-    hint: true,
-    points: true,
-    isSecret: true,
-    emoji: true,
-    imageUrl: true,
-  });
+  zAchievement()
+    .pick({
+      name: true,
+      hint: true,
+      points: true,
+      isSecret: true,
+      type: true,
+      emoji: true,
+      imageUrl: true,
+    })
+    .extend({ key: z.string().optional() });
 
 export const zAchievementWithCompletion = () =>
   zAchievement().extend({

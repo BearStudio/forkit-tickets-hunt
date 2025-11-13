@@ -37,6 +37,8 @@ export const PageAchievementNew = () => {
       isSecret: false,
       emoji: '',
       imageUrl: '',
+      type: 'CUSTOM',
+      key: '',
     },
   });
 

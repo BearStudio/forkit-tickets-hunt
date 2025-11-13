@@ -40,6 +40,8 @@ export const PageAchievementUpdate = (props: { params: { id: string } }) => {
       isSecret: achievementQuery.data?.isSecret ?? false,
       emoji: achievementQuery.data?.emoji ?? '',
       imageUrl: achievementQuery.data?.imageUrl ?? '',
+      type: achievementQuery.data?.type ?? 'CUSTOM',
+      key: achievementQuery.data?.key ?? '',
     },
   });
 

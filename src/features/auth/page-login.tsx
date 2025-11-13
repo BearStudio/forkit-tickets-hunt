@@ -19,6 +19,7 @@ import { AUTH_SIGNUP_ENABLED } from '@/features/auth/config';
 import { useMascot } from '@/features/auth/mascot';
 import { FormFieldsLogin, zFormFieldsLogin } from '@/features/auth/schema';
 import { LoginEmailHint } from '@/features/devtools/login-hint';
+import { Badge } from '@/components/ui/badge';
 
 const I18N_KEY_PAGE_PREFIX = AUTH_SIGNUP_ENABLED
   ? ('auth:pageLoginWithSignUp' as const)
@@ -100,6 +101,31 @@ export default function PageLogin({
         </p>
       </div>
       <div className="grid gap-6">
+        <Button
+          className="w-full overflow-visible"
+          variant="secondary"
+          disabled={envClient.VITE_IS_DEMO}
+          loading={
+            social.variables === 'github' &&
+            (social.isPending || social.isSuccess)
+          }
+          size="lg"
+          onClick={() => social.mutate('github')}
+        >
+          <span>
+            {t(`${I18N_KEY_PAGE_PREFIX}.loginWithSocial`, {
+              provider: 'GitHub',
+            })}
+          </span>
+          <Badge size="sm" className="z- absolute -right-6 -bottom-1">
+            ⭐ BONUS POINTS
+          </Badge>
+        </Button>
+        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+          <span className="relative z-10 bg-background px-2 text-muted-foreground">
+            {t(`${I18N_KEY_PAGE_PREFIX}.spacer`)}
+          </span>
+        </div>
         <div className="grid gap-4">
           <FormField>
             <FormFieldLabel className="sr-only">
@@ -123,24 +149,6 @@ export default function PageLogin({
           </Button>
           <LoginEmailHint />
         </div>
-        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-          <span className="relative z-10 bg-background px-2 text-muted-foreground">
-            {t(`${I18N_KEY_PAGE_PREFIX}.spacer`)}
-          </span>
-        </div>
-        <Button
-          className="w-full"
-          variant="secondary"
-          disabled={envClient.VITE_IS_DEMO}
-          loading={
-            social.variables === 'github' &&
-            (social.isPending || social.isSuccess)
-          }
-          size="lg"
-          onClick={() => social.mutate('github')}
-        >
-          {t(`${I18N_KEY_PAGE_PREFIX}.loginWithSocial`, { provider: 'GitHub' })}
-        </Button>
       </div>
     </Form>
   );

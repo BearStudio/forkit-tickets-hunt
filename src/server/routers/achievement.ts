@@ -301,6 +301,8 @@ export default {
             isSecret: input.isSecret,
             emoji: input.emoji ?? undefined,
             imageUrl: input.imageUrl ?? undefined,
+            type: input.type,
+            key: input.key ?? undefined,
           },
         });
       } catch (error: unknown) {
@@ -342,6 +344,8 @@ export default {
             isSecret: input.isSecret,
             emoji: input.emoji ?? null,
             imageUrl: input.imageUrl ?? null,
+            type: input.type,
+            key: input.key ?? undefined,
           },
         });
       } catch (error: unknown) {
