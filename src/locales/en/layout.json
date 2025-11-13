@@ -1,8 +1,8 @@
 {
   "nav": {
-    "home": "Home",
+    "home": "Ranking",
     "application": "Application",
-    "dashboard": "Dashboard",
+    "dashboard": "Leaderboard",
     "achievements": "Achievements",
     "configuration": "Configuration",
     "users": "Users",

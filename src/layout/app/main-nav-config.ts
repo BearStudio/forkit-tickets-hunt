@@ -2,8 +2,10 @@ import { ValidateLinkOptions } from '@tanstack/react-router';
 import { FC } from 'react';
 
 import {
-  IconHouseDuotone,
-  IconHouseFill,
+  IconCrownSimpleDuotone,
+  IconCrownSimpleFill,
+  IconTrophyDuotone,
+  IconTrophyFill,
   IconUserCircleDuotone,
   IconUserCircleFill,
 } from '@/components/icons/generated';
@@ -11,12 +13,20 @@ import {
 export const MAIN_NAV_LINKS = [
   {
     labelTranslationKey: 'layout:nav.home',
-    icon: IconHouseDuotone,
-    iconActive: IconHouseFill,
+    icon: IconCrownSimpleDuotone,
+    iconActive: IconCrownSimpleFill,
     linkOptions: {
       to: '/app',
     },
     exact: true,
+  } as const,
+  {
+    labelTranslationKey: 'layout:nav.achievements',
+    icon: IconTrophyDuotone,
+    iconActive: IconTrophyFill,
+    linkOptions: {
+      to: '/app/achievements',
+    },
   } as const,
   {
     labelTranslationKey: 'layout:nav.account',

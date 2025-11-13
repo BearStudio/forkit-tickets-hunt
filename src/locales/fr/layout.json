@@ -2,10 +2,10 @@
   "nav": {
     "application": "Application",
     "configuration": "Configuration",
-    "dashboard": "Tableau de bord",
+    "dashboard": "Classement",
     "users": "Utilisateurs",
     "account": "Compte",
-    "home": "Accueil",
+    "home": "Classement",
     "apiDocumentation": "Documentation API",
     "openApp": "Ouvrir l'application",
     "achievements": "Succès"

@@ -22,6 +22,7 @@ import { Route as ManagerAchievementsIndexRouteImport } from './routes/manager/a
 import { Route as ManagerAccountIndexRouteImport } from './routes/manager/account.index'
 import { Route as LoginVerifyIndexRouteImport } from './routes/login/verify.index'
 import { Route as LoginErrorIndexRouteImport } from './routes/login/error.index'
+import { Route as AppAchievementsIndexRouteImport } from './routes/app/achievements/index'
 import { Route as AppAccountIndexRouteImport } from './routes/app/account.index'
 import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc.$'
 import { Route as ApiRestSplatRouteImport } from './routes/api/rest.$'
@@ -104,6 +105,11 @@ const LoginErrorIndexRoute = LoginErrorIndexRouteImport.update({
   id: '/error/',
   path: '/error/',
   getParentRoute: () => LoginRouteRoute,
+} as any)
+const AppAchievementsIndexRoute = AppAchievementsIndexRouteImport.update({
+  id: '/achievements/',
+  path: '/achievements/',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppAccountIndexRoute = AppAccountIndexRouteImport.update({
   id: '/account/',
@@ -205,6 +211,7 @@ export interface FileRoutesByFullPath {
   '/api/rest/$': typeof ApiRestSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/app/account': typeof AppAccountIndexRoute
+  '/app/achievements': typeof AppAchievementsIndexRoute
   '/login/error': typeof LoginErrorIndexRoute
   '/login/verify': typeof LoginVerifyIndexRoute
   '/manager/account': typeof ManagerAccountIndexRoute
@@ -233,6 +240,7 @@ export interface FileRoutesByTo {
   '/api/rest/$': typeof ApiRestSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/app/account': typeof AppAccountIndexRoute
+  '/app/achievements': typeof AppAchievementsIndexRoute
   '/login/error': typeof LoginErrorIndexRoute
   '/login/verify': typeof LoginVerifyIndexRoute
   '/manager/account': typeof ManagerAccountIndexRoute
@@ -265,6 +273,7 @@ export interface FileRoutesById {
   '/api/rest/$': typeof ApiRestSplatRoute
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/app/account/': typeof AppAccountIndexRoute
+  '/app/achievements/': typeof AppAchievementsIndexRoute
   '/login/error/': typeof LoginErrorIndexRoute
   '/login/verify/': typeof LoginVerifyIndexRoute
   '/manager/account/': typeof ManagerAccountIndexRoute
@@ -298,6 +307,7 @@ export interface FileRouteTypes {
     | '/api/rest/$'
     | '/api/rpc/$'
     | '/app/account'
+    | '/app/achievements'
     | '/login/error'
     | '/login/verify'
     | '/manager/account'
@@ -326,6 +336,7 @@ export interface FileRouteTypes {
     | '/api/rest/$'
     | '/api/rpc/$'
     | '/app/account'
+    | '/app/achievements'
     | '/login/error'
     | '/login/verify'
     | '/manager/account'
@@ -357,6 +368,7 @@ export interface FileRouteTypes {
     | '/api/rest/$'
     | '/api/rpc/$'
     | '/app/account/'
+    | '/app/achievements/'
     | '/login/error/'
     | '/login/verify/'
     | '/manager/account/'
@@ -481,6 +493,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginErrorIndexRouteImport
       parentRoute: typeof LoginRouteRoute
     }
+    '/app/achievements/': {
+      id: '/app/achievements/'
+      path: '/achievements'
+      fullPath: '/app/achievements'
+      preLoaderRoute: typeof AppAchievementsIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/app/account/': {
       id: '/app/account/'
       path: '/account'
@@ -599,12 +618,14 @@ declare module '@tanstack/react-router' {
 interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
   AppAccountIndexRoute: typeof AppAccountIndexRoute
+  AppAchievementsIndexRoute: typeof AppAchievementsIndexRoute
   AppAchievementsIdCompleteIndexRoute: typeof AppAchievementsIdCompleteIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
   AppAccountIndexRoute: AppAccountIndexRoute,
+  AppAchievementsIndexRoute: AppAchievementsIndexRoute,
   AppAchievementsIdCompleteIndexRoute: AppAchievementsIdCompleteIndexRoute,
 }
 

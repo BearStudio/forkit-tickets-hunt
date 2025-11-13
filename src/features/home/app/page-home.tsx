@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next';
 
 import { Logo } from '@/components/brand/logo';
 
-import { AchievementsList } from '@/features/achievement/app/achievements-list';
 import { CurrentUserRank } from '@/features/user/app/current-user-rank';
 import {
   PageLayout,
@@ -31,7 +30,6 @@ export const PageHome = () => {
             </div>
           </div>
           <CurrentUserRank />
-          <AchievementsList />
         </div>
       </PageLayoutContent>
     </PageLayout>
