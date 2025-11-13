@@ -96,6 +96,7 @@ model Achievement {
   updatedAt   DateTime @updatedAt
 
   key         String   @unique @default(cuid())
+  type        AchievementType @default(CUSTOM)
   name        String
   hint        String?
   points      Int
@@ -106,6 +107,12 @@ model Achievement {
   unlockedAchievements UnlockedAchievement[]
 
   @@map("achievement")
+}
+
+enum AchievementType {
+  GITHUB_STAR
+  IN_APP
+  CUSTOM
 }
 
 model UnlockedAchievement {

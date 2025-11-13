@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { AchievementsList } from '@/features/achievement/app/achievements-list';
+import { GithubClaim } from '@/features/home/app/github-claim';
 import {
   PageLayout,
   PageLayoutContent,
@@ -17,7 +18,10 @@ export const PageAchievements = () => {
         </h1>
       </PageLayoutTopBar>
       <PageLayoutContent>
-        <AchievementsList />
+        <div className="flex flex-col gap-8">
+          <GithubClaim />
+          <AchievementsList />
+        </div>
       </PageLayoutContent>
     </PageLayout>
   );

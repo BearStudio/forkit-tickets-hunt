@@ -32,6 +32,13 @@ export const PageAchievementComplete = () => {
     )
       return set('not-found');
 
+    if (
+      completionQuery.status === 'error' &&
+      completionQuery.error instanceof ORPCError &&
+      completionQuery.error.code === 'FORBIDDEN'
+    )
+      return set('not-starred');
+
     if (completionQuery.status !== 'success') return set('error');
 
     if (completionQuery.data.alreadyCompleted)
@@ -50,6 +57,7 @@ export const PageAchievementComplete = () => {
                   .match('pending', () => <Skeleton className="h-4 w-48" />)
                   .match('error', () => 'Error')
                   .match('not-found', () => 'Not existing achievement')
+                  .match('not-starred', () => 'Not starred')
                   .match(
                     ['default', 'already-completed'],
                     ({ data }) => `${data.achievement.name} reached!`
@@ -61,7 +69,7 @@ export const PageAchievementComplete = () => {
               {ui
                 .match('pending', () => <Spinner full />)
                 .match('error', () => <PageError />)
-                .match('not-found', () => 'Nice try!')
+                .match(['not-found', 'not-starred'], () => 'Nice try!')
                 .match(['default', 'already-completed'], ({ data }) => (
                   <>
                     <div

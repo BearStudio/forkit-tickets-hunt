@@ -2,7 +2,9 @@ import { z } from 'zod';
 
 import { zu } from '@/lib/zod/zod-utils';
 
-export type Achievement = z.infer<ReturnType<typeof zAchievement>>;
+export const zAchievementType = () =>
+  z.enum(['GITHUB_STAR', 'IN_APP', 'CUSTOM']);
+export type AchievementType = z.infer<ReturnType<typeof zAchievementType>>;
 
 export const zAchievement = () =>
   z.object({
@@ -17,6 +19,7 @@ export const zAchievement = () =>
     createdAt: z.date(),
     updatedAt: z.date(),
   });
+export type Achievement = z.infer<ReturnType<typeof zAchievement>>;
 
 export type FormFieldsAchievement = z.infer<
   ReturnType<typeof zFormFieldsAchievement>

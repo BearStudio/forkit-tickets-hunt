@@ -5,6 +5,7 @@ import {
   zAchievement,
   zFormFieldsAchievement,
 } from '@/features/achievement/schema';
+import { fetchGithubStarred } from '@/features/github/utils';
 import { Prisma } from '@/server/db/generated/client';
 import { protectedProcedure } from '@/server/orpc';
 
@@ -176,6 +177,69 @@ export default {
         nextCursor,
         total,
       };
+    }),
+
+  getGithubAchievementsToClaim: protectedProcedure({
+    permission: null,
+  })
+    .route({
+      method: 'GET',
+      path: '/account/github-stars',
+      tags,
+    })
+    .input(z.void())
+    .output(
+      z
+        .array(
+          z.object({
+            achievement: zAchievement().extend({ secretId: z.string() }),
+            repository: z.string(),
+          })
+        )
+        .nullable()
+    )
+    .handler(async ({ context }) => {
+      const githubAccount = await context.db.account.findFirst({
+        where: {
+          userId: context.user.id,
+          providerId: 'github',
+        },
+      });
+
+      if (!githubAccount?.accessToken) {
+        return null;
+      }
+
+      const githubStarAchievementsNotCompleted =
+        await context.db.achievement.findMany({
+          where: {
+            type: 'GITHUB_STAR',
+            unlockedAchievements: { none: { userId: context.user.id } },
+          },
+        });
+
+      const responses = await Promise.all(
+        githubStarAchievementsNotCompleted.map((achievement) =>
+          fetchGithubStarred(achievement.key, githubAccount.accessToken ?? '')
+        )
+      );
+
+      const achievementAndResponse = githubStarAchievementsNotCompleted.map(
+        (achievement, index) => ({
+          achievement: achievement,
+          response: responses[index],
+        })
+      );
+
+      return achievementAndResponse
+        .filter(
+          (achievementAndResponse) =>
+            achievementAndResponse.response?.status === 204
+        )
+        .map((achievementAndResponse) => ({
+          achievement: achievementAndResponse.achievement,
+          repository: achievementAndResponse.achievement.key,
+        }));
     }),
 
   getById: protectedProcedure({
@@ -361,14 +425,60 @@ export default {
 
       const alreadyCompleted = achievement.unlockedAchievements.length > 0;
 
-      if (!alreadyCompleted) {
+      if (alreadyCompleted) {
+        return {
+          achievement,
+          alreadyCompleted,
+        };
+      }
+
+      if (achievement.type !== 'GITHUB_STAR') {
         await context.db.unlockedAchievement.create({
           data: {
             achievementId: achievement.id,
             userId: context.user.id,
           },
         });
+
+        return {
+          achievement,
+          alreadyCompleted,
+        };
       }
+
+      const githubAccount = await context.db.account.findFirst({
+        where: {
+          userId: context.user.id,
+          providerId: 'github',
+        },
+      });
+
+      if (!githubAccount?.accessToken) {
+        throw new ORPCError('BAD_REQUEST', {
+          data: {
+            message: 'Github access token not found',
+          },
+        });
+      }
+      const check = await fetchGithubStarred(
+        achievement.key,
+        githubAccount.accessToken
+      );
+
+      if (check.status !== 204) {
+        throw new ORPCError('FORBIDDEN', {
+          data: {
+            message: 'You are not allowed to complete this achievement',
+          },
+        });
+      }
+
+      await context.db.unlockedAchievement.create({
+        data: {
+          achievementId: achievement.id,
+          userId: context.user.id,
+        },
+      });
 
       return {
         achievement,
