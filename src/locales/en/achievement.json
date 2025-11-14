@@ -43,7 +43,8 @@
       "deleted": "Achievement deleted",
       "deleteError": "Unable to delete achievement",
       "copiedToClipboard": "Copied",
-      "copyToClipboard": "Copy link"
+      "copyToClipboard": "Copy link",
+      "showQrCode": "Show QR Code"
     },
     "update": {
       "title": "Edit achievement",

@@ -49,10 +49,6 @@ export const FormAchievement = () => {
                 id: 'GITHUB_STAR',
               },
               {
-                label: t('achievement:common.type.options.IN_APP'),
-                id: 'IN_APP',
-              },
-              {
                 label: t('achievement:common.type.options.CUSTOM'),
                 id: 'CUSTOM',
               },

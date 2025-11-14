@@ -172,9 +172,18 @@ export const PageAchievements = (props: {
                         {item.hint}
                       </DataListText>
                     </DataListCell>
-                    <DataListCell>
+                    <DataListCell className="max-w-16">
                       {item.isSecret && (
-                        <Badge>{t('achievement:common.secret.label')}</Badge>
+                        <Badge className="w-full" variant="outline">
+                          {t('achievement:common.secret.label')}
+                        </Badge>
+                      )}
+                    </DataListCell>
+                    <DataListCell className="max-w-40">
+                      {item.type !== 'CUSTOM' && (
+                        <Badge className="self-center">
+                          {t(`achievement:common.type.options.${item.type}`)}
+                        </Badge>
                       )}
                     </DataListCell>
                     <DataListCell className="flex-none">

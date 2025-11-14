@@ -7,7 +7,14 @@
     "emoji": { "label": "رمز تعبيري" },
     "imageUrl": { "label": "صورة" },
     "secret": { "label": "سري" },
-    "secretName": "سري",
+    "type": {
+      "label": "النوع",
+      "options": {
+        "GITHUB_STAR": "نجمة Github",
+        "IN_APP": "داخل التطبيق",
+        "CUSTOM": "مخصص"
+      }
+    },
     "yes": "نعم",
     "no": "لا",
     "loadMore": "تحميل المزيد",
@@ -35,7 +42,8 @@
       "deleted": "تم حذف الإنجاز",
       "deleteError": "تعذر حذف الإنجاز",
       "copiedToClipboard": "تم النسخ إلى الحافظة",
-      "copyToClipboard": "نسخ الرابط"
+      "copyToClipboard": "نسخ الرابط",
+      "showQrCode": "عرض كود QR"
     },
     "update": {
       "title": "تعديل الإنجاز",

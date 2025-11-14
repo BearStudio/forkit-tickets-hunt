@@ -7,7 +7,14 @@
     "emoji": { "label": "Émoji" },
     "imageUrl": { "label": "Image" },
     "secret": { "label": "Secret" },
-    "secretName": "Secret",
+    "type": {
+      "label": "Type",
+      "options": {
+        "GITHUB_STAR": "Star Github",
+        "IN_APP": "In App",
+        "CUSTOM": "Perso"
+      }
+    },
     "yes": "Oui",
     "no": "Non",
     "loadMore": "Charger plus",
@@ -35,7 +42,8 @@
       "deleted": "Succès supprimé",
       "deleteError": "Impossible de supprimer le succès",
       "copiedToClipboard": "Copié",
-      "copyToClipboard": "Copier le lien"
+      "copyToClipboard": "Copier le lien",
+      "showQrCode": "Afficher le QR Code"
     },
     "update": {
       "title": "Modifier le succès",

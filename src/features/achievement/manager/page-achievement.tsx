@@ -7,6 +7,8 @@ import {
   AlertCircleIcon,
   CheckCircle2Icon,
   CopyIcon,
+  EyeIcon,
+  EyeOffIcon,
   PencilLineIcon,
   Trash2Icon,
 } from 'lucide-react';
@@ -61,6 +63,9 @@ export const PageAchievement = (props: { params: { id: string } }) => {
     }, 2000);
     return () => clearTimeout(timer);
   }, [showFeedback]);
+
+  const [showKey, setShowKey] = useState(false);
+  const [showQrCode, setShowQrCode] = useState(false);
 
   const ui = getUiState((set) => {
     if (achievementQuery.status === 'pending') return set('pending');
@@ -175,6 +180,33 @@ export const PageAchievement = (props: { params: { id: string } }) => {
                       </div>
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
+                          {t('achievement:common.type.label')}
+                        </dt>
+                        <dd className="flex-1">
+                          {t(
+                            `achievement:common.type.options.${achievement.type}`
+                          )}
+                        </dd>
+                      </div>
+                      {achievement.key && (
+                        <div className="flex items-center gap-4 py-3">
+                          <dt className="flex w-24 flex-none items-center justify-between font-medium text-muted-foreground">
+                            <span>{t('achievement:common.key.label')}</span>
+                            <Button
+                              size="icon-xs"
+                              variant="ghost"
+                              onClick={() => setShowKey(!showKey)}
+                            >
+                              {showKey ? <EyeIcon /> : <EyeOffIcon />}
+                            </Button>
+                          </dt>
+                          <dd className="flex-1">
+                            {showKey ? achievement.key : '********'}
+                          </dd>
+                        </div>
+                      )}
+                      <div className="flex gap-4 py-3">
+                        <dt className="w-24 flex-none font-medium text-muted-foreground">
                           {t('achievement:common.hint.label')}
                         </dt>
                         <dd className="flex-1">{achievement.hint}</dd>
@@ -215,13 +247,23 @@ export const PageAchievement = (props: { params: { id: string } }) => {
                 aria-hidden
                 className="mx-auto flex w-full max-w-64 min-w-48 flex-1 flex-col items-center justify-center gap-4 rounded-md bg-muted"
               >
-                <img
-                  src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
-                    achievementUrl
-                  )}`}
-                  alt=""
-                  className="h-40 w-40 rounded bg-white p-2"
-                />
+                {showQrCode ? (
+                  <img
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(
+                      achievementUrl
+                    )}`}
+                    alt=""
+                    className="h-40 w-40 rounded bg-white p-2"
+                  />
+                ) : (
+                  <Button
+                    type="button"
+                    className="h-40 w-40 rounded bg-white p-2"
+                    onClick={() => setShowQrCode(true)}
+                  >
+                    Show QR Code
+                  </Button>
+                )}
                 {showFeedback ? (
                   <span className="flex items-center gap-1 rounded-md bg-positive-100 px-1.5 py-1 text-xs font-medium text-positive-800 max-sm:mx-auto dark:bg-positive-600/30 dark:text-positive-100">
                     <CheckCircle2Icon className="size-3" />{' '}

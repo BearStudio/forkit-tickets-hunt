@@ -7,7 +7,14 @@
     "emoji": { "label": "Emoji" },
     "imageUrl": { "label": "Picha" },
     "secret": { "label": "Siri" },
-    "secretName": "Siri",
+    "type": {
+      "label": "Aina",
+      "options": {
+        "GITHUB_STAR": "Nyota ya Github",
+        "IN_APP": "Ndani ya Programu",
+        "CUSTOM": "Desturi"
+      }
+    },
     "yes": "Ndiyo",
     "no": "Hapana",
     "loadMore": "Pakia zaidi",
@@ -35,7 +42,8 @@
       "deleted": "Fanikiwa limefutwa",
       "deleteError": "Imeshindwa kufuta fanikiwa",
       "copiedToClipboard": "Imenakiliwa kwenye ubao wa kunakili",
-      "copyToClipboard": "Nakili kiungo"
+      "copyToClipboard": "Nakili kiungo",
+      "showQrCode": "Onyesha QR Code"
     },
     "update": {
       "title": "Hariri fanikiwa",
