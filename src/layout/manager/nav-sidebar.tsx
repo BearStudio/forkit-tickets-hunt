@@ -40,8 +40,8 @@ export const NavSidebar = (props: { children?: ReactNode }) => {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="h-auto">
                   <Link to="/manager">
-                    <span>
-                      <Logo className="w-24 group-data-[collapsible=icon]:w-18" />
+                    <span className="overflow-visible!">
+                      <Logo className="w-32 group-data-[collapsible=icon]:w-18" />
                     </span>
                   </Link>
                 </SidebarMenuButton>
