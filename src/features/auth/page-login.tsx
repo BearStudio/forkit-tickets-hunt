@@ -5,12 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
-import {
-  Form,
-  FormField,
-  FormFieldController,
-  FormFieldLabel,
-} from '@/components/form';
+import { Form } from '@/components/form';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
@@ -19,7 +14,6 @@ import { authClient } from '@/features/auth/client';
 import { AUTH_SIGNUP_ENABLED } from '@/features/auth/config';
 import { useMascot } from '@/features/auth/mascot';
 import { FormFieldsLogin, zFormFieldsLogin } from '@/features/auth/schema';
-import { LoginEmailHint } from '@/features/devtools/login-hint';
 
 const I18N_KEY_PAGE_PREFIX = AUTH_SIGNUP_ENABLED
   ? ('auth:pageLoginWithSignUp' as const)
@@ -121,34 +115,6 @@ export default function PageLogin({
             ⭐ BONUS POINTS
           </Badge>
         </Button>
-        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-          <span className="relative z-10 bg-background px-2 text-muted-foreground">
-            {t(`${I18N_KEY_PAGE_PREFIX}.spacer`)}
-          </span>
-        </div>
-        <div className="grid gap-4">
-          <FormField>
-            <FormFieldLabel className="sr-only">
-              {t('auth:common.email.label')}
-            </FormFieldLabel>
-            <FormFieldController
-              type="email"
-              control={form.control}
-              name="email"
-              size="lg"
-              placeholder={t('auth:common.email.label')}
-            />
-          </FormField>
-          <Button
-            loading={form.formState.isSubmitting}
-            type="submit"
-            size="lg"
-            className="w-full"
-          >
-            {t(`${I18N_KEY_PAGE_PREFIX}.loginWithEmail`)}
-          </Button>
-          <LoginEmailHint />
-        </div>
       </div>
     </Form>
   );
