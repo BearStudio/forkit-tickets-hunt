@@ -111,6 +111,7 @@ model Achievement {
 
 enum AchievementType {
   GITHUB_STAR
+  SECRET_CODE
   IN_APP
   CUSTOM
 }

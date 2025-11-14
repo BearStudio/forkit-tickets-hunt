@@ -11,6 +11,7 @@
       "label": "Type",
       "options": {
         "GITHUB_STAR": "Github Star",
+        "SECRET_CODE": "Secret Code",
         "IN_APP": "In App",
         "CUSTOM": "Custom"
       }

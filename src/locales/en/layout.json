@@ -1,6 +1,7 @@
 {
   "nav": {
     "home": "Ranking",
+    "secretCode": "Secret Code",
     "application": "Application",
     "dashboard": "Leaderboard",
     "achievements": "Achievements",

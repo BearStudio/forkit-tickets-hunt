@@ -242,6 +242,36 @@ export default {
         }));
     }),
 
+  checkSecretCode: protectedProcedure({
+    permission: null,
+  })
+    .route({
+      method: 'POST',
+      path: '/achievements/secret-code/check',
+      tags,
+    })
+    .input(z.object({ secretCode: z.string() }))
+    .output(z.object({ secretId: z.string() }))
+    .handler(async ({ context, input }) => {
+      const achievement = await context.db.achievement.findUnique({
+        where: { key: input.secretCode },
+      });
+
+      if (!achievement) {
+        throw new ORPCError('NOT_FOUND');
+      }
+
+      if (achievement.type !== 'SECRET_CODE') {
+        throw new ORPCError('BAD_REQUEST', {
+          data: {
+            message: 'Achievement is not a secret code',
+          },
+        });
+      }
+
+      return { secretId: achievement.secretId };
+    }),
+
   getById: protectedProcedure({
     permission: {
       achievement: ['read'],

@@ -11,6 +11,7 @@
       "label": "Aina",
       "options": {
         "GITHUB_STAR": "Nyota ya Github",
+        "SECRET_CODE": "Msimbo wa Siri",
         "IN_APP": "Ndani ya Programu",
         "CUSTOM": "Desturi"
       }

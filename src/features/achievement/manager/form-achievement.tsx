@@ -49,13 +49,17 @@ export const FormAchievement = () => {
                 id: 'GITHUB_STAR',
               },
               {
+                label: t('achievement:common.type.options.SECRET_CODE'),
+                id: 'SECRET_CODE',
+              },
+              {
                 label: t('achievement:common.type.options.CUSTOM'),
                 id: 'CUSTOM',
               },
             ]}
           />
         </FormField>
-        {['GITHUB_STAR'].includes(form.watch('type')) && (
+        {['GITHUB_STAR', 'SECRET_CODE'].includes(form.watch('type')) && (
           <FormField>
             <FormFieldLabel>{t('achievement:common.key.label')}</FormFieldLabel>
             <FormFieldController

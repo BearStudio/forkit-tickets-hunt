@@ -11,6 +11,7 @@
       "label": "النوع",
       "options": {
         "GITHUB_STAR": "نجمة Github",
+        "SECRET_CODE": "كود سري",
         "IN_APP": "داخل التطبيق",
         "CUSTOM": "مخصص"
       }

@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { zu } from '@/lib/zod/zod-utils';
 
 export const zAchievementType = () =>
-  z.enum(['GITHUB_STAR', 'IN_APP', 'CUSTOM']);
+  z.enum(['GITHUB_STAR', 'SECRET_CODE', 'IN_APP', 'CUSTOM']);
 export type AchievementType = z.infer<ReturnType<typeof zAchievementType>>;
 
 export const zAchievement = () =>

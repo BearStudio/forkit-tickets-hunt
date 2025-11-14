@@ -21,6 +21,15 @@ export const MAIN_NAV_LINKS = [
     exact: true,
   } as const,
   {
+    labelTranslationKey: 'layout:nav.secretCode',
+    icon: IconCrownSimpleDuotone,
+    iconActive: IconCrownSimpleFill,
+    linkOptions: {
+      to: '/app/secret-code',
+    },
+    exact: true,
+  } as const,
+  {
     labelTranslationKey: 'layout:nav.achievements',
     icon: IconTrophyDuotone,
     iconActive: IconTrophyFill,
