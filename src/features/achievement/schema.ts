@@ -9,7 +9,7 @@ export type AchievementType = z.infer<ReturnType<typeof zAchievementType>>;
 export const zAchievement = () =>
   z.object({
     id: z.string(),
-    key: z.string(),
+    key: zu.fieldText.optional(),
     name: zu.fieldText.required(),
     hint: zu.fieldText.nullish(),
     points: z.coerce.number().int(),
@@ -26,17 +26,16 @@ export type FormFieldsAchievement = z.infer<
   ReturnType<typeof zFormFieldsAchievement>
 >;
 export const zFormFieldsAchievement = () =>
-  zAchievement()
-    .pick({
-      name: true,
-      hint: true,
-      points: true,
-      isSecret: true,
-      type: true,
-      emoji: true,
-      imageUrl: true,
-    })
-    .extend({ key: z.string().optional() });
+  zAchievement().pick({
+    name: true,
+    hint: true,
+    points: true,
+    isSecret: true,
+    type: true,
+    emoji: true,
+    imageUrl: true,
+    key: true,
+  });
 
 export const zAchievementWithCompletion = () =>
   zAchievement().extend({
