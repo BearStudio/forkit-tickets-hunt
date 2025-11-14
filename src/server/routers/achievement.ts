@@ -96,43 +96,38 @@ export default {
       path: '/achievements/with-completion',
       tags,
     })
-    .input(
-      z
-        .object({
-          cursor: z.string().optional(),
-          limit: z.coerce.number().int().min(1).max(100).prefault(100),
-        })
-        .prefault({})
-    )
+    .input(z.void())
     .output(
       z.object({
-        items: z.array(
-          z.object({
-            id: z.string(),
-            name: z.string(),
-            hint: z.string().nullish(),
-            points: z.number().int(),
-            emoji: z.string().nullish(),
-            imageUrl: z.string().nullish(),
-            createdAt: z.date(),
-            updatedAt: z.date(),
-            completed: z.boolean(),
-            isSecret: z.boolean(),
-          })
+        dones: z.array(zAchievement()),
+        toComplete: z.array(
+          zAchievement().extend({ secretId: z.string().nullish() })
         ),
-        nextCursor: z.string().optional(),
         total: z.number(),
       })
     )
-    .handler(async ({ context, input }) => {
+    .handler(async ({ context }) => {
       context.logger.info('Getting achievements with completion state');
 
-      const [total, items] = await Promise.all([
+      const [total, dones, toComplete] = await Promise.all([
         context.db.achievement.count(),
         context.db.achievement.findMany({
-          take: input.limit + 1,
-          cursor: input.cursor ? { id: input.cursor } : undefined,
           orderBy: { points: 'desc' },
+          where: {
+            unlockedAchievements: { some: { userId: context.user.id } },
+          },
+          include: {
+            unlockedAchievements: {
+              where: { userId: context.user.id },
+              select: { achievementId: true },
+            },
+          },
+        }),
+        context.db.achievement.findMany({
+          orderBy: { points: 'desc' },
+          where: {
+            unlockedAchievements: { none: { userId: context.user.id } },
+          },
           include: {
             unlockedAchievements: {
               where: { userId: context.user.id },
@@ -142,39 +137,49 @@ export default {
         }),
       ]);
 
-      let nextCursor: typeof input.cursor | undefined = undefined;
-      if (items.length > input.limit) {
-        const nextItem = items.pop();
-        nextCursor = nextItem?.id;
+      const githubAccount = await context.db.account.findFirst({
+        where: {
+          userId: context.user.id,
+          providerId: 'github',
+        },
+      });
+
+      if (!githubAccount?.accessToken) {
+        throw new ORPCError('INTERNAL_SERVER_ERROR', {
+          data: {
+            message: 'Github access token not found',
+          },
+        });
       }
 
-      const mapped = items
-        .map((achievement) => {
-          const completed = achievement.unlockedAchievements.length > 0;
+      const githubToCheck = toComplete.filter(
+        (achievement) => achievement.type === 'GITHUB_STAR'
+      );
 
-          return {
-            id: achievement.id,
-            name: achievement.isSecret && !completed ? '???' : achievement.name,
-            hint: achievement.hint ?? null,
-            points: achievement.isSecret && !completed ? 0 : achievement.points,
-            emoji: achievement.emoji ?? null,
-            imageUrl: achievement.imageUrl ?? null,
-            createdAt: achievement.createdAt,
-            updatedAt: achievement.updatedAt,
-            completed,
-            isSecret: achievement.isSecret,
-          };
+      const githubChecks = await Promise.all(
+        githubToCheck.map((achievement) =>
+          fetchGithubStarred(achievement.key, githubAccount.accessToken ?? '')
+        )
+      );
+
+      const githuAchievementsWithCanBeClaim = githubToCheck.map(
+        (achievement, index) => ({
+          achievement: achievement,
+          canBeClaim: githubChecks[index]?.status === 204,
         })
-        .sort((a, b) => {
-          if (a.completed && !b.completed) return 1;
-          if (!a.completed && b.completed) return -1;
-
-          return b.points - a.points;
-        });
+      );
 
       return {
-        items: mapped,
-        nextCursor,
+        dones,
+        toComplete: toComplete.map((item) => ({
+          ...item,
+          secretId:
+            githuAchievementsWithCanBeClaim.find(
+              (achievement) =>
+                achievement.canBeClaim &&
+                achievement.achievement.key === item.key
+            )?.achievement.secretId ?? null,
+        })),
         total,
       };
     }),
