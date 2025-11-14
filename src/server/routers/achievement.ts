@@ -173,6 +173,11 @@ export default {
         dones,
         toComplete: toComplete.map((item) => ({
           ...item,
+          name: item.isSecret ? '???' : item.name,
+          key:
+            !item.isSecret && item.type === 'GITHUB_STAR'
+              ? item.key
+              : undefined,
           secretId:
             githuAchievementsWithCanBeClaim.find(
               (achievement) =>

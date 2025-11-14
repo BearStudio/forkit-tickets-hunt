@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { Form } from '@/components/form';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 import { envClient } from '@/env/client';
@@ -90,9 +89,6 @@ export default function PageLogin({
         <h1 className="text-2xl font-bold">
           {t(`${I18N_KEY_PAGE_PREFIX}.title`)}
         </h1>
-        <p className="text-sm text-balance text-muted-foreground">
-          {t(`${I18N_KEY_PAGE_PREFIX}.description`)}
-        </p>
       </div>
       <div className="grid gap-6">
         <Button
@@ -106,14 +102,9 @@ export default function PageLogin({
           size="lg"
           onClick={() => social.mutate('github')}
         >
-          <span>
-            {t(`${I18N_KEY_PAGE_PREFIX}.loginWithSocial`, {
-              provider: 'GitHub',
-            })}
-          </span>
-          <Badge size="sm" className="z- absolute -right-6 -bottom-1">
-            ⭐ BONUS POINTS
-          </Badge>
+          {t(`${I18N_KEY_PAGE_PREFIX}.loginWithSocial`, {
+            provider: 'GitHub',
+          })}
         </Button>
       </div>
     </Form>

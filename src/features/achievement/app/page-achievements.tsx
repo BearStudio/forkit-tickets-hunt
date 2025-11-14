@@ -40,7 +40,7 @@ export const PageAchievements = () => {
         </h1>
       </PageLayoutTopBar>
       <PageLayoutContent>
-        <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid items-start gap-3 sm:grid-cols-2 md:grid-cols-3">
           {ui
             .match('pending', () => 'loading')
             .match('error', () => 'error')
@@ -92,7 +92,7 @@ export const PageAchievements = () => {
                           <p className="flex-1 text-xs opacity-60">
                             {item.hint}
                           </p>
-                          {item.type === 'GITHUB_STAR' && (
+                          {item.type === 'GITHUB_STAR' && !!item.key && (
                             <Button size="xs" variant="ghost" asChild>
                               <a href={`https://github.com/${item.key}`}>
                                 View Repo
@@ -103,7 +103,10 @@ export const PageAchievements = () => {
                         </div>
                       )}
                     {item.type === 'GITHUB_STAR' && item.secretId && (
-                      <div className="flex flex-1 items-center gap-3 border-t bg-white/2 px-3 py-2">
+                      <div className="flex flex-1 flex-col items-center gap-1 border-t bg-white/2 px-3 py-2">
+                        <p className="flex-1 text-2xs opacity-60">
+                          You stared the repo
+                        </p>
                         <Button
                           size="lg"
                           variant="secondary"
@@ -111,7 +114,7 @@ export const PageAchievements = () => {
                           asChild
                         >
                           <a href={getAchievementLinkBySecretId(item.secretId)}>
-                            Complete +{item.points} <TicketIcon />
+                            Claim +{item.points} <TicketIcon />
                           </a>
                         </Button>
                       </div>
