@@ -1,6 +1,6 @@
 {
-  "name": "Start UI",
-  "short_name": "Start UI",
+  "name": "Fork it! Tickets Hunt",
+  "short_name": "Tickets Hunt",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
