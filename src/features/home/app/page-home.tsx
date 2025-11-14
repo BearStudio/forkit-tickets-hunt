@@ -18,12 +18,12 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { TicketIcon } from '@/components/ui/ticket-icon';
 
 import { authClient } from '@/features/auth/client';
+import { SecretCodeInput } from '@/features/secret-code/secret-code-input';
 import {
   PageLayout,
   PageLayoutContent,
   PageLayoutTopBar,
 } from '@/layout/app/page-layout';
-import { SecretCodeInput } from '@/features/secret-code/secret-code-input';
 
 export const PageHome = () => {
   const query = useQuery(orpc.user.getCurrentUserRank.queryOptions());

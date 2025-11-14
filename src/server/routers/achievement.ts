@@ -112,7 +112,7 @@ export default {
       const [total, dones, toComplete] = await Promise.all([
         context.db.achievement.count(),
         context.db.achievement.findMany({
-          orderBy: { points: 'desc' },
+          orderBy: [{ points: 'desc' }, { type: 'asc' }, { isSecret: 'asc' }],
           where: {
             unlockedAchievements: { some: { userId: context.user.id } },
           },
@@ -124,7 +124,7 @@ export default {
           },
         }),
         context.db.achievement.findMany({
-          orderBy: { points: 'desc' },
+          orderBy: [{ points: 'desc' }, { type: 'asc' }, { isSecret: 'asc' }],
           where: {
             unlockedAchievements: { none: { userId: context.user.id } },
           },
