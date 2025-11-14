@@ -1,12 +1,15 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
 import { CheckIcon, ExternalLinkIcon, TrophyIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 import { cn } from '@/lib/tailwind/utils';
 
+import { PageError } from '@/components/page-error';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { TicketIcon } from '@/components/ui/ticket-icon';
 
 import { getAchievementLinkBySecretId } from '@/features/achievement/get-achievement-link';
@@ -15,7 +18,6 @@ import {
   PageLayoutContent,
   PageLayoutTopBar,
 } from '@/layout/app/page-layout';
-import { Link } from '@tanstack/react-router';
 
 export const PageAchievements = () => {
   const { t } = useTranslation(['achievement']);
@@ -43,9 +45,15 @@ export const PageAchievements = () => {
       <PageLayoutContent>
         <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
           {ui
-            .match('pending', () => 'loading')
-            .match('error', () => 'error')
-            .match('empty', () => 'none')
+            .match('pending', () => (
+              <>
+                <Skeleton className="h-24 w-full rounded-lg" />
+                <Skeleton className="h-24 w-full rounded-lg" />
+                <Skeleton className="h-24 w-full rounded-lg" />
+              </>
+            ))
+            .match('error', () => <PageError />)
+            .match('empty', () => <p>No achievements found</p>)
             .match('default', ({ dones, toComplete }) => (
               <>
                 {toComplete.map((item) => (
