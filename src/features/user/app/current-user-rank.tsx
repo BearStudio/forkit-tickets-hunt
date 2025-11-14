@@ -1,19 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
-import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 
-import { IconCrownSimpleDuotone } from '@/components/icons/generated';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TicketIcon } from '@/components/ui/ticket-icon';
+
 import { authClient } from '@/features/auth/client';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export const CurrentUserRank = () => {
   const query = useQuery(orpc.user.getCurrentUserRank.queryOptions());
-  const { t } = useTranslation(['home']);
   const session = authClient.useSession();
 
   return (
