@@ -6,6 +6,14 @@ import { orpc } from '@/lib/orpc/client';
 import { Logo } from '@/components/brand/logo';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+import {
+  ResponsiveDrawer,
+  ResponsiveDrawerBody,
+  ResponsiveDrawerContent,
+  ResponsiveDrawerHeader,
+  ResponsiveDrawerTitle,
+  ResponsiveDrawerTrigger,
+} from '@/components/ui/responsive-drawer';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TicketIcon } from '@/components/ui/ticket-icon';
 
@@ -15,6 +23,7 @@ import {
   PageLayoutContent,
   PageLayoutTopBar,
 } from '@/layout/app/page-layout';
+import { SecretCodeInput } from '@/features/secret-code/secret-code-input';
 
 export const PageHome = () => {
   const query = useQuery(orpc.user.getCurrentUserRank.queryOptions());
@@ -69,9 +78,24 @@ export const PageHome = () => {
               </div>
             </div>
           </div>
-          <Button variant="secondary" asChild>
-            <Link to="/app/achievements">View All Achievements</Link>
-          </Button>
+          <div className="flex flex-col gap-2">
+            <ResponsiveDrawer>
+              <ResponsiveDrawerTrigger asChild>
+                <Button variant="secondary">Enter secret code</Button>
+              </ResponsiveDrawerTrigger>
+              <ResponsiveDrawerContent>
+                <ResponsiveDrawerHeader>
+                  <ResponsiveDrawerTitle>Secret code</ResponsiveDrawerTitle>
+                </ResponsiveDrawerHeader>
+                <ResponsiveDrawerBody>
+                  <SecretCodeInput />
+                </ResponsiveDrawerBody>
+              </ResponsiveDrawerContent>
+            </ResponsiveDrawer>
+            <Button variant="secondary" asChild>
+              <Link to="/app/achievements">All Achievements</Link>
+            </Button>
+          </div>
         </div>
       </PageLayoutContent>
     </PageLayout>

@@ -49,6 +49,16 @@ export const inAppAchievements = [
     isSecret: true,
     type: 'IN_APP' as const,
   } as const,
+  {
+    key: 'empty-code',
+    secretId: 'cmhz2phwa0001c9icgcgjvxxs',
+    name: 'Code vide',
+    hint: ' ',
+    emoji: '∅',
+    points: 50,
+    isSecret: true,
+    type: 'IN_APP' as const,
+  } as const,
 ] satisfies (Omit<Achievement, 'id' | 'createdAt' | 'updatedAt'> & {
   secretId?: string;
   type: AchievementType;

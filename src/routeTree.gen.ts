@@ -22,7 +22,6 @@ import { Route as ManagerAchievementsIndexRouteImport } from './routes/manager/a
 import { Route as ManagerAccountIndexRouteImport } from './routes/manager/account.index'
 import { Route as LoginVerifyIndexRouteImport } from './routes/login/verify.index'
 import { Route as LoginErrorIndexRouteImport } from './routes/login/error.index'
-import { Route as AppSecretCodeIndexRouteImport } from './routes/app/secret-code/index'
 import { Route as AppAchievementsIndexRouteImport } from './routes/app/achievements/index'
 import { Route as AppAccountIndexRouteImport } from './routes/app/account.index'
 import { Route as ApiRpcSplatRouteImport } from './routes/api/rpc.$'
@@ -106,11 +105,6 @@ const LoginErrorIndexRoute = LoginErrorIndexRouteImport.update({
   id: '/error/',
   path: '/error/',
   getParentRoute: () => LoginRouteRoute,
-} as any)
-const AppSecretCodeIndexRoute = AppSecretCodeIndexRouteImport.update({
-  id: '/secret-code/',
-  path: '/secret-code/',
-  getParentRoute: () => AppRouteRoute,
 } as any)
 const AppAchievementsIndexRoute = AppAchievementsIndexRouteImport.update({
   id: '/achievements/',
@@ -218,7 +212,6 @@ export interface FileRoutesByFullPath {
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/app/account': typeof AppAccountIndexRoute
   '/app/achievements': typeof AppAchievementsIndexRoute
-  '/app/secret-code': typeof AppSecretCodeIndexRoute
   '/login/error': typeof LoginErrorIndexRoute
   '/login/verify': typeof LoginVerifyIndexRoute
   '/manager/account': typeof ManagerAccountIndexRoute
@@ -248,7 +241,6 @@ export interface FileRoutesByTo {
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/app/account': typeof AppAccountIndexRoute
   '/app/achievements': typeof AppAchievementsIndexRoute
-  '/app/secret-code': typeof AppSecretCodeIndexRoute
   '/login/error': typeof LoginErrorIndexRoute
   '/login/verify': typeof LoginVerifyIndexRoute
   '/manager/account': typeof ManagerAccountIndexRoute
@@ -282,7 +274,6 @@ export interface FileRoutesById {
   '/api/rpc/$': typeof ApiRpcSplatRoute
   '/app/account/': typeof AppAccountIndexRoute
   '/app/achievements/': typeof AppAchievementsIndexRoute
-  '/app/secret-code/': typeof AppSecretCodeIndexRoute
   '/login/error/': typeof LoginErrorIndexRoute
   '/login/verify/': typeof LoginVerifyIndexRoute
   '/manager/account/': typeof ManagerAccountIndexRoute
@@ -317,7 +308,6 @@ export interface FileRouteTypes {
     | '/api/rpc/$'
     | '/app/account'
     | '/app/achievements'
-    | '/app/secret-code'
     | '/login/error'
     | '/login/verify'
     | '/manager/account'
@@ -347,7 +337,6 @@ export interface FileRouteTypes {
     | '/api/rpc/$'
     | '/app/account'
     | '/app/achievements'
-    | '/app/secret-code'
     | '/login/error'
     | '/login/verify'
     | '/manager/account'
@@ -380,7 +369,6 @@ export interface FileRouteTypes {
     | '/api/rpc/$'
     | '/app/account/'
     | '/app/achievements/'
-    | '/app/secret-code/'
     | '/login/error/'
     | '/login/verify/'
     | '/manager/account/'
@@ -504,13 +492,6 @@ declare module '@tanstack/react-router' {
       fullPath: '/login/error'
       preLoaderRoute: typeof LoginErrorIndexRouteImport
       parentRoute: typeof LoginRouteRoute
-    }
-    '/app/secret-code/': {
-      id: '/app/secret-code/'
-      path: '/secret-code'
-      fullPath: '/app/secret-code'
-      preLoaderRoute: typeof AppSecretCodeIndexRouteImport
-      parentRoute: typeof AppRouteRoute
     }
     '/app/achievements/': {
       id: '/app/achievements/'
@@ -638,7 +619,6 @@ interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
   AppAccountIndexRoute: typeof AppAccountIndexRoute
   AppAchievementsIndexRoute: typeof AppAchievementsIndexRoute
-  AppSecretCodeIndexRoute: typeof AppSecretCodeIndexRoute
   AppAchievementsIdCompleteIndexRoute: typeof AppAchievementsIdCompleteIndexRoute
 }
 
@@ -646,7 +626,6 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
   AppAccountIndexRoute: AppAccountIndexRoute,
   AppAchievementsIndexRoute: AppAchievementsIndexRoute,
-  AppSecretCodeIndexRoute: AppSecretCodeIndexRoute,
   AppAchievementsIdCompleteIndexRoute: AppAchievementsIdCompleteIndexRoute,
 }
 

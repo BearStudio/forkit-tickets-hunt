@@ -10,14 +10,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 import { getAchievementLinkBySecretId } from '@/features/achievement/get-achievement-link';
-import {
-  PageLayout,
-  PageLayoutContent,
-  PageLayoutTopBar,
-  PageLayoutTopBarTitle,
-} from '@/layout/app/page-layout';
 
-export const PageSecretCode = () => {
+export const SecretCodeInput = () => {
   const router = useRouter();
 
   const [code, setCode] = useState('');
@@ -26,6 +20,9 @@ export const PageSecretCode = () => {
     orpc.achievement.checkSecretCode.mutationOptions({
       onSuccess: (data) => {
         router.navigate({ href: getAchievementLinkBySecretId(data.secretId) });
+      },
+      onSettled: () => {
+        setCode('');
       },
     })
   );
@@ -46,27 +43,30 @@ export const PageSecretCode = () => {
   });
 
   return (
-    <PageLayout>
-      <PageLayoutTopBar>
-        <PageLayoutTopBarTitle>Secret Code</PageLayoutTopBarTitle>
-      </PageLayoutTopBar>
-      <PageLayoutContent>
-        <div className="mt-2 flex flex-col gap-4">
-          <Input value={code} onChange={(e) => setCode(e.target.value)} />
-          <Button
-            loading={checkCode.isPending}
-            onClick={() => checkCode.mutate({ secretCode: code })}
-          >
-            Check Code
-          </Button>
-          {ui.when('not-found', () => (
-            <div>Code not found</div>
-          ))}
-          {ui.when('error', () => (
-            <div>Not valid code</div>
-          ))}
-        </div>
-      </PageLayoutContent>
-    </PageLayout>
+    <div className="flex flex-col gap-4">
+      <div>
+        <Input
+          value={code}
+          onChange={(e) => {
+            setCode(e.target.value);
+            checkCode.reset();
+          }}
+          aria-invalid={checkCode.status === 'error' ? true : undefined}
+        />
+        {ui.when('not-found', () => (
+          <p className="text-destructive">Code not found</p>
+        ))}
+        {ui.when('error', () => (
+          <p className="text-destructive">An error occurred</p>
+        ))}
+      </div>
+      <Button
+        loading={checkCode.isPending}
+        onClick={() => checkCode.mutate({ secretCode: code })}
+        className="w-full"
+      >
+        Check Code
+      </Button>
+    </div>
   );
 };

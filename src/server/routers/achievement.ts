@@ -263,6 +263,18 @@ export default {
     .input(z.object({ secretCode: z.string() }))
     .output(z.object({ secretId: z.string() }))
     .handler(async ({ context, input }) => {
+      if (input.secretCode === '') {
+        const achievement = await context.db.achievement.findUnique({
+          where: { key: 'empty-code' },
+        });
+
+        if (!achievement) {
+          throw new ORPCError('NOT_FOUND');
+        }
+
+        return { secretId: achievement.secretId };
+      }
+
       const achievement = await context.db.achievement.findUnique({
         where: { key: input.secretCode },
       });
