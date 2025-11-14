@@ -15,6 +15,7 @@ import {
   PageLayoutContent,
   PageLayoutTopBar,
 } from '@/layout/app/page-layout';
+import { Link } from '@tanstack/react-router';
 
 export const PageAchievements = () => {
   const { t } = useTranslation(['achievement']);
@@ -113,12 +114,14 @@ export const PageAchievements = () => {
                           className="w-full"
                           asChild
                         >
-                          <a href={getAchievementLinkBySecretId(item.secretId)}>
+                          <Link
+                            to={getAchievementLinkBySecretId(item.secretId)}
+                          >
                             {t('achievement:app.githubStar.claim', {
                               points: item.points,
                             })}{' '}
                             <TicketIcon />
-                          </a>
+                          </Link>
                         </Button>
                       </div>
                     )}
