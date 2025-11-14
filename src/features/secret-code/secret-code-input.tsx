@@ -3,6 +3,7 @@ import { ORPCError } from '@orpc/client';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from '@tanstack/react-router';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 
@@ -13,6 +14,7 @@ import { getAchievementLinkBySecretId } from '@/features/achievement/get-achieve
 
 export const SecretCodeInput = () => {
   const router = useRouter();
+  const { t } = useTranslation(['secretCode']);
 
   const [code, setCode] = useState('');
 
@@ -54,10 +56,10 @@ export const SecretCodeInput = () => {
           aria-invalid={checkCode.status === 'error' ? true : undefined}
         />
         {ui.when('not-found', () => (
-          <p className="text-destructive">Code not found</p>
+          <p className="text-destructive">{t('secretCode:input.invalid')}</p>
         ))}
         {ui.when('error', () => (
-          <p className="text-destructive">An error occurred</p>
+          <p className="text-destructive">{t('secretCode:input.error')}</p>
         ))}
       </div>
       <Button
@@ -65,7 +67,7 @@ export const SecretCodeInput = () => {
         onClick={() => checkCode.mutate({ secretCode: code })}
         className="w-full"
       >
-        Check Code
+        {t('secretCode:input.submit')}
       </Button>
     </div>
   );

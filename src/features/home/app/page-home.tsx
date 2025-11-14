@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
+import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 
@@ -28,6 +29,7 @@ import {
 export const PageHome = () => {
   const query = useQuery(orpc.user.getCurrentUserRank.queryOptions());
   const session = authClient.useSession();
+  const { t } = useTranslation(['home', 'secretCode']);
   return (
     <PageLayout>
       <PageLayoutTopBar className="md:hidden">
@@ -64,9 +66,9 @@ export const PageHome = () => {
                     {query.data?.completedCount}
                   </div>
                   <div className="text-xs opacity-60">
-                    Achievements
+                    {t('home:rank.achievements')}
                     <br />
-                    Completed
+                    {t('home:rank.completed')}
                   </div>
                 </div>
                 <div className="flex items-center justify-center gap-2 p-4 text-center">
@@ -81,19 +83,25 @@ export const PageHome = () => {
           <div className="flex flex-col gap-2">
             <ResponsiveDrawer>
               <ResponsiveDrawerTrigger asChild>
-                <Button variant="secondary">Enter secret code</Button>
+                <Button variant="secondary" className="w-full">
+                  {t('home:actions.secretCode')}
+                </Button>
               </ResponsiveDrawerTrigger>
               <ResponsiveDrawerContent>
                 <ResponsiveDrawerHeader>
-                  <ResponsiveDrawerTitle>Secret code</ResponsiveDrawerTitle>
+                  <ResponsiveDrawerTitle>
+                    {t('secretCode:drawer.title')}
+                  </ResponsiveDrawerTitle>
                 </ResponsiveDrawerHeader>
                 <ResponsiveDrawerBody>
                   <SecretCodeInput />
                 </ResponsiveDrawerBody>
               </ResponsiveDrawerContent>
             </ResponsiveDrawer>
-            <Button variant="secondary" asChild>
-              <Link to="/app/achievements">All Achievements</Link>
+            <Button variant="secondary" className="w-full" asChild>
+              <Link to="/app/achievements">
+                {t('home:actions.allAchievements')}
+              </Link>
             </Button>
           </div>
         </div>

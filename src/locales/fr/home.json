@@ -6,6 +6,12 @@
   },
   "rank": {
     "title": "Mon classement",
-    "summary": "{{completedCount}} terminés • {{totalPoints}} tickets"
+    "summary": "{{completedCount}} terminés • {{totalPoints}} tickets",
+    "achievements": "Succès",
+    "completed": "Terminés"
+  },
+  "actions": {
+    "secretCode": "Entrer un code secret",
+    "allAchievements": "Tous les succès"
   }
 }

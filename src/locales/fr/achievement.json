@@ -16,6 +16,7 @@
         "CUSTOM": "Perso"
       }
     },
+    "key": { "label": "Clé" },
     "yes": "Oui",
     "no": "Non",
     "loadMore": "Charger plus",
@@ -59,6 +60,11 @@
       "titleNotFound": "Succès introuvable",
       "alreadyCompleted": "Déjà validé",
       "completed": "Succès validé !"
+    },
+    "githubStar": {
+      "viewRepo": "Voir le repo",
+      "youStarred": "Vous avez mis une star sur le repo",
+      "claim": "Récupérer +{{points}}"
     }
   },
   "inAppAchievements": {

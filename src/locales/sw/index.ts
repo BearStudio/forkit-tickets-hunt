@@ -10,6 +10,7 @@ import demo from './demo.json' with { type: 'json' };
 import emails from './emails.json' with { type: 'json' };
 import home from './home.json' with { type: 'json' };
 import layout from './layout.json' with { type: 'json' };
+import secretCode from './secret-code.json' with { type: 'json' };
 import user from './user.json' with { type: 'json' };
 
 export default {
@@ -22,6 +23,7 @@ export default {
   emails,
   layout,
   home,
+  secretCode,
   achievement,
   user,
 } as const;

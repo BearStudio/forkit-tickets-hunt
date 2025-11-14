@@ -95,7 +95,7 @@ export const PageAchievements = () => {
                           {item.type === 'GITHUB_STAR' && !!item.key && (
                             <Button size="xs" variant="ghost" asChild>
                               <a href={`https://github.com/${item.key}`}>
-                                View Repo
+                                {t('achievement:app.githubStar.viewRepo')}
                                 <ExternalLinkIcon />
                               </a>
                             </Button>
@@ -105,7 +105,7 @@ export const PageAchievements = () => {
                     {item.type === 'GITHUB_STAR' && item.secretId && (
                       <div className="flex flex-1 flex-col items-center gap-1 border-t bg-white/2 px-3 py-2">
                         <p className="flex-1 text-2xs opacity-60">
-                          You stared the repo
+                          {t('achievement:app.githubStar.youStarred')}
                         </p>
                         <Button
                           size="lg"
@@ -114,7 +114,10 @@ export const PageAchievements = () => {
                           asChild
                         >
                           <a href={getAchievementLinkBySecretId(item.secretId)}>
-                            Claim +{item.points} <TicketIcon />
+                            {t('achievement:app.githubStar.claim', {
+                              points: item.points,
+                            })}{' '}
+                            <TicketIcon />
                           </a>
                         </Button>
                       </div>

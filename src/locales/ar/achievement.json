@@ -16,6 +16,7 @@
         "CUSTOM": "مخصص"
       }
     },
+    "key": { "label": "المفتاح" },
     "yes": "نعم",
     "no": "لا",
     "loadMore": "تحميل المزيد",
@@ -59,6 +60,11 @@
       "titleNotFound": "الإنجاز غير موجود",
       "alreadyCompleted": "مُكتمل بالفعل",
       "completed": "تم إكمال الإنجاز!"
+    },
+    "githubStar": {
+      "viewRepo": "عرض المستودع",
+      "youStarred": "لقد منحت المستودع نجمة",
+      "claim": "مطالبة +{{points}}"
     }
   },
   "inAppAchievements": {

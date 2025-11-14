@@ -6,6 +6,12 @@
   },
   "rank": {
     "title": "Nafasi yako",
-    "summary": "{{completedCount}} zimekamilika • {{totalPoints}} alama"
+    "summary": "{{completedCount}} zimekamilika • {{totalPoints}} alama",
+    "achievements": "Mafanikio",
+    "completed": "Zimekamilika"
+  },
+  "actions": {
+    "secretCode": "Weka nambari ya siri",
+    "allAchievements": "Mafanikio Yote"
   }
 }

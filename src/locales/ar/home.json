@@ -6,6 +6,12 @@
   },
   "rank": {
     "title": "ترتيبك",
-    "summary": "{{completedCount}} مكتملة • {{totalPoints}} نقطة"
+    "summary": "{{completedCount}} مكتملة • {{totalPoints}} نقطة",
+    "achievements": "الإنجازات",
+    "completed": "مكتملة"
+  },
+  "actions": {
+    "secretCode": "أدخل الرمز السري",
+    "allAchievements": "كل الإنجازات"
   }
 }

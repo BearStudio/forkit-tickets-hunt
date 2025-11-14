@@ -6,6 +6,12 @@
   },
   "rank": {
     "title": "My position",
-    "summary": "{{completedCount}} completed • {{totalPoints}} tickets"
+    "summary": "{{completedCount}} completed • {{totalPoints}} tickets",
+    "achievements": "Achievements",
+    "completed": "Completed"
+  },
+  "actions": {
+    "secretCode": "Enter secret code",
+    "allAchievements": "All Achievements"
   }
 }

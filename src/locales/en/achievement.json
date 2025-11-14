@@ -60,6 +60,11 @@
       "titleNotFound": "Achievement not found",
       "alreadyCompleted": "Already completed",
       "completed": "Achievement completed!"
+    },
+    "githubStar": {
+      "viewRepo": "View Repo",
+      "youStarred": "You starred the repo",
+      "claim": "Claim +{{points}}"
     }
   },
   "inAppAchievements": {
