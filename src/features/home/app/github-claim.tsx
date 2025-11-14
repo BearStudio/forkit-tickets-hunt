@@ -15,7 +15,7 @@ export const GithubClaim = () => {
   if (!githubAchievementsToClaim.data?.length) return null;
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex w-full flex-col gap-2">
       {githubAchievementsToClaim.data.map((item) => (
         <Card key={item.repository}>
           <CardHeader>

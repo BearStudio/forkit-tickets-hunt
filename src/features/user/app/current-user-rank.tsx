@@ -1,10 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { Link } from '@tanstack/react-router';
 
 import { orpc } from '@/lib/orpc/client';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TicketIcon } from '@/components/ui/ticket-icon';
 
@@ -15,7 +13,7 @@ export const CurrentUserRank = () => {
   const session = authClient.useSession();
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-8 p-4">
+    <div className="flex flex-col items-center justify-center gap-8 p-4">
       <div className="flex flex-col gap-3">
         <div className="relative flex size-36 flex-col items-center justify-center rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10">
           <Avatar className="size-36">
@@ -52,9 +50,6 @@ export const CurrentUserRank = () => {
             <TicketIcon className="w-12" />
           </div>
         </div>
-        <Button variant="secondary" asChild>
-          <Link to="/app/achievements">View All Achievements</Link>
-        </Button>
       </div>
     </div>
   );
