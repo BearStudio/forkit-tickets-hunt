@@ -262,11 +262,7 @@ export default {
       }
 
       if (achievement.type !== 'SECRET_CODE') {
-        throw new ORPCError('BAD_REQUEST', {
-          data: {
-            message: 'Achievement is not a secret code',
-          },
-        });
+        throw new ORPCError('NOT_FOUND');
       }
 
       return { secretId: achievement.secretId };
