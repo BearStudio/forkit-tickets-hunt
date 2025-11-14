@@ -1,3 +1,4 @@
+import { getUiState } from '@bearstudio/ui-state';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
@@ -30,6 +31,14 @@ export const PageHome = () => {
   const query = useQuery(orpc.user.getCurrentUserRank.queryOptions());
   const session = authClient.useSession();
   const { t } = useTranslation(['home', 'secretCode']);
+
+  const ui = getUiState((set) => {
+    if (query.status === 'pending') return set('pending');
+    if (query.status === 'error') return set('error');
+
+    return set('default', query.data);
+  });
+
   return (
     <PageLayout>
       <PageLayoutTopBar className="md:hidden">
@@ -48,23 +57,31 @@ export const PageHome = () => {
                   />
                 </Avatar>
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-sm bg-accent px-3 py-0.5 text-accent-foreground">
-                  {query.status === 'pending' && (
-                    <Skeleton className="mx-auto h-6 w-8" />
-                  )}
-                  {query.status === 'success' && (
-                    <span className="text-xl font-bold">
-                      #{query.data.rank}
-                    </span>
-                  )}
+                  <span className="block text-xl font-bold">
+                    {ui
+                      .match('pending', () => '--')
+                      .match('error', () => 'ERROR')
+                      .match('default', (data) => `#${data.rank}`)
+                      .exhaustive()}
+                  </span>
                 </div>
               </div>
             </div>
             <div className="flex flex-col items-center gap-2">
               <div className="flex gap-2">
                 <div className="flex items-center gap-2 p-4">
-                  <div className="text-4xl font-bold">
-                    {query.data?.completedCount}
-                  </div>
+                  {ui
+                    .match('pending', () => <Skeleton className="h-10 w-6" />)
+                    .match('error', () => (
+                      <div className="text-4xl font-bold">-</div>
+                    ))
+                    .match('default', (data) => (
+                      <div className="text-4xl font-bold">
+                        {data.completedCount}
+                      </div>
+                    ))
+                    .exhaustive()}
+
                   <div className="text-xs opacity-60">
                     {t('home:rank.achievements')}
                     <br />
@@ -72,9 +89,17 @@ export const PageHome = () => {
                   </div>
                 </div>
                 <div className="flex items-center justify-center gap-2 p-4 text-center">
-                  <div className="text-4xl font-bold">
-                    {query.data?.totalPoints}
-                  </div>
+                  {ui
+                    .match('pending', () => <Skeleton className="h-10 w-6" />)
+                    .match('error', () => (
+                      <div className="text-4xl font-bold">-</div>
+                    ))
+                    .match('default', (data) => (
+                      <div className="text-4xl font-bold">
+                        {data.totalPoints}
+                      </div>
+                    ))
+                    .exhaustive()}
                   <TicketIcon className="w-12" />
                 </div>
               </div>
