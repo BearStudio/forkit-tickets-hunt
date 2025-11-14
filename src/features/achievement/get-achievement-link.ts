@@ -18,5 +18,7 @@ export const getAchievementLinkByKey = (key: string) => {
     throw new Error(`Achievement with key ${key} not found`);
   }
 
-  return getAchievementLinkBySecretId(achievement.secretId);
+  return achievement.secretId
+    ? getAchievementLinkBySecretId(achievement.secretId)
+    : '';
 };

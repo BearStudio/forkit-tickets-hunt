@@ -1,30 +1,44 @@
 import { Achievement, AchievementType } from '@/features/achievement/schema';
-import { GITHUB_REPOSITORIES_TO_CHECK } from '@/features/github/constants';
 
-const GITHUB_REPOSITORIES_TO_CHECK_ACHIEVEMENTS =
-  GITHUB_REPOSITORIES_TO_CHECK.map((repositoryKey) => ({
-    key: repositoryKey,
-    secretId: repositoryKey,
-    name: `Github Star • ${repositoryKey}`,
-    hint: 'Star the repository on Github',
+export const inAppAchievements = [
+  // GitHub
+  {
+    key: 'BearStudio/start-ui-web',
+    name: 'Start UI web ⭐',
+    hint: 'Star BearStudio/start-ui-web on Github',
     emoji: '⭐',
     points: 100,
     isSecret: false,
     type: 'GITHUB_STAR' as const,
-  })) satisfies Omit<Achievement, 'id' | 'createdAt' | 'updatedAt'>[];
-
-export const inAppAchievements = [
-  ...GITHUB_REPOSITORIES_TO_CHECK_ACHIEVEMENTS,
-  {
-    key: 'onboarded',
-    secretId: 'cmhvykzoq0001c9pcmbgipx4a',
-    name: 'Onboarded',
-    hint: 'Check your email',
-    emoji: '👋',
-    points: 50,
-    isSecret: false,
-    type: 'IN_APP' as const,
   } as const,
+  {
+    key: 'BearStudio/start-ui-native',
+    name: 'Start UI native ⭐',
+    hint: 'Star BearStudio/start-ui-native on Github',
+    emoji: '⭐',
+    points: 100,
+    isSecret: false,
+    type: 'GITHUB_STAR' as const,
+  } as const,
+  {
+    key: 'Fork-It-Community/forkit.community',
+    name: 'forkit.community ⭐',
+    hint: 'Star Fork-It-Community/forkit.community on Github',
+    emoji: '⭐',
+    points: 100,
+    isSecret: false,
+    type: 'GITHUB_STAR' as const,
+  } as const,
+  {
+    key: 'DecampsRenan/kikoojs',
+    name: 'kikoojs ⭐',
+    hint: 'Be kikoo ⭐',
+    emoji: '⭐',
+    points: 50,
+    isSecret: true,
+    type: 'GITHUB_STAR' as const,
+  } as const,
+  // In App
   {
     key: 'error',
     secretId: 'cmhvykzp30003c9pcq7tju1pc',
