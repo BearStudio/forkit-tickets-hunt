@@ -68,9 +68,6 @@
     }
   },
   "inAppAchievements": {
-    "error": { "triggerButton": { "label": "Obtenir des points" } },
-    "onboarded": {
-      "triggerButton": { "label": "Je pense que vous devriez vérifier ce lien" }
-    }
+    "error": { "triggerButton": { "label": "Obtenir des points" } }
   }
 }

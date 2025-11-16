@@ -6,11 +6,5 @@
     "intro": "Ili kuthibitisha utambulisho wako, ingiza msimbo ufuatao:",
     "validityTime": "Msimbo huu utakuwa halali kwa dakika {{expiration}} zijazo tu.",
     "ignoreHelper": "Ikiwa hukujaribu kuingia, unaweza kupuuza barua pepe hii kwa usalama."
-  },
-  "onboarded": {
-    "subject": "Wewe tayari seti!",
-    "preview": "Kuna kitu kidogo kwaweza kusubiri",
-    "title": "Asante kwa kuongeza {{name}} !",
-    "intro": "Kwa kukushangaza kuongeza na washirika wetu, tumekuwa na kitu kidogo kwaweza kusubiri:"
   }
 }
