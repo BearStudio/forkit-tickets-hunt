@@ -15,5 +15,12 @@ export function getRouter() {
     defaultPreloadStaleTime: 0,
     scrollRestoration: true,
     routeTree,
+    routeMasks: [
+      {
+        routeTree,
+        from: '/app/achievements/$id/complete',
+        to: '/app/achievements/complete',
+      },
+    ],
   });
 }
