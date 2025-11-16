@@ -189,6 +189,28 @@ export default {
       };
     }),
 
+  getInAppSecret: protectedProcedure({
+    permission: null,
+  })
+    .route({
+      method: 'GET',
+      path: '/achievements/in-app-secret',
+      tags,
+    })
+    .input(z.object({ key: z.string() }))
+    .output(z.string())
+    .handler(async ({ context, input }) => {
+      const achievement = await context.db.achievement.findUnique({
+        where: { key: input.key, type: 'IN_APP' },
+      });
+
+      if (!achievement) {
+        throw new ORPCError('NOT_FOUND');
+      }
+
+      return achievement.secretId;
+    }),
+
   getGithubAchievementsToClaim: protectedProcedure({
     permission: null,
   })

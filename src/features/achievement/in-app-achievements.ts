@@ -41,7 +41,6 @@ export const inAppAchievements = [
   // In App
   {
     key: 'error',
-    secretId: 'cmhvykzp30003c9pcq7tju1pc',
     name: 'Erreur',
     hint: 'Une erreur est survenue...',
     emoji: '⚠️',
@@ -51,7 +50,6 @@ export const inAppAchievements = [
   } as const,
   {
     key: 'empty-code',
-    secretId: 'cmhz2phwa0001c9icgcgjvxxs',
     name: 'Code vide',
     hint: ' ',
     emoji: '∅',
@@ -60,6 +58,5 @@ export const inAppAchievements = [
     type: 'IN_APP' as const,
   } as const,
 ] satisfies (Omit<Achievement, 'id' | 'createdAt' | 'updatedAt'> & {
-  secretId?: string;
   type: AchievementType;
 })[];

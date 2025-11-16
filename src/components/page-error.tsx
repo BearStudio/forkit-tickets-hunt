@@ -1,12 +1,14 @@
+import { useQuery } from '@tanstack/react-query';
+import { Link } from '@tanstack/react-router';
 import { HomeIcon, TrophyIcon, Undo2Icon } from 'lucide-react';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { match } from 'ts-pattern';
 
+import { orpc } from '@/lib/orpc/client';
+
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-
-import { getAchievementLinkByKey } from '@/features/achievement/get-achievement-link';
 
 export const PageError = (props: {
   error?: '403' | '404' | '500' | 'custom';
@@ -101,12 +103,27 @@ const PageErrorContent = (props: {
 
 const PageErrorButtonAchievement = () => {
   const { t } = useTranslation(['achievement']);
+
+  const errorAchievement = useQuery(
+    orpc.achievement.getInAppSecret.queryOptions({
+      input: { key: 'error' },
+    })
+  );
+
   return (
-    <Button asChild>
-      <a href={getAchievementLinkByKey('error')}>
+    <Button
+      loading={errorAchievement.isLoading}
+      asChild
+      disabled={!errorAchievement.data}
+    >
+      <Link
+        to="/app/achievements/$id/complete"
+        params={{ id: errorAchievement.data ?? '' }}
+        from="/app/achievements"
+      >
         <TrophyIcon />
         {t('achievement:inAppAchievements.error.triggerButton.label')}
-      </a>
+      </Link>
     </Button>
   );
 };

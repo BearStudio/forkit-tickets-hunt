@@ -10,8 +10,6 @@ import { orpc } from '@/lib/orpc/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
-import { getAchievementLinkBySecretId } from '@/features/achievement/get-achievement-link';
-
 export const SecretCodeInput = () => {
   const router = useRouter();
   const { t } = useTranslation(['secretCode']);
@@ -21,7 +19,10 @@ export const SecretCodeInput = () => {
   const checkCode = useMutation(
     orpc.achievement.checkSecretCode.mutationOptions({
       onSuccess: (data) => {
-        router.navigate({ href: getAchievementLinkBySecretId(data.secretId) });
+        router.navigate({
+          to: '/app/achievements/$id/complete',
+          params: { id: data.secretId },
+        });
       },
       onSettled: () => {
         setCode('');
