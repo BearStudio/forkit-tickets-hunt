@@ -144,7 +144,7 @@ export const PageHome = () => {
             <ResponsiveDrawer>
               <ResponsiveDrawerTrigger asChild>
                 <Button variant="secondary" size="lg" className="w-full">
-                  {t('home:actions.secretCode')}
+                  🔐 {t('home:actions.secretCode')}
                 </Button>
               </ResponsiveDrawerTrigger>
               <ResponsiveDrawerContent>

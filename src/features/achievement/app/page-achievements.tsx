@@ -26,7 +26,7 @@ import {
 } from '@/layout/app/page-layout';
 
 export const PageAchievements = () => {
-  const { t } = useTranslation(['achievement', 'secretCode']);
+  const { t } = useTranslation(['achievement', 'secretCode', 'home']);
   const achievementsQuery = useQuery(
     orpc.achievement.getAllWithCompletion.queryOptions()
   );
@@ -64,7 +64,7 @@ export const PageAchievements = () => {
           <ResponsiveDrawer>
             <ResponsiveDrawerTrigger asChild>
               <Button variant="secondary">
-                {t('home:actions.secretCode')}
+                🔐 {t('home:actions.secretCode')}
               </Button>
             </ResponsiveDrawerTrigger>
             <ResponsiveDrawerContent>

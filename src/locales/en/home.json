@@ -11,7 +11,7 @@
     "completed": "Completed"
   },
   "actions": {
-    "secretCode": "Enter secret code",
+    "secretCode": "Secret code",
     "allAchievements": "All Achievements"
   }
 }

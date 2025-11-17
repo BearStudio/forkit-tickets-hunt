@@ -91,7 +91,7 @@
       "claim": "مطالبة +{{points}}"
     },
     "instructions": "فتح الإنجازات للفوز <ticket/> من خلال استكمال التحديات. \nإنهاء في أعلى 3 للفوز!",
-    "instruction2": "اذهب إلى جناحنا في {{time}} للفائزين!"
+    "instructions2": "اذهب إلى جناحنا في {{time}} للفائزين!"
   },
   "inAppAchievements": {
     "error": {
