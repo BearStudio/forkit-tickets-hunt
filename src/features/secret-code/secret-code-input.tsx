@@ -51,6 +51,7 @@ export const SecretCodeInput = () => {
         <Input
           value={code}
           size="lg"
+          autoFocus
           onChange={(e) => {
             setCode(e.target.value);
             checkCode.reset();
