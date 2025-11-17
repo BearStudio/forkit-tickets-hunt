@@ -24,6 +24,7 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
   const completionQuery = useQuery(
     orpc.achievement.completeBySecretId.queryOptions({
       input: { id: props.secretId },
+      gcTime: 0,
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
     })

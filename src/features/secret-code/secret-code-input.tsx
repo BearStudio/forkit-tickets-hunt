@@ -46,7 +46,13 @@ export const SecretCodeInput = () => {
   });
 
   return (
-    <div className="flex flex-col gap-4">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        checkCode.mutate({ secretCode: code });
+      }}
+      className="flex flex-col gap-4"
+    >
       <div>
         <Input
           value={code}
@@ -67,12 +73,12 @@ export const SecretCodeInput = () => {
       </div>
       <Button
         size="lg"
+        type="submit"
         loading={checkCode.isPending}
-        onClick={() => checkCode.mutate({ secretCode: code })}
         className="w-full"
       >
         {t('secretCode:input.submit')}
       </Button>
-    </div>
+    </form>
   );
 };

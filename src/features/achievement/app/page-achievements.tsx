@@ -6,9 +6,19 @@ import { orpc } from '@/lib/orpc/client';
 
 import LightRays from '@/components/light-rays';
 import { PageError } from '@/components/page-error';
+import { Button } from '@/components/ui/button';
+import {
+  ResponsiveDrawer,
+  ResponsiveDrawerBody,
+  ResponsiveDrawerContent,
+  ResponsiveDrawerHeader,
+  ResponsiveDrawerTitle,
+  ResponsiveDrawerTrigger,
+} from '@/components/ui/responsive-drawer';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { AchievementItem } from '@/features/achievement/app/achievement-item';
+import { SecretCodeInput } from '@/features/secret-code/secret-code-input';
 import {
   PageLayout,
   PageLayoutContent,
@@ -16,7 +26,7 @@ import {
 } from '@/layout/app/page-layout';
 
 export const PageAchievements = () => {
-  const { t } = useTranslation(['achievement']);
+  const { t } = useTranslation(['achievement', 'secretCode']);
   const achievementsQuery = useQuery(
     orpc.achievement.getAllWithCompletion.queryOptions()
   );
@@ -48,7 +58,28 @@ export const PageAchievements = () => {
           saturation={5}
         />
       </div>
-      <PageLayoutTopBar className="md:hidden">
+      <PageLayoutTopBar
+        className="md:hidden"
+        rightActions={
+          <ResponsiveDrawer>
+            <ResponsiveDrawerTrigger asChild>
+              <Button variant="secondary">
+                {t('home:actions.secretCode')}
+              </Button>
+            </ResponsiveDrawerTrigger>
+            <ResponsiveDrawerContent>
+              <ResponsiveDrawerHeader>
+                <ResponsiveDrawerTitle>
+                  {t('secretCode:drawer.title')}
+                </ResponsiveDrawerTitle>
+              </ResponsiveDrawerHeader>
+              <ResponsiveDrawerBody>
+                <SecretCodeInput />
+              </ResponsiveDrawerBody>
+            </ResponsiveDrawerContent>
+          </ResponsiveDrawer>
+        }
+      >
         <h1 className="text-base font-medium md:text-sm">
           {t('achievement:common.achievements')}
         </h1>
