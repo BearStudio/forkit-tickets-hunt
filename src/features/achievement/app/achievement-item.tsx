@@ -97,8 +97,8 @@ export const AchievementItem = (props: {
             </p>
             <Button size="lg" variant="secondary" className="w-full" asChild>
               <Link
-                to="/app/achievements/$id/complete"
-                params={{ id: props.achievement.secretId }}
+                to="/app/achievements/complete"
+                search={{ id: props.achievement.secretId }}
               >
                 {t('achievement:app.githubStar.claim', {
                   points: props.achievement.points,

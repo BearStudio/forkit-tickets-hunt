@@ -1,12 +1,7 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { ORPCError } from '@orpc/client';
 import { useQuery } from '@tanstack/react-query';
-import {
-  Link,
-  useCanGoBack,
-  useParams,
-  useRouter,
-} from '@tanstack/react-router';
+import { Link, useRouter } from '@tanstack/react-router';
 import { TrophyIcon } from 'lucide-react';
 import { useEffect } from 'react';
 
@@ -22,14 +17,12 @@ import { TicketIcon } from '@/components/ui/ticket-icon';
 import { fireworks } from '@/features/achievement/app/fireworks';
 import { PageLayout, PageLayoutContent } from '@/layout/app/page-layout';
 
-export const PageAchievementComplete = () => {
-  const canGoBack = useCanGoBack();
+export const PageAchievementComplete = (props: { secretId: string }) => {
   const router = useRouter();
-  const params = useParams({ from: '/app/achievements/$id/complete/' });
 
   const completionQuery = useQuery(
     orpc.achievement.completeBySecretId.queryOptions({
-      input: { id: params.id },
+      input: { id: props.secretId },
       refetchOnWindowFocus: false,
       refetchOnReconnect: false,
     })
@@ -173,7 +166,7 @@ export const PageAchievementComplete = () => {
             <Link
               to="/app"
               onClick={(e) => {
-                if (canGoBack) {
+                if (router.history.canGoBack()) {
                   e.preventDefault();
                   router.history.back();
                 }

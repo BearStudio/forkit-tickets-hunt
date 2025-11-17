@@ -117,9 +117,9 @@ const PageErrorButtonAchievement = () => {
       disabled={!errorAchievement.data}
     >
       <Link
-        to="/app/achievements/$id/complete"
-        params={{ id: errorAchievement.data ?? '' }}
-        from="/app/achievements"
+        to="/app/achievements/complete"
+        search={{ id: errorAchievement.data ?? '' }}
+        replace
       >
         <TrophyIcon />
         {t('achievement:inAppAchievements.error.triggerButton.label')}

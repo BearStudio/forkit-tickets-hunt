@@ -20,8 +20,8 @@ export const SecretCodeInput = () => {
     orpc.achievement.checkSecretCode.mutationOptions({
       onSuccess: (data) => {
         router.navigate({
-          to: '/app/achievements/$id/complete',
-          params: { id: data.secretId },
+          to: '/app/achievements/complete',
+          search: { id: data.secretId },
         });
       },
       onSettled: () => {

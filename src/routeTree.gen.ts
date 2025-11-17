@@ -33,12 +33,12 @@ import { Route as ManagerUsersNewIndexRouteImport } from './routes/manager/users
 import { Route as ManagerUsersIdIndexRouteImport } from './routes/manager/users/$id.index'
 import { Route as ManagerAchievementsNewIndexRouteImport } from './routes/manager/achievements/new.index'
 import { Route as ManagerAchievementsIdIndexRouteImport } from './routes/manager/achievements/$id.index'
+import { Route as AppAchievementsCompleteIndexRouteImport } from './routes/app/achievements/complete.index'
 import { Route as ApiOpenapiAuthSchemaRouteImport } from './routes/api/openapi/auth.schema'
 import { Route as ApiOpenapiAppSchemaRouteImport } from './routes/api/openapi/app.schema'
 import { Route as ApiDevEmailTemplateRouteImport } from './routes/api/dev.email.$template'
 import { Route as ManagerUsersIdUpdateIndexRouteImport } from './routes/manager/users/$id.update.index'
 import { Route as ManagerAchievementsIdUpdateIndexRouteImport } from './routes/manager/achievements/$id.update.index'
-import { Route as AppAchievementsIdCompleteIndexRouteImport } from './routes/app/achievements/$id.complete.index'
 
 const ManagerRouteRoute = ManagerRouteRouteImport.update({
   id: '/manager',
@@ -163,6 +163,12 @@ const ManagerAchievementsIdIndexRoute =
     path: '/achievements/$id/',
     getParentRoute: () => ManagerRouteRoute,
   } as any)
+const AppAchievementsCompleteIndexRoute =
+  AppAchievementsCompleteIndexRouteImport.update({
+    id: '/achievements/complete/',
+    path: '/achievements/complete/',
+    getParentRoute: () => AppRouteRoute,
+  } as any)
 const ApiOpenapiAuthSchemaRoute = ApiOpenapiAuthSchemaRouteImport.update({
   id: '/schema',
   path: '/schema',
@@ -190,12 +196,6 @@ const ManagerAchievementsIdUpdateIndexRoute =
     path: '/achievements/$id/update/',
     getParentRoute: () => ManagerRouteRoute,
   } as any)
-const AppAchievementsIdCompleteIndexRoute =
-  AppAchievementsIdCompleteIndexRouteImport.update({
-    id: '/achievements/$id/complete/',
-    path: '/achievements/$id/complete/',
-    getParentRoute: () => AppRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -221,11 +221,11 @@ export interface FileRoutesByFullPath {
   '/api/dev/email/$template': typeof ApiDevEmailTemplateRoute
   '/api/openapi/app/schema': typeof ApiOpenapiAppSchemaRoute
   '/api/openapi/auth/schema': typeof ApiOpenapiAuthSchemaRoute
+  '/app/achievements/complete': typeof AppAchievementsCompleteIndexRoute
   '/manager/achievements/$id': typeof ManagerAchievementsIdIndexRoute
   '/manager/achievements/new': typeof ManagerAchievementsNewIndexRoute
   '/manager/users/$id': typeof ManagerUsersIdIndexRoute
   '/manager/users/new': typeof ManagerUsersNewIndexRoute
-  '/app/achievements/$id/complete': typeof AppAchievementsIdCompleteIndexRoute
   '/manager/achievements/$id/update': typeof ManagerAchievementsIdUpdateIndexRoute
   '/manager/users/$id/update': typeof ManagerUsersIdUpdateIndexRoute
 }
@@ -250,11 +250,11 @@ export interface FileRoutesByTo {
   '/api/dev/email/$template': typeof ApiDevEmailTemplateRoute
   '/api/openapi/app/schema': typeof ApiOpenapiAppSchemaRoute
   '/api/openapi/auth/schema': typeof ApiOpenapiAuthSchemaRoute
+  '/app/achievements/complete': typeof AppAchievementsCompleteIndexRoute
   '/manager/achievements/$id': typeof ManagerAchievementsIdIndexRoute
   '/manager/achievements/new': typeof ManagerAchievementsNewIndexRoute
   '/manager/users/$id': typeof ManagerUsersIdIndexRoute
   '/manager/users/new': typeof ManagerUsersNewIndexRoute
-  '/app/achievements/$id/complete': typeof AppAchievementsIdCompleteIndexRoute
   '/manager/achievements/$id/update': typeof ManagerAchievementsIdUpdateIndexRoute
   '/manager/users/$id/update': typeof ManagerUsersIdUpdateIndexRoute
 }
@@ -283,11 +283,11 @@ export interface FileRoutesById {
   '/api/dev/email/$template': typeof ApiDevEmailTemplateRoute
   '/api/openapi/app/schema': typeof ApiOpenapiAppSchemaRoute
   '/api/openapi/auth/schema': typeof ApiOpenapiAuthSchemaRoute
+  '/app/achievements/complete/': typeof AppAchievementsCompleteIndexRoute
   '/manager/achievements/$id/': typeof ManagerAchievementsIdIndexRoute
   '/manager/achievements/new/': typeof ManagerAchievementsNewIndexRoute
   '/manager/users/$id/': typeof ManagerUsersIdIndexRoute
   '/manager/users/new/': typeof ManagerUsersNewIndexRoute
-  '/app/achievements/$id/complete/': typeof AppAchievementsIdCompleteIndexRoute
   '/manager/achievements/$id/update/': typeof ManagerAchievementsIdUpdateIndexRoute
   '/manager/users/$id/update/': typeof ManagerUsersIdUpdateIndexRoute
 }
@@ -317,11 +317,11 @@ export interface FileRouteTypes {
     | '/api/dev/email/$template'
     | '/api/openapi/app/schema'
     | '/api/openapi/auth/schema'
+    | '/app/achievements/complete'
     | '/manager/achievements/$id'
     | '/manager/achievements/new'
     | '/manager/users/$id'
     | '/manager/users/new'
-    | '/app/achievements/$id/complete'
     | '/manager/achievements/$id/update'
     | '/manager/users/$id/update'
   fileRoutesByTo: FileRoutesByTo
@@ -346,11 +346,11 @@ export interface FileRouteTypes {
     | '/api/dev/email/$template'
     | '/api/openapi/app/schema'
     | '/api/openapi/auth/schema'
+    | '/app/achievements/complete'
     | '/manager/achievements/$id'
     | '/manager/achievements/new'
     | '/manager/users/$id'
     | '/manager/users/new'
-    | '/app/achievements/$id/complete'
     | '/manager/achievements/$id/update'
     | '/manager/users/$id/update'
   id:
@@ -378,11 +378,11 @@ export interface FileRouteTypes {
     | '/api/dev/email/$template'
     | '/api/openapi/app/schema'
     | '/api/openapi/auth/schema'
+    | '/app/achievements/complete/'
     | '/manager/achievements/$id/'
     | '/manager/achievements/new/'
     | '/manager/users/$id/'
     | '/manager/users/new/'
-    | '/app/achievements/$id/complete/'
     | '/manager/achievements/$id/update/'
     | '/manager/users/$id/update/'
   fileRoutesById: FileRoutesById
@@ -570,6 +570,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManagerAchievementsIdIndexRouteImport
       parentRoute: typeof ManagerRouteRoute
     }
+    '/app/achievements/complete/': {
+      id: '/app/achievements/complete/'
+      path: '/achievements/complete'
+      fullPath: '/app/achievements/complete'
+      preLoaderRoute: typeof AppAchievementsCompleteIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/api/openapi/auth/schema': {
       id: '/api/openapi/auth/schema'
       path: '/schema'
@@ -605,13 +612,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManagerAchievementsIdUpdateIndexRouteImport
       parentRoute: typeof ManagerRouteRoute
     }
-    '/app/achievements/$id/complete/': {
-      id: '/app/achievements/$id/complete/'
-      path: '/achievements/$id/complete'
-      fullPath: '/app/achievements/$id/complete'
-      preLoaderRoute: typeof AppAchievementsIdCompleteIndexRouteImport
-      parentRoute: typeof AppRouteRoute
-    }
   }
 }
 
@@ -619,14 +619,14 @@ interface AppRouteRouteChildren {
   AppIndexRoute: typeof AppIndexRoute
   AppAccountIndexRoute: typeof AppAccountIndexRoute
   AppAchievementsIndexRoute: typeof AppAchievementsIndexRoute
-  AppAchievementsIdCompleteIndexRoute: typeof AppAchievementsIdCompleteIndexRoute
+  AppAchievementsCompleteIndexRoute: typeof AppAchievementsCompleteIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppIndexRoute: AppIndexRoute,
   AppAccountIndexRoute: AppAccountIndexRoute,
   AppAchievementsIndexRoute: AppAchievementsIndexRoute,
-  AppAchievementsIdCompleteIndexRoute: AppAchievementsIdCompleteIndexRoute,
+  AppAchievementsCompleteIndexRoute: AppAchievementsCompleteIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(

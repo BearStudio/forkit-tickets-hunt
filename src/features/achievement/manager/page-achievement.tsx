@@ -46,7 +46,7 @@ export const PageAchievement = (props: { params: { id: string } }) => {
   const { t } = useTranslation(['achievement']);
 
   const achievementUrl = achievementQuery.data
-    ? `${envClient.VITE_BASE_URL}/app/achievements/${achievementQuery.data.secretId}/complete`
+    ? `${envClient.VITE_BASE_URL}/app/achievements/complete?id=${achievementQuery.data.secretId}`
     : '';
 
   const [, copyToClipboard] = useCopyToClipboard();
