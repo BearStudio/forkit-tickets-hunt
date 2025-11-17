@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 
+import LightRays from '@/components/light-rays';
 import { PageError } from '@/components/page-error';
 import { Skeleton } from '@/components/ui/skeleton';
 
@@ -32,13 +33,27 @@ export const PageAchievements = () => {
 
   return (
     <PageLayout>
+      <div className="fixed inset-0 z-0 overflow-hidden opacity-40">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#ebff11"
+          raysSpeed={0.2}
+          lightSpread={0.8}
+          rayLength={10}
+          fadeDistance={10}
+          followMouse={true}
+          mouseInfluence={0.05}
+          noiseAmount={0.15}
+          distortion={0.05}
+        />
+      </div>
       <PageLayoutTopBar className="md:hidden">
         <h1 className="text-base font-medium md:text-sm">
           {t('achievement:common.achievements')}
         </h1>
       </PageLayoutTopBar>
       <PageLayoutContent>
-        <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid gap-3 pb-20 sm:grid-cols-2 md:grid-cols-3">
           {ui
             .match('pending', () => (
               <>

@@ -17,7 +17,7 @@ export const MainNavDesktop = () => {
         }}
       />
       <header
-        className="fixed top-0 right-0 left-0 flex items-center border-b border-b-neutral-200 bg-white pt-safe-top dark:border-b-neutral-800 dark:bg-neutral-900"
+        className="fixed top-0 right-0 left-0 z-10 flex items-center border-b border-b-white/10 bg-white/5 pt-safe-top backdrop-blur-xl"
         style={{ height: HEIGHT }}
       >
         <div className="mx-auto flex w-full max-w-4xl items-center justify-between px-4">

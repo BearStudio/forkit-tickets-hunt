@@ -13,6 +13,7 @@ import { useEffect } from 'react';
 import { orpc } from '@/lib/orpc/client';
 
 import { PageError } from '@/components/page-error';
+import PrismaticBurst from '@/components/prismatic-burst';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Spinner } from '@/components/ui/spinner';
@@ -64,10 +65,10 @@ export const PageAchievementComplete = () => {
   return (
     <PageLayout>
       <PageLayoutContent>
-        <div className="flex flex-1 flex-col items-center justify-center gap-6 p-6">
+        <div className="flex flex-1 flex-col items-center justify-center gap-6 p-4">
           {ui
             .match('pending', () => (
-              <>
+              <div className="relative flex flex-col items-center justify-center gap-6 p-6">
                 <div className="flex aspect-square size-24 items-center justify-center overflow-hidden rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10">
                   <Spinner />
                 </div>
@@ -78,12 +79,12 @@ export const PageAchievementComplete = () => {
                   <Skeleton className="h-6 w-32" />
                 </div>
                 <Skeleton className="h-10 w-24" />
-              </>
+              </div>
             ))
             .match('error', () => <PageError />)
             .match(['not-found'], () => (
-              <>
-                <div className="flex aspect-square size-24 items-center justify-center overflow-hidden rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10">
+              <div className="relative flex flex-col items-center justify-center gap-6 p-6">
+                <div className="flex aspect-square size-24 items-center justify-center overflow-hidden rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10 backdrop-blur-lg">
                   <Spinner />
                 </div>
                 <div className="flex flex-col items-center justify-center gap-4 text-center">
@@ -92,11 +93,11 @@ export const PageAchievementComplete = () => {
                   </h1>
                   <h2 className="text-xl font-bold text-balance">Not found</h2>
                 </div>
-              </>
+              </div>
             ))
             .match(['already-completed'], ({ data }) => (
-              <>
-                <div className="flex aspect-square size-24 items-center justify-center overflow-hidden rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10">
+              <div className="relative flex flex-col items-center justify-center gap-6 p-6">
+                <div className="flex aspect-square size-24 items-center justify-center overflow-hidden rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10 backdrop-blur-lg">
                   {data.achievement.imageUrl && (
                     <img
                       src={data.achievement.imageUrl}
@@ -119,41 +120,52 @@ export const PageAchievementComplete = () => {
                     Already completed!
                   </h2>
                 </div>
-              </>
+              </div>
             ))
             .match(['default'], ({ data }) => (
               <>
-                <div
-                  className="flex aspect-square size-24 items-center justify-center overflow-hidden rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10"
-                  onClick={() => {
-                    fireworks();
-                  }}
-                >
-                  {data.achievement.imageUrl && (
-                    <img
-                      src={data.achievement.imageUrl}
-                      alt=""
-                      className="size-full object-cover"
-                    />
-                  )}
-                  {!data.achievement.imageUrl && data.achievement.emoji && (
-                    <span className="text-5xl">{data.achievement.emoji}</span>
-                  )}
-                  {!data.achievement.imageUrl && !data.achievement.emoji && (
-                    <TrophyIcon className="size-8 text-accent" />
-                  )}
+                <div className="fixed inset-0">
+                  <PrismaticBurst
+                    animationType="rotate3d"
+                    intensity={1.9}
+                    speed={1.2}
+                    rayCount={7}
+                    colors={['#ebff11', '#C78800', '#000']}
+                  />
                 </div>
-                <div className="flex flex-col items-center justify-center gap-1 text-center">
-                  <h1 className="text-xs font-medium uppercase opacity-60">
-                    Achievement unlocked
-                  </h1>
-                  <h2 className="text-xl font-bold text-balance">
-                    {data.achievement.name}
-                  </h2>
+                <div className="relative flex w-full flex-col items-center justify-center gap-6">
+                  <div
+                    className="flex aspect-square size-24 items-center justify-center overflow-hidden rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10 backdrop-blur-lg"
+                    onClick={() => {
+                      fireworks();
+                    }}
+                  >
+                    {data.achievement.imageUrl && (
+                      <img
+                        src={data.achievement.imageUrl}
+                        alt=""
+                        className="size-full object-cover"
+                      />
+                    )}
+                    {!data.achievement.imageUrl && data.achievement.emoji && (
+                      <span className="text-5xl">{data.achievement.emoji}</span>
+                    )}
+                    {!data.achievement.imageUrl && !data.achievement.emoji && (
+                      <TrophyIcon className="size-8 text-accent" />
+                    )}
+                  </div>
+                  <div className="relative flex flex-col items-center justify-center gap-1 text-center">
+                    <h1 className="text-xs font-medium uppercase opacity-60">
+                      Achievement unlocked
+                    </h1>
+                    <h2 className="text-xl font-bold text-balance">
+                      {data.achievement.name}
+                    </h2>
+                  </div>
+                  <p className="flex gap-4 text-3xl font-bold">
+                    +{data.achievement.points} <TicketIcon className="w-12" />
+                  </p>
                 </div>
-                <p className="flex gap-4 text-3xl font-bold">
-                  +{data.achievement.points} <TicketIcon className="w-12" />
-                </p>
               </>
             ))
             .exhaustive()}

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { orpc } from '@/lib/orpc/client';
 
 import { Logo } from '@/components/brand/logo';
+import LightRays from '@/components/light-rays';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -41,18 +42,32 @@ export const PageHome = () => {
 
   return (
     <PageLayout>
+      <div className="fixed inset-0 z-0 overflow-hidden">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#ebff11"
+          raysSpeed={0.2}
+          lightSpread={0.8}
+          rayLength={10}
+          fadeDistance={10}
+          followMouse={true}
+          mouseInfluence={0.05}
+          noiseAmount={0.15}
+          distortion={0.05}
+        />
+      </div>
       <PageLayoutTopBar className="md:hidden">
         <Logo className="mx-auto w-28" />
       </PageLayoutTopBar>
       <PageLayoutContent>
-        <div className="flex flex-1 flex-col items-center justify-center gap-0">
+        <div className="relative flex flex-1 flex-col items-center justify-center gap-0">
           <div className="flex flex-col items-center justify-center gap-8 p-4">
             <div className="flex flex-col gap-3">
               <div className="relative flex size-36 flex-col items-center justify-center rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10">
                 <Avatar className="size-36">
                   <AvatarImage src={session.data?.user.image ?? undefined} />
                   <AvatarFallback
-                    variant="boring"
+                    variant="initials"
                     name={session.data?.user.name ?? ''}
                   />
                 </Avatar>
@@ -68,8 +83,8 @@ export const PageHome = () => {
               </div>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <div className="flex gap-2">
-                <div className="flex items-center gap-2 p-4">
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-2xl">
                   {ui
                     .match('pending', () => <Skeleton className="h-10 w-6" />)
                     .match('error', () => (
@@ -88,7 +103,7 @@ export const PageHome = () => {
                     {t('home:rank.completed')}
                   </div>
                 </div>
-                <div className="flex items-center justify-center gap-2 p-4 text-center">
+                <div className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 p-4 text-center backdrop-blur-2xl">
                   {ui
                     .match('pending', () => <Skeleton className="h-10 w-6" />)
                     .match('error', () => (

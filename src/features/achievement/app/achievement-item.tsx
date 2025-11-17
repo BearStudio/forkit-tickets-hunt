@@ -17,7 +17,7 @@ export const AchievementItem = (props: {
   return (
     <div
       className={cn(
-        'flex flex-col overflow-hidden rounded-lg border border-white/4 bg-muted text-foreground shadow-2xl'
+        'flex flex-col overflow-hidden rounded-lg border border-white/10 bg-white/5 text-foreground shadow-2xl backdrop-blur-xl'
       )}
     >
       <div className="relative flex items-center gap-3 p-2">
@@ -28,7 +28,7 @@ export const AchievementItem = (props: {
         )}
         <div
           className={cn(
-            'flex aspect-square size-12 items-center justify-center overflow-hidden rounded-md border border-foreground/10 bg-background text-foreground'
+            'flex aspect-square size-12 items-center justify-center overflow-hidden rounded-md border border-foreground/10 bg-white/5 text-foreground'
           )}
         >
           <div className={cn(!props.completed && 'opacity-40 grayscale')}>
@@ -68,7 +68,7 @@ export const AchievementItem = (props: {
         (!!props.achievement.hint ||
           props.achievement.type === 'GITHUB_STAR') &&
         !props.achievement.secretId && (
-          <div className="flex flex-1 items-center gap-3 border-t bg-white/2 px-3 py-2">
+          <div className="flex flex-1 items-center gap-3 border-t border-t-white/10 bg-white/2 px-3 py-2">
             <p className="flex-1 text-xs opacity-60">
               {props.achievement.hint}
             </p>
@@ -91,7 +91,7 @@ export const AchievementItem = (props: {
       {!props.completed &&
         props.achievement.type === 'GITHUB_STAR' &&
         props.achievement.secretId && (
-          <div className="flex flex-1 flex-col items-center gap-1 border-t bg-white/2 px-3 py-2">
+          <div className="flex flex-1 flex-col items-center gap-1 border-t border-t-white/10 bg-white/2 px-3 py-2">
             <p className="flex-1 text-2xs opacity-60">
               {t('achievement:app.githubStar.youStarred')}
             </p>

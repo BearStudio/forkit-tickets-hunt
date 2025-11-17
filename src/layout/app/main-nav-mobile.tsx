@@ -16,7 +16,7 @@ export const MainNavMobile = () => {
         }}
       />
       <nav
-        className="fixed right-0 bottom-0 left-0 flex border-t border-t-neutral-200 bg-white px-4 pb-safe-bottom dark:border-t-neutral-800 dark:bg-neutral-900"
+        className="fixed right-0 bottom-0 left-0 flex border-t border-t-white/10 bg-white/5 px-4 pb-safe-bottom backdrop-blur-xl"
         style={{ height: HEIGHT }}
       >
         {MAIN_NAV_LINKS.map(({ labelTranslationKey, ...item }) => (
