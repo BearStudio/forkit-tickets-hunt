@@ -4,6 +4,7 @@ import { Link } from '@tanstack/react-router';
 import { Trans, useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
+import { cn } from '@/lib/tailwind/utils';
 
 import { Logo } from '@/components/brand/logo';
 import LightRays from '@/components/light-rays';
@@ -68,7 +69,7 @@ export const PageHome = () => {
               <h1 className="max-w-[60ch] text-2xl font-bold text-balance">
                 {envClient.VITE_EVENT_NAME}
               </h1>
-              <p className="max-w-[60ch] text-center text-sm text-balance text-muted-foreground opacity-80">
+              <p className="max-w-[60ch] text-center text-sm text-balance text-foreground/60">
                 <Trans
                   t={t}
                   i18nKey={'achievement:app.instructions'}
@@ -87,12 +88,19 @@ export const PageHome = () => {
                     name={session.data?.user.name ?? ''}
                   />
                 </Avatar>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-sm bg-accent px-3 py-0.5 text-accent-foreground">
+                <div
+                  className={cn(
+                    'absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-sm border-b-2 border-black/10 bg-accent px-3 py-0.5 text-accent-foreground backdrop-blur-2xl',
+                    query.data?.rank === 1 && 'bg-[#d5c388]',
+                    query.data?.rank === 2 && 'bg-[#c0c0c0]',
+                    query.data?.rank === 3 && 'bg-[#c79b56]'
+                  )}
+                >
                   <span className="block text-xl font-bold">
                     {ui
                       .match('pending', () => '--')
                       .match('error', () => 'ERROR')
-                      .match('default', (data) => `#${data.rank}`)
+                      .match('default', (data) => <>#{data.rank}</>)
                       .exhaustive()}
                   </span>
                 </div>

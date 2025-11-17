@@ -81,10 +81,10 @@ export const PageDashboard = () => {
                         </Avatar>
                         <div
                           className={cn(
-                            'absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-sm px-3 py-0.5 text-accent-foreground',
-                            index === 0 && 'bg-[#d5c388]',
-                            index === 1 && 'bg-[#c0c0c0]',
-                            index === 2 && 'bg-[#c79b56]'
+                            'absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-sm border-b-2 border-black/10 bg-accent px-3 py-0.5 text-accent-foreground backdrop-blur-2xl',
+                            index + 1 === 1 && 'bg-[#d5c388]',
+                            index + 1 === 2 && 'bg-[#c0c0c0]',
+                            index + 1 === 3 && 'bg-[#c79b56]'
                           )}
                         >
                           <span className="block text-xl font-bold">

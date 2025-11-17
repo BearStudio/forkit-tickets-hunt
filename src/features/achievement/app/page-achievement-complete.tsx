@@ -122,9 +122,14 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
                   )}
                 </div>
                 <div className="flex flex-col items-center justify-center gap-4 text-center">
-                  <h1 className="text-xs font-medium uppercase opacity-60">
-                    Achievement
-                  </h1>
+                  <div className="flex flex-col items-center justify-center">
+                    <h1 className="text-xs font-medium uppercase opacity-60">
+                      Achievement
+                    </h1>
+                    <h3 className="text-sm font-medium opacity-60">
+                      "{data.achievement.name}"
+                    </h3>
+                  </div>
                   <h2 className="text-xl font-bold text-balance">
                     Already completed!
                   </h2>
