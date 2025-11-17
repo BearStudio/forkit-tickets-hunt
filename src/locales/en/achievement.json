@@ -1,12 +1,24 @@
 {
   "common": {
     "achievements": "Achievements",
-    "name": { "label": "Name" },
-    "hint": { "label": "Hint" },
-    "points": { "label": "Tickets" },
-    "emoji": { "label": "Emoji" },
-    "imageUrl": { "label": "Image URL" },
-    "secret": { "label": "Secret" },
+    "name": {
+      "label": "Name"
+    },
+    "hint": {
+      "label": "Hint"
+    },
+    "points": {
+      "label": "Tickets"
+    },
+    "emoji": {
+      "label": "Emoji"
+    },
+    "imageUrl": {
+      "label": "Image URL"
+    },
+    "secret": {
+      "label": "Secret"
+    },
     "type": {
       "label": "Type",
       "options": {
@@ -16,7 +28,9 @@
         "CUSTOM": "Custom"
       }
     },
-    "key": { "label": "Key" },
+    "key": {
+      "label": "Key"
+    },
     "yes": "Yes",
     "no": "No",
     "loadMore": "Load more",
@@ -28,19 +42,27 @@
   "manager": {
     "list": {
       "title": "Achievements",
-      "new": { "label": "New achievement" }
+      "new": {
+        "label": "New achievement"
+      }
     },
     "new": {
       "title": "New achievement",
-      "createButton": { "label": "Create" },
+      "createButton": {
+        "label": "Create"
+      },
       "conflict": "An achievement with this name already exists.",
       "createError": "Unable to create achievement"
     },
     "detail": {
       "deleteConfirmTitle": "Delete \"{{name}}\"?",
       "deleteConfirmDescription": "This action cannot be undone.",
-      "deleteButton": { "label": "Delete" },
-      "editButton": { "label": "Edit" },
+      "deleteButton": {
+        "label": "Delete"
+      },
+      "editButton": {
+        "label": "Edit"
+      },
       "deleted": "Achievement deleted",
       "deleteError": "Unable to delete achievement",
       "copiedToClipboard": "Copied",
@@ -49,12 +71,15 @@
     },
     "update": {
       "title": "Edit achievement",
-      "updateButton": { "label": "Update" },
+      "updateButton": {
+        "label": "Update"
+      },
       "conflict": "Conflict updating achievement",
       "updateError": "Unable to update achievement"
     }
   },
   "app": {
+    "instructions": "Unlock achievements to win <ticket/> by completing challenges. Finish in top 3 to win!",
     "complete": {
       "title": "Achievement completed",
       "titleNotFound": "Achievement not found",
@@ -68,6 +93,10 @@
     }
   },
   "inAppAchievements": {
-    "error": { "triggerButton": { "label": "Get some points" } }
+    "error": {
+      "triggerButton": {
+        "label": "Get some points"
+      }
+    }
   }
 }

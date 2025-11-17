@@ -1,12 +1,24 @@
 {
   "common": {
     "achievements": "الإنجازات",
-    "name": { "label": "الاسم" },
-    "hint": { "label": "تلميح" },
-    "points": { "label": "النقاط" },
-    "emoji": { "label": "رمز تعبيري" },
-    "imageUrl": { "label": "صورة" },
-    "secret": { "label": "سري" },
+    "name": {
+      "label": "الاسم"
+    },
+    "hint": {
+      "label": "تلميح"
+    },
+    "points": {
+      "label": "النقاط"
+    },
+    "emoji": {
+      "label": "رمز تعبيري"
+    },
+    "imageUrl": {
+      "label": "صورة"
+    },
+    "secret": {
+      "label": "سري"
+    },
     "type": {
       "label": "النوع",
       "options": {
@@ -16,7 +28,9 @@
         "CUSTOM": "مخصص"
       }
     },
-    "key": { "label": "المفتاح" },
+    "key": {
+      "label": "المفتاح"
+    },
     "yes": "نعم",
     "no": "لا",
     "loadMore": "تحميل المزيد",
@@ -28,19 +42,27 @@
   "manager": {
     "list": {
       "title": "الإنجازات",
-      "new": { "label": "إنجاز جديد" }
+      "new": {
+        "label": "إنجاز جديد"
+      }
     },
     "new": {
       "title": "إنجاز جديد",
-      "createButton": { "label": "إنشاء" },
+      "createButton": {
+        "label": "إنشاء"
+      },
       "conflict": "يوجد إنجاز بهذا الاسم بالفعل.",
       "createError": "تعذر إنشاء الإنجاز"
     },
     "detail": {
       "deleteConfirmTitle": "حذف \"{{name}}\"؟",
       "deleteConfirmDescription": "لا يمكن التراجع عن هذا الإجراء.",
-      "deleteButton": { "label": "حذف" },
-      "editButton": { "label": "تعديل" },
+      "deleteButton": {
+        "label": "حذف"
+      },
+      "editButton": {
+        "label": "تعديل"
+      },
       "deleted": "تم حذف الإنجاز",
       "deleteError": "تعذر حذف الإنجاز",
       "copiedToClipboard": "تم النسخ إلى الحافظة",
@@ -49,7 +71,9 @@
     },
     "update": {
       "title": "تعديل الإنجاز",
-      "updateButton": { "label": "تحديث" },
+      "updateButton": {
+        "label": "تحديث"
+      },
       "conflict": "حدث تعارض أثناء تحديث الإنجاز",
       "updateError": "تعذر تحديث الإنجاز"
     }
@@ -65,9 +89,14 @@
       "viewRepo": "عرض المستودع",
       "youStarred": "لقد منحت المستودع نجمة",
       "claim": "مطالبة +{{points}}"
-    }
+    },
+    "instructions": "فتح الإنجازات للفوز <ticket/> من خلال استكمال التحديات. \nإنهاء في أعلى 3 للفوز!"
   },
   "inAppAchievements": {
-    "error": { "triggerButton": { "label": "احصل على بعض النقاط" } }
+    "error": {
+      "triggerButton": {
+        "label": "احصل على بعض النقاط"
+      }
+    }
   }
 }

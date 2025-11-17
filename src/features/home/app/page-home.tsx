@@ -1,7 +1,7 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from '@tanstack/react-router';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 
@@ -31,7 +31,7 @@ import {
 export const PageHome = () => {
   const query = useQuery(orpc.user.getCurrentUserRank.queryOptions());
   const session = authClient.useSession();
-  const { t } = useTranslation(['home', 'secretCode']);
+  const { t } = useTranslation(['home', 'secretCode', 'achievement']);
 
   const ui = getUiState((set) => {
     if (query.status === 'pending') return set('pending');
@@ -42,10 +42,10 @@ export const PageHome = () => {
 
   return (
     <PageLayout>
-      <div className="fixed inset-0 z-0 overflow-hidden">
+      <div className="fixed inset-0 z-0 overflow-hidden opacity-80">
         <LightRays
           raysOrigin="top-center"
-          raysColor="#ebff11"
+          raysColor="#F3FF6D"
           raysSpeed={0.2}
           lightSpread={0.8}
           rayLength={10}
@@ -54,6 +54,7 @@ export const PageHome = () => {
           mouseInfluence={0.05}
           noiseAmount={0.15}
           distortion={0.05}
+          saturation={5}
         />
       </div>
       <PageLayoutTopBar className="md:hidden">
@@ -62,6 +63,20 @@ export const PageHome = () => {
       <PageLayoutContent>
         <div className="relative flex flex-1 flex-col items-center justify-center gap-0">
           <div className="flex flex-col items-center justify-center gap-8 p-4">
+            <div className="flex flex-col items-center justify-center gap-2 text-center">
+              <h1 className="max-w-[60ch] text-2xl font-bold text-balance">
+                Codeurs en seine 2025
+              </h1>
+              <p className="max-w-[60ch] text-center text-sm text-balance text-muted-foreground opacity-80">
+                <Trans
+                  t={t}
+                  i18nKey={'achievement:app.instructions'}
+                  components={{
+                    ticket: <TicketIcon />,
+                  }}
+                />
+              </p>
+            </div>
             <div className="flex flex-col gap-3">
               <div className="relative flex size-36 flex-col items-center justify-center rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10">
                 <Avatar className="size-36">
@@ -84,7 +99,10 @@ export const PageHome = () => {
             </div>
             <div className="flex flex-col items-center gap-2">
               <div className="flex flex-wrap items-center justify-center gap-2">
-                <div className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-2xl">
+                <Link
+                  to="/app/achievements"
+                  className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-2xl"
+                >
                   {ui
                     .match('pending', () => <Skeleton className="h-10 w-6" />)
                     .match('error', () => (
@@ -102,8 +120,11 @@ export const PageHome = () => {
                     <br />
                     {t('home:rank.completed')}
                   </div>
-                </div>
-                <div className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 p-4 text-center backdrop-blur-2xl">
+                </Link>
+                <Link
+                  to="/app/achievements"
+                  className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 p-4 text-center backdrop-blur-2xl"
+                >
                   {ui
                     .match('pending', () => <Skeleton className="h-10 w-6" />)
                     .match('error', () => (
@@ -116,14 +137,14 @@ export const PageHome = () => {
                     ))
                     .exhaustive()}
                   <TicketIcon className="w-12" />
-                </div>
+                </Link>
               </div>
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <ResponsiveDrawer>
               <ResponsiveDrawerTrigger asChild>
-                <Button variant="secondary" className="w-full">
+                <Button variant="secondary" size="lg" className="w-full">
                   {t('home:actions.secretCode')}
                 </Button>
               </ResponsiveDrawerTrigger>
@@ -138,7 +159,7 @@ export const PageHome = () => {
                 </ResponsiveDrawerBody>
               </ResponsiveDrawerContent>
             </ResponsiveDrawer>
-            <Button variant="secondary" className="w-full" asChild>
+            <Button variant="secondary" size="lg" className="w-full" asChild>
               <Link to="/app/achievements">
                 {t('home:actions.allAchievements')}
               </Link>

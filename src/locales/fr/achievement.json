@@ -1,12 +1,24 @@
 {
   "common": {
     "achievements": "Succès",
-    "name": { "label": "Nom" },
-    "hint": { "label": "Indice" },
-    "points": { "label": "Tickets" },
-    "emoji": { "label": "Émoji" },
-    "imageUrl": { "label": "Image" },
-    "secret": { "label": "Secret" },
+    "name": {
+      "label": "Nom"
+    },
+    "hint": {
+      "label": "Indice"
+    },
+    "points": {
+      "label": "Tickets"
+    },
+    "emoji": {
+      "label": "Émoji"
+    },
+    "imageUrl": {
+      "label": "Image"
+    },
+    "secret": {
+      "label": "Secret"
+    },
     "type": {
       "label": "Type",
       "options": {
@@ -16,7 +28,9 @@
         "CUSTOM": "Perso"
       }
     },
-    "key": { "label": "Clé" },
+    "key": {
+      "label": "Clé"
+    },
     "yes": "Oui",
     "no": "Non",
     "loadMore": "Charger plus",
@@ -28,19 +42,27 @@
   "manager": {
     "list": {
       "title": "Succès",
-      "new": { "label": "Nouveau succès" }
+      "new": {
+        "label": "Nouveau succès"
+      }
     },
     "new": {
       "title": "Nouveau succès",
-      "createButton": { "label": "Créer" },
+      "createButton": {
+        "label": "Créer"
+      },
       "conflict": "Un succès avec ce nom existe déjà.",
       "createError": "Impossible de créer le succès"
     },
     "detail": {
       "deleteConfirmTitle": "Supprimer « {{name}} » ?",
       "deleteConfirmDescription": "Cette action est irréversible.",
-      "deleteButton": { "label": "Supprimer" },
-      "editButton": { "label": "Modifier" },
+      "deleteButton": {
+        "label": "Supprimer"
+      },
+      "editButton": {
+        "label": "Modifier"
+      },
       "deleted": "Succès supprimé",
       "deleteError": "Impossible de supprimer le succès",
       "copiedToClipboard": "Copié",
@@ -49,7 +71,9 @@
     },
     "update": {
       "title": "Modifier le succès",
-      "updateButton": { "label": "Mettre à jour" },
+      "updateButton": {
+        "label": "Mettre à jour"
+      },
       "conflict": "Conflit lors de la mise à jour du succès",
       "updateError": "Impossible de mettre à jour le succès"
     }
@@ -65,9 +89,14 @@
       "viewRepo": "Voir le repo",
       "youStarred": "Vous avez mis une star sur le repo",
       "claim": "Récupérer +{{points}}"
-    }
+    },
+    "instructions": "Débloquez des succès pour gagner des <ticket/> en relevant des défis. \nTerminez dans le top 3 pour gagner !"
   },
   "inAppAchievements": {
-    "error": { "triggerButton": { "label": "Obtenir des points" } }
+    "error": {
+      "triggerButton": {
+        "label": "Obtenir des points"
+      }
+    }
   }
 }

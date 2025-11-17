@@ -8,7 +8,7 @@ export const fireworks = ({ duration = 3 * 1000 } = {}) => {
     spread: 360,
     ticks: 60,
     zIndex: 99,
-    colors: ['#ebff11', '#000', '#fff'],
+    colors: ['#ebff11', '#15A495', '#fff'],
   };
 
   function randomInRange(min: number, max: number) {

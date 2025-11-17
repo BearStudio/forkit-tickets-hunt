@@ -1,12 +1,24 @@
 {
   "common": {
     "achievements": "Mafanikio",
-    "name": { "label": "Jina" },
-    "hint": { "label": "Dokezo" },
-    "points": { "label": "Alama" },
-    "emoji": { "label": "Emoji" },
-    "imageUrl": { "label": "Picha" },
-    "secret": { "label": "Siri" },
+    "name": {
+      "label": "Jina"
+    },
+    "hint": {
+      "label": "Dokezo"
+    },
+    "points": {
+      "label": "Alama"
+    },
+    "emoji": {
+      "label": "Emoji"
+    },
+    "imageUrl": {
+      "label": "Picha"
+    },
+    "secret": {
+      "label": "Siri"
+    },
     "type": {
       "label": "Aina",
       "options": {
@@ -16,7 +28,9 @@
         "CUSTOM": "Desturi"
       }
     },
-    "key": { "label": "Ufunguo" },
+    "key": {
+      "label": "Ufunguo"
+    },
     "yes": "Ndiyo",
     "no": "Hapana",
     "loadMore": "Pakia zaidi",
@@ -28,19 +42,27 @@
   "manager": {
     "list": {
       "title": "Mafanikio",
-      "new": { "label": "Fanikiwa jipya" }
+      "new": {
+        "label": "Fanikiwa jipya"
+      }
     },
     "new": {
       "title": "Fanikiwa jipya",
-      "createButton": { "label": "Unda" },
+      "createButton": {
+        "label": "Unda"
+      },
       "conflict": "Fanikiwa lenye jina hili tayari lipo.",
       "createError": "Imeshindikana kuunda fanikiwa"
     },
     "detail": {
       "deleteConfirmTitle": "Futa \"{{name}}\"?",
       "deleteConfirmDescription": "Kitendo hiki hakiwezi kubatilishwa.",
-      "deleteButton": { "label": "Futa" },
-      "editButton": { "label": "Hariri" },
+      "deleteButton": {
+        "label": "Futa"
+      },
+      "editButton": {
+        "label": "Hariri"
+      },
       "deleted": "Fanikiwa limefutwa",
       "deleteError": "Imeshindwa kufuta fanikiwa",
       "copiedToClipboard": "Imenakiliwa kwenye ubao wa kunakili",
@@ -49,7 +71,9 @@
     },
     "update": {
       "title": "Hariri fanikiwa",
-      "updateButton": { "label": "Sasisha" },
+      "updateButton": {
+        "label": "Sasisha"
+      },
       "conflict": "Mgongano wakati wa kusasisha fanikiwa",
       "updateError": "Imeshindikana kusasisha fanikiwa"
     }
@@ -65,9 +89,14 @@
       "viewRepo": "Tazama hifadhi",
       "youStarred": "Umeweka nyota kwenye hazina",
       "claim": "Dai +{{points}}"
-    }
+    },
+    "instructions": "Fungua mafanikio ya kushinda <ticket/> kwa kumaliza changamoto. \nMaliza katika Juu 3 kushinda!"
   },
   "inAppAchievements": {
-    "error": { "triggerButton": { "label": "Kupata alama" } }
+    "error": {
+      "triggerButton": {
+        "label": "Kupata alama"
+      }
+    }
   }
 }

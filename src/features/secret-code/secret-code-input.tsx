@@ -50,6 +50,7 @@ export const SecretCodeInput = () => {
       <div>
         <Input
           value={code}
+          size="lg"
           onChange={(e) => {
             setCode(e.target.value);
             checkCode.reset();
@@ -64,6 +65,7 @@ export const SecretCodeInput = () => {
         ))}
       </div>
       <Button
+        size="lg"
         loading={checkCode.isPending}
         onClick={() => checkCode.mutate({ secretCode: code })}
         className="w-full"

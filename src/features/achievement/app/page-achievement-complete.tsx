@@ -123,7 +123,7 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
                     intensity={1.9}
                     speed={1.2}
                     rayCount={7}
-                    colors={['#ebff11', '#C78800', '#000']}
+                    colors={['#ebff11', '#15A495', '#000']}
                   />
                 </div>
                 <div className="relative flex w-full flex-col items-center justify-center gap-6">

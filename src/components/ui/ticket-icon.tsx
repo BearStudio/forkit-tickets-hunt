@@ -9,8 +9,9 @@ export const TicketIcon = (props: SVGProps<SVGSVGElement>) => {
       fill="none"
       aria-label="ticket"
       {...props}
-      className={cn('w-6 text-accent', props.className)}
+      className={cn('inline-block w-6 text-accent', props.className)}
     >
+      <title>Points</title>
       <mask id="c" fill="#fff">
         <path d="M28 3.262c0 .514-.43.916-.91 1.103-1.116.433-1.918 1.639-1.918 3.06 0 1.729 1.188 3.14 2.683 3.227a.15.15 0 0 1 .145.15v3.116a.93.93 0 0 1-.932.932H.932A.93.93 0 0 1 0 13.918v-2.329c0-.515.43-.917.91-1.103 1.116-.433 1.918-1.64 1.918-3.061 0-1.73-1.188-3.141-2.682-3.228A.15.15 0 0 1 0 4.047V.933C0 .417.417 0 .932 0h26.136c.515 0 .932.417.932.932z" />
       </mask>
