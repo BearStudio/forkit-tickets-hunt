@@ -66,9 +66,13 @@ export default {
           // Get an extra item at the end which we'll use as next cursor
           take: input.limit + 1,
           cursor: input.cursor ? { id: input.cursor } : undefined,
-          orderBy: {
-            name: 'asc',
-          },
+          orderBy: [
+            { points: 'desc' },
+            { type: 'asc' },
+            { isSecret: 'asc' },
+            { name: 'asc' },
+            { emoji: 'asc' },
+          ],
           where,
         }),
       ]);
@@ -112,7 +116,13 @@ export default {
       const [total, dones, toComplete] = await Promise.all([
         context.db.achievement.count(),
         context.db.achievement.findMany({
-          orderBy: [{ points: 'desc' }, { type: 'asc' }, { isSecret: 'asc' }],
+          orderBy: [
+            { points: 'desc' },
+            { type: 'asc' },
+            { isSecret: 'asc' },
+            { name: 'asc' },
+            { emoji: 'asc' },
+          ],
           where: {
             unlockedAchievements: { some: { userId: context.user.id } },
           },
@@ -124,7 +134,13 @@ export default {
           },
         }),
         context.db.achievement.findMany({
-          orderBy: [{ points: 'desc' }, { type: 'asc' }, { isSecret: 'asc' }],
+          orderBy: [
+            { points: 'desc' },
+            { type: 'asc' },
+            { isSecret: 'asc' },
+            { name: 'asc' },
+            { emoji: 'asc' },
+          ],
           where: {
             unlockedAchievements: { none: { userId: context.user.id } },
           },
