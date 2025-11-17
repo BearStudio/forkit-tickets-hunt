@@ -37,7 +37,7 @@ export const PageDashboard = () => {
     if (leaderboardQuery.status === 'error') return set('error');
     if (
       leaderboardQuery.status === 'success' &&
-      leaderboardQuery.data.items.length === 0
+      leaderboardQuery.data.podium.length === 0
     )
       return set('empty');
     return set('default', leaderboardQuery.data);
