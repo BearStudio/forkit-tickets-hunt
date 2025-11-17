@@ -17,7 +17,9 @@ export const AchievementItem = (props: {
   return (
     <div
       className={cn(
-        'flex flex-col overflow-hidden rounded-lg border border-white/10 bg-white/5 text-foreground shadow-2xl backdrop-blur-xl'
+        'flex flex-col overflow-hidden rounded-lg border border-white/10 bg-white/5 text-foreground shadow-2xl backdrop-blur-xl',
+        props.completed &&
+          'bg-white/10 bg-gradient-to-br from-white/5 to-accent/10'
       )}
     >
       <div className="relative flex items-center gap-3 p-2">

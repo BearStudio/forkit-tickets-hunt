@@ -20,6 +20,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { TicketIcon } from '@/components/ui/ticket-icon';
 
+import { envClient } from '@/env/client';
 import { authClient } from '@/features/auth/client';
 import { SecretCodeInput } from '@/features/secret-code/secret-code-input';
 import {
@@ -27,7 +28,6 @@ import {
   PageLayoutContent,
   PageLayoutTopBar,
 } from '@/layout/app/page-layout';
-import { envClient } from '@/env/client';
 
 export const PageHome = () => {
   const query = useQuery(orpc.user.getCurrentUserRank.queryOptions());
