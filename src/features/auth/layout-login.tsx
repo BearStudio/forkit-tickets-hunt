@@ -3,7 +3,6 @@ import { ReactNode } from 'react';
 
 import { Logo } from '@/components/brand/logo';
 import { LocalSwitcher } from '@/components/ui/local-switcher';
-import { ThemeSwitcher } from '@/components/ui/theme-switcher';
 
 import { useMascotState } from '@/features/auth/mascot';
 
@@ -27,7 +26,6 @@ export const LayoutLogin = (props: {
             <Logo className="w-24" />
           </Link>
           <div className="flex flex-wrap justify-end gap-x-4">
-            <ThemeSwitcher iconOnly />
             <LocalSwitcher />
           </div>
         </div>
