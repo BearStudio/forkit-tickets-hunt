@@ -80,6 +80,7 @@
   },
   "app": {
     "instructions": "Unlock achievements to win <ticket/> by completing challenges. Finish in top 3 to win!",
+    "instructions2": "Go to our stand at {{time}} for the winners!",
     "complete": {
       "title": "Achievement completed",
       "titleNotFound": "Achievement not found",

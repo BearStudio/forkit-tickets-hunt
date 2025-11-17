@@ -90,7 +90,8 @@
       "youStarred": "Umeweka nyota kwenye hazina",
       "claim": "Dai +{{points}}"
     },
-    "instructions": "Fungua mafanikio ya kushinda <ticket/> kwa kumaliza changamoto. \nMaliza katika Juu 3 kushinda!"
+    "instructions": "Fungua mafanikio ya kushinda <ticket/> kwa kumaliza changamoto. \nMaliza katika Juu 3 kushinda!",
+    "instructions2": "Nenda kwenye msimamo wetu kwa {{time}} kwa washindi!"
   },
   "inAppAchievements": {
     "error": {

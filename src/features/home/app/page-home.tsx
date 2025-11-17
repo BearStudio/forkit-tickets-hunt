@@ -70,13 +70,7 @@ export const PageHome = () => {
                 {envClient.VITE_EVENT_NAME}
               </h1>
               <p className="max-w-[60ch] text-center text-sm text-balance text-foreground/60">
-                <Trans
-                  t={t}
-                  i18nKey={'achievement:app.instructions'}
-                  components={{
-                    ticket: <TicketIcon />,
-                  }}
-                />
+                {t('achievement:app.instructions2', { time: '16:20' })}
               </p>
             </div>
             <div className="flex flex-col gap-3">
@@ -106,48 +100,44 @@ export const PageHome = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <div className="flex flex-wrap items-center justify-center gap-2">
-                <Link
-                  to="/app/achievements"
-                  className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-2xl"
-                >
-                  {ui
-                    .match('pending', () => <Skeleton className="h-10 w-6" />)
-                    .match('error', () => (
-                      <div className="text-4xl font-bold">-</div>
-                    ))
-                    .match('default', (data) => (
-                      <div className="text-4xl font-bold">
-                        {data.completedCount}
-                      </div>
-                    ))
-                    .exhaustive()}
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <Link
+                to="/app/achievements"
+                className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 p-4 backdrop-blur-2xl"
+              >
+                {ui
+                  .match('pending', () => <Skeleton className="h-10 w-6" />)
+                  .match('error', () => (
+                    <div className="text-4xl font-bold">-</div>
+                  ))
+                  .match('default', (data) => (
+                    <div className="text-4xl font-bold">
+                      {data.completedCount}
+                    </div>
+                  ))
+                  .exhaustive()}
 
-                  <div className="text-xs opacity-60">
-                    {t('home:rank.achievements')}
-                    <br />
-                    {t('home:rank.completed')}
-                  </div>
-                </Link>
-                <Link
-                  to="/app/achievements"
-                  className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 p-4 text-center backdrop-blur-2xl"
-                >
-                  {ui
-                    .match('pending', () => <Skeleton className="h-10 w-6" />)
-                    .match('error', () => (
-                      <div className="text-4xl font-bold">-</div>
-                    ))
-                    .match('default', (data) => (
-                      <div className="text-4xl font-bold">
-                        {data.totalPoints}
-                      </div>
-                    ))
-                    .exhaustive()}
-                  <TicketIcon className="w-12" />
-                </Link>
-              </div>
+                <div className="text-xs opacity-60">
+                  {t('home:rank.achievements')}
+                  <br />
+                  {t('home:rank.completed')}
+                </div>
+              </Link>
+              <Link
+                to="/app/achievements"
+                className="flex items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/5 p-4 text-center backdrop-blur-2xl"
+              >
+                {ui
+                  .match('pending', () => <Skeleton className="h-10 w-6" />)
+                  .match('error', () => (
+                    <div className="text-4xl font-bold">-</div>
+                  ))
+                  .match('default', (data) => (
+                    <div className="text-4xl font-bold">{data.totalPoints}</div>
+                  ))
+                  .exhaustive()}
+                <TicketIcon className="w-12" />
+              </Link>
             </div>
           </div>
           <div className="flex flex-col gap-2">
@@ -173,6 +163,17 @@ export const PageHome = () => {
                 {t('home:actions.allAchievements')}
               </Link>
             </Button>
+          </div>
+          <div className="flex flex-col gap-4 p-4">
+            <p className="max-w-[60ch] text-center text-sm text-balance text-foreground/60">
+              <Trans
+                t={t}
+                i18nKey={'achievement:app.instructions'}
+                components={{
+                  ticket: <TicketIcon />,
+                }}
+              />
+            </p>
           </div>
         </div>
       </PageLayoutContent>

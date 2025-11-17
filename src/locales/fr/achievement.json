@@ -90,7 +90,8 @@
       "youStarred": "Vous avez mis une star sur le repo",
       "claim": "Récupérer +{{points}}"
     },
-    "instructions": "Débloquez des succès pour gagner des <ticket/> en relevant des défis. \nTerminez dans le top 3 pour gagner !"
+    "instructions": "Débloquez des succès pour gagner des <ticket/> en relevant des défis. \nTerminez dans le top 3 pour gagner !",
+    "instructions2": "Rendez-vous sur notre stand à {{time}} pour les gagnants !"
   },
   "inAppAchievements": {
     "error": {

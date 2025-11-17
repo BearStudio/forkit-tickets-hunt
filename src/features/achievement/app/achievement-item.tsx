@@ -33,7 +33,7 @@ export const AchievementItem = (props: {
             'flex aspect-square size-12 items-center justify-center overflow-hidden rounded-md border border-foreground/10 bg-white/5 text-foreground'
           )}
         >
-          <div className={cn(!props.completed && 'opacity-40 grayscale')}>
+          <div className={cn(!props.completed && 'opacity-80 grayscale')}>
             {props.achievement.imageUrl && (
               <img
                 src={props.achievement.imageUrl}
