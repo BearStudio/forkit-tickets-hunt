@@ -282,7 +282,7 @@ export default {
       path: '/achievements/secret-code/check',
       tags,
     })
-    .input(z.object({ secretCode: z.string() }))
+    .input(z.object({ secretCode: z.string().trim() }))
     .output(z.object({ secretId: z.string() }))
     .handler(async ({ context, input }) => {
       if (input.secretCode === '') {
@@ -297,8 +297,13 @@ export default {
         return { secretId: achievement.secretId };
       }
 
-      const achievement = await context.db.achievement.findUnique({
-        where: { key: input.secretCode },
+      const achievement = await context.db.achievement.findFirst({
+        where: {
+          key: {
+            equals: input.secretCode,
+            mode: 'insensitive',
+          },
+        },
       });
 
       if (!achievement) {
