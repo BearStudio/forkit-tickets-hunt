@@ -25,6 +25,7 @@ export const envClient = createEnv({
   clientPrefix: 'VITE_',
   client: {
     VITE_BASE_URL: z.url(),
+    VITE_EVENT_NAME: z.string(),
     VITE_IS_DEMO: z
       .enum(['true', 'false'])
       .optional()

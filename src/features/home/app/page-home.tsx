@@ -27,6 +27,7 @@ import {
   PageLayoutContent,
   PageLayoutTopBar,
 } from '@/layout/app/page-layout';
+import { envClient } from '@/env/client';
 
 export const PageHome = () => {
   const query = useQuery(orpc.user.getCurrentUserRank.queryOptions());
@@ -65,7 +66,7 @@ export const PageHome = () => {
           <div className="flex flex-col items-center justify-center gap-8 p-4">
             <div className="flex flex-col items-center justify-center gap-2 text-center">
               <h1 className="max-w-[60ch] text-2xl font-bold text-balance">
-                Codeurs en seine 2025
+                {envClient.VITE_EVENT_NAME}
               </h1>
               <p className="max-w-[60ch] text-center text-sm text-balance text-muted-foreground opacity-80">
                 <Trans

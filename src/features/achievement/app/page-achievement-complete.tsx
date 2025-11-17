@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 
 import { orpc } from '@/lib/orpc/client';
 
+import LightRays from '@/components/light-rays';
 import { PageError } from '@/components/page-error';
 import PrismaticBurst from '@/components/prismatic-burst';
 import { Button } from '@/components/ui/button';
@@ -57,6 +58,21 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
 
   return (
     <PageLayout>
+      <div className="fixed inset-0 z-0 overflow-hidden opacity-40">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#F3FF6D"
+          raysSpeed={0.2}
+          lightSpread={0.8}
+          rayLength={10}
+          fadeDistance={10}
+          followMouse={true}
+          mouseInfluence={0.05}
+          noiseAmount={0.15}
+          distortion={0.05}
+          saturation={5}
+        />
+      </div>
       <PageLayoutContent>
         <div className="flex flex-1 flex-col items-center justify-center gap-6 p-4">
           {ui

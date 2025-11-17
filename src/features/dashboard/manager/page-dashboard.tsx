@@ -19,6 +19,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { TicketIcon } from '@/components/ui/ticket-icon';
 
+import { envClient } from '@/env/client';
 import {
   PageLayout,
   PageLayoutContent,
@@ -46,7 +47,9 @@ export const PageDashboard = () => {
   return (
     <PageLayout>
       <PageLayoutTopBar>
-        <PageLayoutTopBarTitle>Leaderboard</PageLayoutTopBarTitle>
+        <PageLayoutTopBarTitle>
+          Leaderboard {envClient.VITE_EVENT_NAME}
+        </PageLayoutTopBarTitle>
       </PageLayoutTopBar>
       <PageLayoutContent containerClassName="max-w-6xl">
         <div className="flex flex-col gap-6">

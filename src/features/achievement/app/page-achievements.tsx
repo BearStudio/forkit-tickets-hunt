@@ -54,7 +54,7 @@ export const PageAchievements = () => {
         </h1>
       </PageLayoutTopBar>
       <PageLayoutContent containerClassName="gap-4">
-        <div className="grid gap-3 pb-20 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid items-start gap-3 pb-20 sm:grid-cols-2 md:grid-cols-3">
           {ui
             .match('pending', () => (
               <>

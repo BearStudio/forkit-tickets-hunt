@@ -32,7 +32,7 @@ export const PageAccount = () => {
           saturation={5}
         />
       </div>
-      <PageLayoutTopBar>
+      <PageLayoutTopBar className="md:hidden">
         <h1 className="text-base font-medium md:text-sm">
           {t('account:title')}
         </h1>
