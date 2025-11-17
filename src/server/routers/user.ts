@@ -23,12 +23,21 @@ export default {
     .input(
       z
         .object({
-          limit: z.coerce.number().int().min(1).max(100).prefault(50),
+          limit: z.coerce.number().int().min(1).max(100).prefault(100),
         })
         .prefault({})
     )
     .output(
       z.object({
+        podium: z.array(
+          z.object({
+            id: z.string(),
+            name: z.string(),
+            image: z.string().nullish(),
+            totalPoints: z.number().int(),
+            completedCount: z.number().int(),
+          })
+        ),
         items: z.array(
           z.object({
             id: z.string(),
@@ -73,7 +82,8 @@ export default {
         .slice(0, input.limit);
 
       return {
-        items,
+        podium: items.slice(0, 3),
+        items: items.slice(3),
         total: users.length,
       };
     }),

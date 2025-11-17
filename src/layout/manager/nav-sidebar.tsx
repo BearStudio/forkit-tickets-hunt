@@ -1,15 +1,11 @@
 import { Link } from '@tanstack/react-router';
-import {
-  LayoutDashboardIcon,
-  PanelLeftIcon,
-  UsersIcon,
-  XIcon,
-} from 'lucide-react';
+import { PanelLeftIcon, UsersIcon, XIcon } from 'lucide-react';
 import { TrophyIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Logo } from '@/components/brand/logo';
+import { IconCrownSimple } from '@/components/icons/generated';
 import {
   Sidebar,
   SidebarContent,
@@ -68,7 +64,7 @@ export const NavSidebar = (props: { children?: ReactNode }) => {
                     {({ isActive }) => (
                       <SidebarMenuButton asChild isActive={isActive}>
                         <span>
-                          <LayoutDashboardIcon />
+                          <IconCrownSimple />
                           <span>{t('layout:nav.dashboard')}</span>
                         </span>
                       </SidebarMenuButton>
