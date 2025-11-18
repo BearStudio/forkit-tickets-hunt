@@ -82,10 +82,21 @@
     "instructions": "Unlock achievements to win <ticket/> by completing challenges. Finish in top 3 to win!",
     "instructions2": "Go to our stand at {{time}} for the winners!",
     "complete": {
-      "title": "Achievement completed",
-      "titleNotFound": "Achievement not found",
-      "alreadyCompleted": "Already completed",
-      "completed": "Achievement completed!"
+      "unlocked": {
+        "title1": "Achievement unlocked"
+      },
+      "notFound": {
+        "title1": "Achievement",
+        "title2": "Not found"
+      },
+      "closed": {
+        "title1": "Too late!",
+        "title2": "Contest closed"
+      },
+      "alreadyCompleted": {
+        "title1": "Achievement",
+        "title2": "Already completed!"
+      }
     },
     "githubStar": {
       "viewRepo": "View Repo",

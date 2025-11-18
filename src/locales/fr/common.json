@@ -21,7 +21,8 @@
     "cancel": "Annuler",
     "delete": "Supprimer",
     "edit": "Modifier",
-    "update": "Mettre à jour"
+    "update": "Mettre à jour",
+    "close": "Fermer"
   },
   "errors": {
     "required": "Requis"

@@ -21,7 +21,8 @@
     "cancel": "إلغاء",
     "delete": "حذف",
     "edit": "تعديل",
-    "update": "تحديث"
+    "update": "تحديث",
+    "close": "يغلق"
   },
   "errors": {
     "required": "مطلوب"

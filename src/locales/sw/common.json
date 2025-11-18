@@ -21,7 +21,8 @@
     "cancel": "Ghairi",
     "delete": "Futa",
     "edit": "Hariri",
-    "update": "Sasisha"
+    "update": "Sasisha",
+    "close": "Karibu"
   },
   "errors": {
     "required": "Inahitajika"

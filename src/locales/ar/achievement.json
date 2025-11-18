@@ -79,19 +79,30 @@
     }
   },
   "app": {
-    "complete": {
-      "title": "تم إكمال الإنجاز",
-      "titleNotFound": "الإنجاز غير موجود",
-      "alreadyCompleted": "مُكتمل بالفعل",
-      "completed": "تم إكمال الإنجاز!"
-    },
     "githubStar": {
       "viewRepo": "عرض المستودع",
       "youStarred": "لقد منحت المستودع نجمة",
       "claim": "مطالبة +{{points}}"
     },
     "instructions": "فتح الإنجازات للفوز <ticket/> من خلال استكمال التحديات. \nإنهاء في أعلى 3 للفوز!",
-    "instructions2": "اذهب إلى جناحنا في {{time}} للفائزين!"
+    "instructions2": "اذهب إلى جناحنا في {{time}} للفائزين!",
+    "complete": {
+      "alreadyCompleted": {
+        "title1": "إنجاز",
+        "title2": "اكتملت بالفعل!"
+      },
+      "closed": {
+        "title1": "فات الأوان!",
+        "title2": "المسابقة مغلقة"
+      },
+      "notFound": {
+        "title1": "إنجاز",
+        "title2": "لم يتم العثور عليه"
+      },
+      "unlocked": {
+        "title1": "تم فتح الإنجاز"
+      }
+    }
   },
   "inAppAchievements": {
     "error": {

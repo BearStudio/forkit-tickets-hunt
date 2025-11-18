@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useRouter } from '@tanstack/react-router';
 import { TrophyIcon } from 'lucide-react';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
 
@@ -19,6 +20,7 @@ import { fireworks } from '@/features/achievement/app/fireworks';
 import { PageLayout, PageLayoutContent } from '@/layout/app/page-layout';
 
 export const PageAchievementComplete = (props: { secretId: string }) => {
+  const { t } = useTranslation(['common', 'achievement']);
   const router = useRouter();
   const queryClient = useQueryClient();
 
@@ -41,6 +43,13 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
         completionQuery.error.code === 'FORBIDDEN')
     )
       return set('not-found');
+
+    if (
+      completionQuery.status === 'error' &&
+      completionQuery.error instanceof ORPCError &&
+      completionQuery.error.code === 'BAD_REQUEST'
+    )
+      return set('closed');
 
     if (completionQuery.status !== 'success') return set('error');
 
@@ -89,7 +98,7 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1 text-center">
                   <h1 className="text-xs font-medium uppercase opacity-60">
-                    Achievement unlocked
+                    {t('achievement:app.complete.unlocked.title1')}
                   </h1>
                   <Skeleton className="h-6 w-32" />
                 </div>
@@ -100,13 +109,30 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
             .match(['not-found'], () => (
               <div className="relative flex flex-col items-center justify-center gap-6 p-6">
                 <div className="flex aspect-square size-24 items-center justify-center overflow-hidden rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10 backdrop-blur-lg">
-                  <Spinner />
+                  <span className="text-5xl">⚠️</span>
                 </div>
                 <div className="flex flex-col items-center justify-center gap-4 text-center">
                   <h1 className="text-xs font-medium uppercase opacity-60">
-                    Achievement
+                    {t('achievement:app.complete.notFound.title1')}
                   </h1>
-                  <h2 className="text-xl font-bold text-balance">Not found</h2>
+                  <h2 className="text-xl font-bold text-balance">
+                    {t('achievement:app.complete.notFound.title2')}
+                  </h2>
+                </div>
+              </div>
+            ))
+            .match('closed', () => (
+              <div className="relative flex flex-col items-center justify-center gap-6 p-6">
+                <div className="flex aspect-square size-24 items-center justify-center overflow-hidden rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10 backdrop-blur-lg">
+                  <span className="text-5xl">🙅</span>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-4 text-center">
+                  <h1 className="text-xs font-medium uppercase opacity-60">
+                    {t('achievement:app.complete.closed.title1')}
+                  </h1>
+                  <h2 className="text-xl font-bold text-balance">
+                    {t('achievement:app.complete.closed.title2')}
+                  </h2>
                 </div>
               </div>
             ))
@@ -130,14 +156,14 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
                 <div className="flex flex-col items-center justify-center gap-4 text-center">
                   <div className="flex flex-col items-center justify-center">
                     <h1 className="text-xs font-medium uppercase opacity-60">
-                      Achievement
+                      {t('achievement:app.complete.alreadyCompleted.title1')}
                     </h1>
                     <h3 className="text-sm font-medium opacity-60">
                       "{data.achievement.name}"
                     </h3>
                   </div>
                   <h2 className="text-xl font-bold text-balance">
-                    Already completed!
+                    {t('achievement:app.complete.alreadyCompleted.title2')}
                   </h2>
                 </div>
               </div>
@@ -176,7 +202,7 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
                   </div>
                   <div className="relative flex flex-col items-center justify-center gap-1 text-center">
                     <h1 className="text-xs font-medium uppercase opacity-60">
-                      Achievement unlocked
+                      {t('achievement:app.complete.unlocked.title1')}
                     </h1>
                     <h2 className="text-xl font-bold text-balance">
                       {data.achievement.name}
@@ -199,7 +225,7 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
                 }
               }}
             >
-              Close
+              {t('common:actions.close')}
             </Link>
           </Button>
         </div>

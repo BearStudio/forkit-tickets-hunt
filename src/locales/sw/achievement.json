@@ -79,19 +79,30 @@
     }
   },
   "app": {
-    "complete": {
-      "title": "Fanikiwa limekamilika",
-      "titleNotFound": "Fanikiwa halipatikani",
-      "alreadyCompleted": "Tayari limekamilika",
-      "completed": "Fanikiwa limekamilika!"
-    },
     "githubStar": {
       "viewRepo": "Tazama hifadhi",
       "youStarred": "Umeweka nyota kwenye hazina",
       "claim": "Dai +{{points}}"
     },
     "instructions": "Fungua mafanikio ya kushinda <ticket/> kwa kumaliza changamoto. \nMaliza katika Juu 3 kushinda!",
-    "instructions2": "Nenda kwenye msimamo wetu kwa {{time}} kwa washindi!"
+    "instructions2": "Nenda kwenye msimamo wetu kwa {{time}} kwa washindi!",
+    "complete": {
+      "alreadyCompleted": {
+        "title1": "Mafanikio",
+        "title2": "Tayari imekamilika!"
+      },
+      "closed": {
+        "title1": "Kuchelewa sana!",
+        "title2": "Mashindano yamefungwa"
+      },
+      "notFound": {
+        "title1": "Mafanikio",
+        "title2": "Haipatikani"
+      },
+      "unlocked": {
+        "title1": "Mafanikio yaliyofunguliwa"
+      }
+    }
   },
   "inAppAchievements": {
     "error": {

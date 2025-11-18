@@ -79,19 +79,30 @@
     }
   },
   "app": {
-    "complete": {
-      "title": "Succès validé",
-      "titleNotFound": "Succès introuvable",
-      "alreadyCompleted": "Déjà validé",
-      "completed": "Succès validé !"
-    },
     "githubStar": {
       "viewRepo": "Voir le repo",
       "youStarred": "Vous avez mis une star sur le repo",
       "claim": "Récupérer +{{points}}"
     },
     "instructions": "Débloquez des succès pour gagner des <ticket/> en relevant des défis. \nTerminez dans le top 3 pour gagner !",
-    "instructions2": "Rendez-vous sur notre stand à {{time}} pour les gagnants !"
+    "instructions2": "Rendez-vous sur notre stand à {{time}} pour les gagnants !",
+    "complete": {
+      "alreadyCompleted": {
+        "title1": "Succès",
+        "title2": "Déjà débloqué !"
+      },
+      "closed": {
+        "title1": "Trop tard !",
+        "title2": "Concours terminé"
+      },
+      "notFound": {
+        "title1": "Succès",
+        "title2": "Introuvable"
+      },
+      "unlocked": {
+        "title1": "Succès débloqué"
+      }
+    }
   },
   "inAppAchievements": {
     "error": {
