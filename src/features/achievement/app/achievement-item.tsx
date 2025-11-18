@@ -105,7 +105,7 @@ export const AchievementItem = (props: {
                 {t('achievement:app.githubStar.claim', {
                   points: props.achievement.points,
                 })}{' '}
-                <TicketIcon />
+                <TicketIcon className="w-6!" />
               </Link>
             </Button>
           </div>
