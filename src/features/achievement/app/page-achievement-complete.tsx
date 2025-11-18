@@ -34,6 +34,12 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
   );
 
   const ui = getUiState((set) => {
+    if (
+      completionQuery.failureReason instanceof ORPCError &&
+      completionQuery.failureReason.code === 'BAD_REQUEST'
+    )
+      return set('closed');
+
     if (completionQuery.status === 'pending') return set('pending');
 
     if (
@@ -43,13 +49,6 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
         completionQuery.error.code === 'FORBIDDEN')
     )
       return set('not-found');
-
-    if (
-      completionQuery.status === 'error' &&
-      completionQuery.error instanceof ORPCError &&
-      completionQuery.error.code === 'BAD_REQUEST'
-    )
-      return set('closed');
 
     if (completionQuery.status !== 'success') return set('error');
 

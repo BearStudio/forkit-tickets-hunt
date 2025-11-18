@@ -1,5 +1,6 @@
 /* eslint-disable no-process-env */
 import { createEnv } from '@t3-oss/env-core';
+import dayjs from 'dayjs';
 import { z } from 'zod';
 
 const envMetaOrProcess: Record<string, string> = import.meta.env ?? process.env;
@@ -26,6 +27,24 @@ export const envClient = createEnv({
   client: {
     VITE_BASE_URL: z.url(),
     VITE_EVENT_NAME: z.string(),
+
+    VITE_EVENT_END_DATE: z
+      .templateLiteral([
+        z.number().min(0).max(31),
+        ' ',
+        z.string().length(3),
+        ' ',
+        z.number().min(2000).max(2100),
+        ' ',
+        z.number().min(0).max(23),
+        ':',
+        z.number().min(0).max(59),
+        ':',
+        z.number().min(0).max(59),
+        ' ',
+        z.string().length(2),
+      ])
+      .transform((v) => dayjs(v)),
     VITE_IS_DEMO: z
       .enum(['true', 'false'])
       .optional()

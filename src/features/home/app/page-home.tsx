@@ -70,7 +70,9 @@ export const PageHome = () => {
                 {envClient.VITE_EVENT_NAME}
               </h1>
               <p className="max-w-[60ch] text-center text-sm text-balance text-foreground/60">
-                {t('achievement:app.instructions2', { time: '16:20' })}
+                {t('achievement:app.instructions2', {
+                  time: envClient.VITE_EVENT_END_DATE.format('HH:mm'),
+                })}
               </p>
             </div>
             <div className="flex flex-col gap-3">
