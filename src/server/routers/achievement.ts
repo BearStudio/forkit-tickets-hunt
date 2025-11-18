@@ -1,6 +1,8 @@
 import { ORPCError } from '@orpc/client';
+import dayjs from 'dayjs';
 import { z } from 'zod';
 
+import { envClient } from '@/env/client';
 import {
   zAchievement,
   zFormFieldsAchievement,
@@ -502,6 +504,16 @@ export default {
     )
     .handler(async ({ context, input }) => {
       context.logger.info('Complete achievement for current user');
+
+      const now = dayjs();
+
+      if (now.isAfter(envClient.VITE_EVENT_END_DATE)) {
+        throw new ORPCError('BAD_REQUEST', {
+          data: {
+            message: 'The event has ended',
+          },
+        });
+      }
 
       const achievement = await context.db.achievement.findUnique({
         where: { secretId: input.id },
