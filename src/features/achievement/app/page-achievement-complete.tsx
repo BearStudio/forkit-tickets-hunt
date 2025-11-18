@@ -1,6 +1,6 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { ORPCError } from '@orpc/client';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, useRouter } from '@tanstack/react-router';
 import { TrophyIcon } from 'lucide-react';
 import { useEffect } from 'react';
@@ -20,6 +20,7 @@ import { PageLayout, PageLayoutContent } from '@/layout/app/page-layout';
 
 export const PageAchievementComplete = (props: { secretId: string }) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const completionQuery = useQuery(
     orpc.achievement.completeBySecretId.queryOptions({
@@ -54,8 +55,12 @@ export const PageAchievementComplete = (props: { secretId: string }) => {
   useEffect(() => {
     if (triggerFireworks) {
       fireworks();
+      queryClient.refetchQueries(
+        orpc.achievement.getAllWithCompletion.queryOptions()
+      );
+      queryClient.refetchQueries(orpc.user.getCurrentUserRank.queryOptions());
     }
-  }, [triggerFireworks]);
+  }, [triggerFireworks, queryClient]);
 
   return (
     <PageLayout>
