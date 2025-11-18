@@ -19,6 +19,9 @@
     "secret": {
       "label": "سري"
     },
+    "hidden": {
+      "label": "مخفي"
+    },
     "type": {
       "label": "النوع",
       "options": {

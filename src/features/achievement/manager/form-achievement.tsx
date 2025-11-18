@@ -28,14 +28,28 @@ export const FormAchievement = () => {
         <FormFieldLabel>{t('achievement:common.hint.label')}</FormFieldLabel>
         <FormFieldController type="text" control={form.control} name="hint" />
       </FormField>
-      <FormField>
-        <FormFieldLabel>{t('achievement:common.secret.label')}</FormFieldLabel>
-        <FormFieldController
-          type="checkbox"
-          control={form.control}
-          name="isSecret"
-        />
-      </FormField>
+      <div className="flex flex-row gap-8">
+        <FormField>
+          <FormFieldLabel>
+            {t('achievement:common.hidden.label')}
+          </FormFieldLabel>
+          <FormFieldController
+            type="checkbox"
+            control={form.control}
+            name="isHidden"
+          />
+        </FormField>
+        <FormField>
+          <FormFieldLabel>
+            {t('achievement:common.secret.label')}
+          </FormFieldLabel>
+          <FormFieldController
+            type="checkbox"
+            control={form.control}
+            name="isSecret"
+          />
+        </FormField>
+      </div>
       <div className="flex gap-2">
         <FormField>
           <FormFieldLabel>{t('achievement:common.type.label')}</FormFieldLabel>

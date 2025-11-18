@@ -19,6 +19,9 @@
     "secret": {
       "label": "Siri"
     },
+    "hidden": {
+      "label": "Fungua"
+    },
     "type": {
       "label": "Aina",
       "options": {

@@ -19,6 +19,9 @@
     "secret": {
       "label": "Secret"
     },
+    "hidden": {
+      "label": "Masqué"
+    },
     "type": {
       "label": "Type",
       "options": {

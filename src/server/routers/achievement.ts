@@ -72,6 +72,7 @@ export default {
             { points: 'desc' },
             { type: 'asc' },
             { isSecret: 'asc' },
+            { isHidden: 'asc' },
             { name: 'asc' },
             { emoji: 'asc' },
           ],
@@ -116,12 +117,13 @@ export default {
       context.logger.info('Getting achievements with completion state');
 
       const [total, dones, toComplete] = await Promise.all([
-        context.db.achievement.count(),
+        context.db.achievement.count({ where: { isHidden: false } }),
         context.db.achievement.findMany({
           orderBy: [
             { points: 'desc' },
             { type: 'asc' },
             { isSecret: 'asc' },
+            { isHidden: 'asc' },
             { name: 'asc' },
             { emoji: 'asc' },
           ],
@@ -144,6 +146,7 @@ export default {
             { emoji: 'asc' },
           ],
           where: {
+            isHidden: false,
             unlockedAchievements: { none: { userId: context.user.id } },
           },
           include: {
@@ -392,6 +395,7 @@ export default {
             hint: input.hint ?? undefined,
             points: input.points,
             isSecret: input.isSecret,
+            isHidden: input.isHidden,
             emoji: input.emoji ?? undefined,
             imageUrl: input.imageUrl ?? undefined,
             type: input.type,
@@ -435,6 +439,7 @@ export default {
             hint: input.hint ?? null,
             points: input.points,
             isSecret: input.isSecret,
+            isHidden: input.isHidden,
             emoji: input.emoji ?? null,
             imageUrl: input.imageUrl ?? null,
             type: input.type,

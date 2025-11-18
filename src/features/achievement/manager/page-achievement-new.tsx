@@ -35,6 +35,7 @@ export const PageAchievementNew = () => {
       hint: '',
       points: 100,
       isSecret: false,
+      isHidden: false,
       emoji: '',
       imageUrl: '',
       type: 'CUSTOM',

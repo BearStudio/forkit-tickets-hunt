@@ -229,6 +229,16 @@ export const PageAchievement = (props: { params: { id: string } }) => {
                       </div>
                       <div className="flex gap-4 py-3">
                         <dt className="w-24 flex-none font-medium text-muted-foreground">
+                          {t('achievement:common.hidden.label')}
+                        </dt>
+                        <dd className="flex-1">
+                          {achievement.isHidden
+                            ? t('achievement:common.yes')
+                            : t('achievement:common.no')}
+                        </dd>
+                      </div>
+                      <div className="flex gap-4 py-3">
+                        <dt className="w-24 flex-none font-medium text-muted-foreground">
                           {t('achievement:common.emoji.label')}
                         </dt>
                         <dd className="flex-1">{achievement.emoji}</dd>

@@ -101,6 +101,7 @@ model Achievement {
   hint        String?
   points      Int
   isSecret    Boolean  @default(false)
+  isHidden    Boolean  @default(false)
   emoji       String?
   imageUrl    String?
 

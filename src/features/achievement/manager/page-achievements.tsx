@@ -172,8 +172,13 @@ export const PageAchievements = (props: {
                         {item.hint}
                       </DataListText>
                     </DataListCell>
-                    <DataListCell className="max-w-16">
-                      {item.isSecret && (
+                    <DataListCell className="max-w-24">
+                      {item.isHidden && (
+                        <Badge className="w-full" variant="outline">
+                          {t('achievement:common.hidden.label')}
+                        </Badge>
+                      )}
+                      {!item.isHidden && item.isSecret && (
                         <Badge className="w-full" variant="outline">
                           {t('achievement:common.secret.label')}
                         </Badge>

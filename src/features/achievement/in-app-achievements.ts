@@ -9,6 +9,7 @@ export const inAppAchievements = [
     emoji: '⭐',
     points: 100,
     isSecret: false,
+    isHidden: false,
     type: 'GITHUB_STAR' as const,
   } as const,
   {
@@ -18,6 +19,7 @@ export const inAppAchievements = [
     emoji: '⭐',
     points: 100,
     isSecret: false,
+    isHidden: false,
     type: 'GITHUB_STAR' as const,
   } as const,
   {
@@ -27,6 +29,7 @@ export const inAppAchievements = [
     emoji: '⭐',
     points: 100,
     isSecret: false,
+    isHidden: false,
     type: 'GITHUB_STAR' as const,
   } as const,
   {
@@ -36,6 +39,7 @@ export const inAppAchievements = [
     emoji: '⭐',
     points: 50,
     isSecret: true,
+    isHidden: false,
     type: 'GITHUB_STAR' as const,
   } as const,
   // In App
@@ -46,6 +50,7 @@ export const inAppAchievements = [
     emoji: '⚠️',
     points: 100,
     isSecret: true,
+    isHidden: false,
     type: 'IN_APP' as const,
   } as const,
   {
@@ -55,6 +60,7 @@ export const inAppAchievements = [
     emoji: '∅',
     points: 50,
     isSecret: true,
+    isHidden: false,
     type: 'IN_APP' as const,
   } as const,
 ] satisfies (Omit<Achievement, 'id' | 'createdAt' | 'updatedAt'> & {
