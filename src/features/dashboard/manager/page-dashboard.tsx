@@ -30,7 +30,10 @@ import {
 export const PageDashboard = () => {
   const { t } = useTranslation(['home']);
   const leaderboardQuery = useQuery(
-    orpc.user.getLeaderboard.queryOptions({ input: { limit: 50 } })
+    orpc.user.getLeaderboard.queryOptions({
+      input: { limit: 50 },
+      refetchInterval: 30000,
+    })
   );
 
   const ui = getUiState((set) => {
