@@ -115,6 +115,7 @@ export const PageDashboard = () => {
                     }}
                     layoutId={item.id}
                     layout
+                    className="border-b last:border-none"
                   >
                     <DataListRow>
                       <DataListCell className="flex-none">
