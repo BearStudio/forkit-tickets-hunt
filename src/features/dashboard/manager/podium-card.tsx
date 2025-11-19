@@ -1,4 +1,5 @@
 import { t } from 'i18next';
+import * as motion from 'motion/react-client';
 
 import { cn } from '@/lib/tailwind/utils';
 
@@ -14,6 +15,7 @@ export const PodiumCard = ({
 }: {
   position: number;
   data: {
+    id: string;
     image?: string | null;
     name: string;
     completedCount: number;
@@ -31,56 +33,64 @@ export const PodiumCard = ({
   const color = getColor();
 
   return (
-    <Card
-      className={cn(
-        'w-full items-center justify-center text-center',
-        className
-      )}
+    <motion.div
+      transition={{
+        type: 'tween',
+        duration: 0.4,
+        ease: 'easeOut',
+      }}
+      layoutId={data.id}
+      layout
+      className={className}
     >
-      <div className="fixed inset-0 z-0 overflow-hidden opacity-40">
-        <LightRays
-          raysOrigin="top-center"
-          raysColor={color}
-          raysSpeed={0.2}
-          lightSpread={3}
-          rayLength={40}
-          fadeDistance={5}
-          followMouse={false}
-          pulsating
-          className="rotate-180"
-        />
-      </div>
-      <CardContent className="flex flex-col items-center justify-center gap-6 py-4">
-        <div className="relative flex size-36 flex-col items-center justify-center rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10">
-          <Avatar className="size-36">
-            <AvatarImage src={data.image ?? undefined} />
-            <AvatarFallback variant="initials" name={data.name ?? ''} />
-          </Avatar>
-          <div
-            className={cn(
-              'absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-sm border-b-2 border-black/10 bg-accent px-3 py-0.5 text-accent-foreground backdrop-blur-2xl',
-              `bg-[${color}]`
-            )}
-          >
-            <span className="block text-xl font-bold">#{position}</span>
-          </div>
+      <Card
+        className="w-full items-center justify-center text-center"
+      >
+        <div className="fixed inset-0 z-0 overflow-hidden opacity-40">
+          <LightRays
+            raysOrigin="top-center"
+            raysColor={color}
+            raysSpeed={0.2}
+            lightSpread={3}
+            rayLength={40}
+            fadeDistance={5}
+            followMouse={false}
+            pulsating
+            className="rotate-180"
+          />
         </div>
-        <p>{data.name}</p>
-        <div className="flex flex-wrap items-center justify-center gap-4 text-left">
-          <div className="flex items-center gap-2">
-            <div className="text-3xl font-bold">{data.completedCount}</div>
-            <div className="text-2xs opacity-60">
-              {t('home:rank.achievements')}
-              <br />
-              {t('home:rank.completed')}
+        <CardContent className="flex flex-col items-center justify-center gap-6 py-4">
+          <div className="relative flex size-36 flex-col items-center justify-center rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10">
+            <Avatar className="size-36">
+              <AvatarImage src={data.image ?? undefined} />
+              <AvatarFallback variant="initials" name={data.name ?? ''} />
+            </Avatar>
+            <div
+              className={cn(
+                'absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-sm border-b-2 border-black/10 bg-accent px-3 py-0.5 text-accent-foreground backdrop-blur-2xl',
+                `bg-[${color}]`
+              )}
+            >
+              <span className="block text-xl font-bold">#{position}</span>
             </div>
           </div>
-          <div className="flex items-center justify-center gap-2 text-center">
-            <div className="text-3xl font-bold">{data.totalPoints}</div>
-            <TicketIcon className="w-12" />
+          <p>{data.name}</p>
+          <div className="flex flex-wrap items-center justify-center gap-4 text-left">
+            <div className="flex items-center gap-2">
+              <div className="text-3xl font-bold">{data.completedCount}</div>
+              <div className="text-2xs opacity-60">
+                {t('home:rank.achievements')}
+                <br />
+                {t('home:rank.completed')}
+              </div>
+            </div>
+            <div className="flex items-center justify-center gap-2 text-center">
+              <div className="text-3xl font-bold">{data.totalPoints}</div>
+              <TicketIcon className="w-12" />
+            </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </motion.div>
   );
 };

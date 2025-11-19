@@ -1,5 +1,6 @@
 import { getUiState } from '@bearstudio/ui-state';
 import { useQuery } from '@tanstack/react-query';
+import * as motion from 'motion/react-client';
 import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
@@ -31,7 +32,7 @@ export const PageDashboard = () => {
   const leaderboardQuery = useQuery(
     orpc.user.getLeaderboard.queryOptions({
       input: { limit: 50 },
-      refetchInterval: 30000,
+      refetchInterval: 10000,
     })
   );
 
@@ -70,6 +71,7 @@ export const PageDashboard = () => {
                 <div className="my-6 grid w-full grid-cols-1 gap-6 lg:translate-x-2 lg:grid-cols-3">
                   {data.podium[0] && (
                     <PodiumCard
+                      key={data.podium[0].id}
                       position={1}
                       data={data.podium[0]}
                       className="lg:col-2 lg:row-end-1"
@@ -77,6 +79,7 @@ export const PageDashboard = () => {
                   )}
                   {data.podium[1] && (
                     <PodiumCard
+                      key={data.podium[1].id}
                       position={2}
                       data={data.podium[1]}
                       className="lg:col-1 lg:row-end-1 lg:translate-x-2 lg:translate-y-4 lg:scale-90"
@@ -84,6 +87,7 @@ export const PageDashboard = () => {
                   )}
                   {data.podium[2] && (
                     <PodiumCard
+                      key={data.podium[2].id}
                       position={3}
                       data={data.podium[2]}
                       className="lg:col-3 lg:row-end-1 lg:-translate-x-8 lg:translate-y-8 lg:scale-80"
@@ -102,39 +106,52 @@ export const PageDashboard = () => {
               .match('empty', () => <DataListEmptyState />)
               .match('default', (data) =>
                 data.items.map((item, index) => (
-                  <DataListRow key={item.id}>
-                    <DataListCell className="flex-none">
-                      <span className="text-xs text-muted-foreground">
-                        #{index + 4}
-                      </span>
-                    </DataListCell>
-                    <DataListCell className="flex-none">
-                      <Avatar className="size-8">
-                        <AvatarImage src={item.image ?? undefined} alt="" />
-                        <AvatarFallback>
-                          {item.name?.slice(0, 1) ?? 'U'}
-                        </AvatarFallback>
-                      </Avatar>
-                    </DataListCell>
-                    <DataListCell>
-                      <DataListText className="font-medium">
-                        {item.name}
-                      </DataListText>
-                    </DataListCell>
-                    <DataListCell className="hidden md:flex">
-                      <DataListText className="flex items-center gap-1.5">
-                        <span className="text-base">{item.completedCount}</span>{' '}
+                  <motion.div
+                    key={item.id}
+                    transition={{
+                      type: 'tween',
+                      duration: 0.4,
+                      ease: 'easeOut',
+                    }}
+                    layoutId={item.id}
+                    layout
+                  >
+                    <DataListRow>
+                      <DataListCell className="flex-none">
                         <span className="text-xs text-muted-foreground">
-                          {t('home:rank.completed')}
+                          #{index + 4}
                         </span>
-                      </DataListText>
-                    </DataListCell>
-                    <DataListCell className="max-w-16 md:max-w-none">
-                      <span className="flex items-center gap-1.5">
-                        {item.totalPoints} <TicketIcon className="w-5" />
-                      </span>
-                    </DataListCell>
-                  </DataListRow>
+                      </DataListCell>
+                      <DataListCell className="flex-none">
+                        <Avatar className="size-8">
+                          <AvatarImage src={item.image ?? undefined} alt="" />
+                          <AvatarFallback>
+                            {item.name?.slice(0, 1) ?? 'U'}
+                          </AvatarFallback>
+                        </Avatar>
+                      </DataListCell>
+                      <DataListCell>
+                        <DataListText className="font-medium">
+                          {item.name}
+                        </DataListText>
+                      </DataListCell>
+                      <DataListCell className="hidden md:flex">
+                        <DataListText className="flex items-center gap-1.5">
+                          <span className="text-base">
+                            {item.completedCount}
+                          </span>{' '}
+                          <span className="text-xs text-muted-foreground">
+                            {t('home:rank.completed')}
+                          </span>
+                        </DataListText>
+                      </DataListCell>
+                      <DataListCell className="max-w-16 md:max-w-none">
+                        <span className="flex items-center gap-1.5">
+                          {item.totalPoints} <TicketIcon className="w-5" />
+                        </span>
+                      </DataListCell>
+                    </DataListRow>
+                  </motion.div>
                 ))
               )
               .exhaustive()}
