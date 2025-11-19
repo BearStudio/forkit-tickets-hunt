@@ -59,8 +59,8 @@ export const inAppAchievements = [
     hint: ' ',
     emoji: '∅',
     points: 50,
-    isSecret: true,
-    isHidden: false,
+    isSecret: false,
+    isHidden: true,
     type: 'IN_APP' as const,
   } as const,
 ] satisfies (Omit<Achievement, 'id' | 'createdAt' | 'updatedAt'> & {

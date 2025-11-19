@@ -9,7 +9,7 @@ import {
 
 import { FormFieldsAchievement } from '@/features/achievement/schema';
 
-export const FormAchievement = () => {
+export const FormAchievement = (props: { isInApp?: boolean }) => {
   const form = useFormContext<FormFieldsAchievement>();
   const { t } = useTranslation(['achievement']);
 
@@ -50,40 +50,46 @@ export const FormAchievement = () => {
           />
         </FormField>
       </div>
-      <div className="flex gap-2">
-        <FormField>
-          <FormFieldLabel>{t('achievement:common.type.label')}</FormFieldLabel>
-          <FormFieldController
-            type="select"
-            control={form.control}
-            name="type"
-            options={[
-              {
-                label: t('achievement:common.type.options.GITHUB_STAR'),
-                id: 'GITHUB_STAR',
-              },
-              {
-                label: t('achievement:common.type.options.SECRET_CODE'),
-                id: 'SECRET_CODE',
-              },
-              {
-                label: t('achievement:common.type.options.CUSTOM'),
-                id: 'CUSTOM',
-              },
-            ]}
-          />
-        </FormField>
-        {['GITHUB_STAR', 'SECRET_CODE'].includes(form.watch('type')) && (
+      {!props.isInApp && (
+        <div className="flex gap-2">
           <FormField>
-            <FormFieldLabel>{t('achievement:common.key.label')}</FormFieldLabel>
+            <FormFieldLabel>
+              {t('achievement:common.type.label')}
+            </FormFieldLabel>
             <FormFieldController
-              type="text"
+              type="select"
               control={form.control}
-              name="key"
+              name="type"
+              options={[
+                {
+                  label: t('achievement:common.type.options.GITHUB_STAR'),
+                  id: 'GITHUB_STAR',
+                },
+                {
+                  label: t('achievement:common.type.options.SECRET_CODE'),
+                  id: 'SECRET_CODE',
+                },
+                {
+                  label: t('achievement:common.type.options.CUSTOM'),
+                  id: 'CUSTOM',
+                },
+              ]}
             />
           </FormField>
-        )}
-      </div>
+          {['GITHUB_STAR', 'SECRET_CODE'].includes(form.watch('type')) && (
+            <FormField>
+              <FormFieldLabel>
+                {t('achievement:common.key.label')}
+              </FormFieldLabel>
+              <FormFieldController
+                type="text"
+                control={form.control}
+                name="key"
+              />
+            </FormField>
+          )}
+        </div>
+      )}
       <FormField>
         <FormFieldLabel>{t('achievement:common.points.label')}</FormFieldLabel>
         <FormFieldController

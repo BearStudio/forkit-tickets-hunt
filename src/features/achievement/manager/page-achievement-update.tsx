@@ -102,7 +102,9 @@ export const PageAchievementUpdate = (props: { params: { id: string } }) => {
               <div className="flex-2">
                 <Card>
                   <CardContent>
-                    <FormAchievement />
+                    <FormAchievement
+                      isInApp={achievementQuery.data?.type === 'IN_APP'}
+                    />
                   </CardContent>
                 </Card>
               </div>
