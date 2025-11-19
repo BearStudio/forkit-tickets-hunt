@@ -2,11 +2,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from '@tanstack/react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { toast } from 'sonner';
 
 import { Form } from '@/components/form';
 import { Button } from '@/components/ui/button';
+import { TicketIcon } from '@/components/ui/ticket-icon';
 
 import { envClient } from '@/env/client';
 import { authClient } from '@/features/auth/client';
@@ -23,7 +24,7 @@ export default function PageLogin({
 }: {
   search: { redirect?: string };
 }) {
-  const { t } = useTranslation(['auth', 'common']);
+  const { t } = useTranslation(['auth', 'common', 'achievement']);
   const router = useRouter();
   const social = useMutation({
     mutationFn: async (
@@ -85,7 +86,10 @@ export default function PageLogin({
 
   return (
     <Form {...form} onSubmit={submitHandler} className="flex flex-col gap-6">
-      <div className="flex flex-col items-center gap-2 text-center">
+      <div className="flex flex-col items-center text-center">
+        <h2 className="text-base font-medium opacity-60">
+          {envClient.VITE_EVENT_NAME}
+        </h2>
         <h1 className="text-2xl font-bold">
           {t(`${I18N_KEY_PAGE_PREFIX}.title`)}
         </h1>
@@ -93,7 +97,6 @@ export default function PageLogin({
       <div className="grid gap-6">
         <Button
           className="w-full overflow-visible"
-          variant="secondary"
           disabled={envClient.VITE_IS_DEMO}
           loading={
             social.variables === 'github' &&
@@ -107,6 +110,15 @@ export default function PageLogin({
           })}
         </Button>
       </div>
+      <p className="max-w-[60ch] text-center text-sm text-balance text-foreground/60">
+        <Trans
+          t={t}
+          i18nKey={'achievement:app.instructions'}
+          components={{
+            ticket: <TicketIcon />,
+          }}
+        />
+      </p>
     </Form>
   );
 }
