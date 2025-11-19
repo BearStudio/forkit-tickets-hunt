@@ -39,8 +39,7 @@
     "loadMore": "Charger plus",
     "showingOf": "Affichage de {{count}} sur {{total}}",
     "searchResults": "{{total}} résultats pour « {{searchTerm}} »",
-    "completed": "Terminé",
-    "notCompleted": "Non terminé"
+    "unlocked": "débloqués"
   },
   "manager": {
     "list": {

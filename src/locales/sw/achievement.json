@@ -39,8 +39,7 @@
     "loadMore": "Pakia zaidi",
     "showingOf": "Inaonyesha {{count}} kati ya {{total}}",
     "searchResults": "Inaonyesha matokeo {{total}} kwa “{{searchTerm}}”",
-    "completed": "Imekamilika",
-    "notCompleted": "Haijakamilika"
+    "unlocked": "imefunguliwa"
   },
   "manager": {
     "list": {

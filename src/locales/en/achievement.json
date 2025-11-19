@@ -39,8 +39,7 @@
     "loadMore": "Load more",
     "showingOf": "Showing {{count}} of {{total}}",
     "searchResults": "Showing {{total}} results for “{{searchTerm}}”",
-    "completed": "Completed",
-    "notCompleted": "Not completed"
+    "unlocked": "unlocked"
   },
   "manager": {
     "list": {

@@ -35,7 +35,7 @@ export default {
     )
     .output(
       z.object({
-        items: z.array(zAchievement()),
+        items: z.array(zAchievement().extend({ unlockedCount: z.number() })),
         nextCursor: z.string().optional(),
         total: z.number(),
       })
@@ -77,6 +77,9 @@ export default {
             { emoji: 'asc' },
           ],
           where,
+          include: {
+            _count: { select: { unlockedAchievements: true } },
+          },
         }),
       ]);
 
@@ -87,7 +90,10 @@ export default {
       }
 
       return {
-        items,
+        items: items.map((item) => ({
+          ...item,
+          unlockedCount: item._count.unlockedAchievements,
+        })),
         nextCursor,
         total,
       };

@@ -39,8 +39,7 @@
     "loadMore": "تحميل المزيد",
     "showingOf": "عرض {{count}} من {{total}}",
     "searchResults": "عرض {{total}} نتيجة لـ “{{searchTerm}}”",
-    "completed": "مكتمل",
-    "notCompleted": "غير مكتمل"
+    "unlocked": "مفعل"
   },
   "manager": {
     "list": {

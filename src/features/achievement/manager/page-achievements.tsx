@@ -172,7 +172,12 @@ export const PageAchievements = (props: {
                         {item.hint}
                       </DataListText>
                     </DataListCell>
-                    <DataListCell className="max-w-24">
+                    <DataListCell className="hidden max-w-32 md:flex">
+                      <DataListText className="text-start text-xs text-muted-foreground">
+                        {item.unlockedCount} {t('achievement:common.unlocked')}
+                      </DataListText>
+                    </DataListCell>
+                    <DataListCell className="hidden max-w-24 md:flex">
                       {item.isHidden && (
                         <Badge className="w-full" variant="outline">
                           {t('achievement:common.hidden.label')}
@@ -184,14 +189,14 @@ export const PageAchievements = (props: {
                         </Badge>
                       )}
                     </DataListCell>
-                    <DataListCell className="max-w-40">
+                    <DataListCell className="hidden max-w-40 md:flex">
                       {item.type !== 'CUSTOM' && (
                         <Badge className="self-center">
                           {t(`achievement:common.type.options.${item.type}`)}
                         </Badge>
                       )}
                     </DataListCell>
-                    <DataListCell className="flex-none">
+                    <DataListCell className="max-w-20">
                       <DataListText className="flex gap-1.5 text-xs text-muted-foreground">
                         +{item.points} <TicketIcon />
                       </DataListText>
