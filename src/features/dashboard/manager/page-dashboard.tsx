@@ -3,10 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 
 import { orpc } from '@/lib/orpc/client';
-import { cn } from '@/lib/tailwind/utils';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Card, CardContent } from '@/components/ui/card';
 import {
   DataList,
   DataListCell,
@@ -20,6 +18,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { TicketIcon } from '@/components/ui/ticket-icon';
 
 import { envClient } from '@/env/client';
+import { PodiumCard } from '@/features/dashboard/manager/podium-card';
 import {
   PageLayout,
   PageLayoutContent,
@@ -56,7 +55,7 @@ export const PageDashboard = () => {
       </PageLayoutTopBar>
       <PageLayoutContent containerClassName="max-w-6xl">
         <div className="flex flex-col gap-6">
-          <div className="flex gap-6 max-md:flex-col">
+          <div className="flex gap-6 max-lg:flex-col">
             {ui
               .match('pending', () => (
                 <>
@@ -67,57 +66,31 @@ export const PageDashboard = () => {
               ))
               .match('error', () => null)
               .match('empty', () => null)
-              .match('default', (data) => {
-                return data.podium.map((item, index) => (
-                  <Card
-                    key={item.id}
-                    className="w-full items-center justify-center text-center"
-                  >
-                    <CardContent className="flex flex-col items-center justify-center gap-6 py-4">
-                      <div className="relative flex size-36 flex-col items-center justify-center rounded-full border-1 border-white/10 bg-white/5 shadow-2xl shadow-white/10">
-                        <Avatar className="size-36">
-                          <AvatarImage src={item.image ?? undefined} />
-                          <AvatarFallback
-                            variant="initials"
-                            name={item.name ?? ''}
-                          />
-                        </Avatar>
-                        <div
-                          className={cn(
-                            'absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-sm border-b-2 border-black/10 bg-accent px-3 py-0.5 text-accent-foreground backdrop-blur-2xl',
-                            index + 1 === 1 && 'bg-[#d5c388]',
-                            index + 1 === 2 && 'bg-[#c0c0c0]',
-                            index + 1 === 3 && 'bg-[#c79b56]'
-                          )}
-                        >
-                          <span className="block text-xl font-bold">
-                            #{index + 1}
-                          </span>
-                        </div>
-                      </div>
-                      <p>{item.name}</p>
-                      <div className="flex flex-wrap items-center justify-center gap-4 text-left">
-                        <div className="flex items-center gap-2">
-                          <div className="text-3xl font-bold">
-                            {item.completedCount}
-                          </div>
-                          <div className="text-2xs opacity-60">
-                            {t('home:rank.achievements')}
-                            <br />
-                            {t('home:rank.completed')}
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-center gap-2 text-center">
-                          <div className="text-3xl font-bold">
-                            {item.totalPoints}
-                          </div>
-                          <TicketIcon className="w-12" />
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ));
-              })
+              .match('default', (data) => (
+                <div className="my-6 grid w-full grid-cols-1 gap-6 lg:translate-x-2 lg:grid-cols-3">
+                  {data.podium[0] && (
+                    <PodiumCard
+                      position={1}
+                      data={data.podium[0]}
+                      className="lg:col-2 lg:row-end-1"
+                    />
+                  )}
+                  {data.podium[1] && (
+                    <PodiumCard
+                      position={2}
+                      data={data.podium[1]}
+                      className="lg:col-1 lg:row-end-1"
+                    />
+                  )}
+                  {data.podium[2] && (
+                    <PodiumCard
+                      position={3}
+                      data={data.podium[2]}
+                      className="lg:col-3 lg:row-end-1"
+                    />
+                  )}
+                </div>
+              ))
               .exhaustive()}
           </div>
           <DataList>
@@ -148,7 +121,7 @@ export const PageDashboard = () => {
                         {item.name}
                       </DataListText>
                     </DataListCell>
-                    <DataListCell>
+                    <DataListCell className="hidden md:flex">
                       <DataListText className="flex items-center gap-1.5">
                         <span className="text-base">{item.completedCount}</span>{' '}
                         <span className="text-xs text-muted-foreground">
@@ -156,7 +129,7 @@ export const PageDashboard = () => {
                         </span>
                       </DataListText>
                     </DataListCell>
-                    <DataListCell>
+                    <DataListCell className="max-w-16 md:max-w-none">
                       <span className="flex items-center gap-1.5">
                         {item.totalPoints} <TicketIcon className="w-5" />
                       </span>
