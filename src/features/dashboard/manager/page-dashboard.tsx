@@ -58,11 +58,11 @@ export const PageDashboard = () => {
           <div className="flex gap-6 max-lg:flex-col">
             {ui
               .match('pending', () => (
-                <>
-                  <Skeleton className="h-64 w-full" />
-                  <Skeleton className="h-64 w-full" />
-                  <Skeleton className="h-64 w-full" />
-                </>
+                <div className="my-6 grid w-full grid-cols-1 gap-6 lg:translate-x-2 lg:grid-cols-3">
+                  <Skeleton className="h-80 w-full lg:translate-x-2 lg:translate-y-4 lg:scale-90" />
+                  <Skeleton className="h-80 w-full" />
+                  <Skeleton className="h-80 w-full lg:-translate-x-8 lg:translate-y-8 lg:scale-80" />
+                </div>
               ))
               .match('error', () => null)
               .match('empty', () => null)
@@ -79,14 +79,14 @@ export const PageDashboard = () => {
                     <PodiumCard
                       position={2}
                       data={data.podium[1]}
-                      className="lg:col-1 lg:row-end-1"
+                      className="lg:col-1 lg:row-end-1 lg:translate-x-2 lg:translate-y-4 lg:scale-90"
                     />
                   )}
                   {data.podium[2] && (
                     <PodiumCard
                       position={3}
                       data={data.podium[2]}
-                      className="lg:col-3 lg:row-end-1"
+                      className="lg:col-3 lg:row-end-1 lg:-translate-x-8 lg:translate-y-8 lg:scale-80"
                     />
                   )}
                 </div>

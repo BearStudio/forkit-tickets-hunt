@@ -34,10 +34,7 @@ export const PodiumCard = ({
     <Card
       className={cn(
         'w-full items-center justify-center text-center',
-        className,
-        position === 1 && 'scale-100',
-        position === 2 && 'lg:translate-x-2 lg:translate-y-4 lg:scale-90',
-        position === 3 && 'lg:-translate-x-8 lg:translate-y-8 lg:scale-80'
+        className
       )}
     >
       <div className="fixed inset-0 z-0 overflow-hidden opacity-40">
